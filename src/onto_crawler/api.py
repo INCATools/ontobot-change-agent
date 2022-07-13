@@ -3,6 +3,7 @@
 import re
 from os import getcwd
 from os.path import join
+from pathlib import Path
 from typing import Generator
 
 from github import Github
@@ -11,8 +12,8 @@ from github import Github
 # For more information:
 #   https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 # Save the token in a txt file as named below.
-SRC = "src/onto_crawler/"
-TOKEN_FILE = join(getcwd(), SRC, "token.txt")
+SRC = Path(__file__).parent
+TOKEN_FILE = join(SRC, "token.txt")
 
 with open(TOKEN_FILE, "r") as t:
     TOKEN = t.read().rstrip()
