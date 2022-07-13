@@ -17,6 +17,7 @@ import os
 import re
 import sys
 from datetime import date
+from onto_crawler import __version__
 
 sys.path.insert(0, os.path.abspath("../../src"))
 
@@ -27,17 +28,17 @@ copyright = f"{date.today().year}, Harshad Hegde"
 author = "Harshad Hegde"
 
 # The full version, including alpha/beta/rc tags.
-release = "0.0.1-dev"
+release = __version__
 
 # The short X.Y version.
-parsed_version = re.match(
-    "(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)(?:-(?P<release>[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+(?P<build>[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?",
-    release,
-)
-version = parsed_version.expand("\g<major>.\g<minor>.\g<patch>")
+# parsed_version = re.match(
+#     "(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)(?:-(?P<release>[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+(?P<build>[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?",
+#     release,
+# )
+# version = parsed_version.expand("\g<major>.\g<minor>.\g<patch>")
 
-if parsed_version.group("release"):
-    tags.add("prerelease")
+# if parsed_version.group("release"):
+#     tags.add("prerelease")
 
 # -- General configuration ---------------------------------------------------
 
@@ -47,10 +48,10 @@ if parsed_version.group("release"):
 
 # If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
-add_module_names = False
+# add_module_names = False
 
 # A list of prefixes that are ignored when creating the module index. (new in Sphinx 0.6)
-modindex_common_prefix = ["onto_crawler."]
+# modindex_common_prefix = ["onto_crawler."]
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -76,7 +77,7 @@ templates_path = ["_templates"]
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = ".rst"
+# source_suffix = ".rst"
 
 # The master toctree document.
 master_doc = "index"
