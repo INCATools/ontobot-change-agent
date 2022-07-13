@@ -401,7 +401,7 @@ regex = ["regex"]
 
 [[package]]
 name = "linkml-runtime"
-version = "1.2.21"
+version = "1.2.22"
 description = "Runtime environment for LinkML, the Linked open data modeling language"
 category = "main"
 optional = false
@@ -1072,7 +1072,7 @@ docs = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "67b703acfd620ea78f987ef84b759b7b515f2ec9d6e9a616b13df9652171d320"
+content-hash = "49fbb6bc94c49695a978a5db76ef08097cb96f372363ac99319ebd265955d8c5"
 
 [metadata.files]
 aiohttp = [
@@ -1462,7 +1462,10 @@ lark = [
     {file = "lark-1.1.2-py2.py3-none-any.whl", hash = "sha256:c1ab213fc5e2d273fe2d91da218ccc8b5b92d065b17faa5e743499cb16594b7d"},
     {file = "lark-1.1.2.tar.gz", hash = "sha256:7a8d0c07d663da9391d7faee1bf1d7df4998c47ca43a593cbef5c7566acd057a"},
 ]
-linkml-runtime = []
+linkml-runtime = [
+    {file = "linkml-runtime-1.2.22.tar.gz", hash = "sha256:8927415366cabf803cab06164aa9114fb9dcb2de1dbf34049efb39d5f8f32a90"},
+    {file = "linkml_runtime-1.2.22-py3-none-any.whl", hash = "sha256:baf42e182fe07e163d8b5de28e1678c35f3e6793306161eb84edb1c5d3dce521"},
+]
 more-click = [
     {file = "more_click-0.1.1-py3-none-any.whl", hash = "sha256:ff68c7e874fd409ce501903be3177363499aa9c2662607a3b66568f766dea527"},
     {file = "more_click-0.1.1.tar.gz", hash = "sha256:277c64767a6a9c6625ec6bc3e1241012867f6953b2295b2a1e8eeddec586eb53"},
