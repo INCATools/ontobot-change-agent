@@ -1,4 +1,4 @@
- |release| Documentation
+|release| Documentation
 ========================
 
 Table of Contents
@@ -9,6 +9,8 @@ Table of Contents
    :name: start
 
    installation
+   first_run
+   developers
    usage
    cli
 
