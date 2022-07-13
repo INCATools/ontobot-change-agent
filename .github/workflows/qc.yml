@@ -35,6 +35,12 @@ jobs:
     - name: Run docstring coverage
       run: tox -e docstr-coverage
 
+    #----------------------------------------------
+    #          install & configure poetry
+    #----------------------------------------------
+    - name: Install Poetry
+      uses: snok/install-poetry@v1.3
+
     - name: Run tests
       run: |
         echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
