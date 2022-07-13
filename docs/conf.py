@@ -23,7 +23,7 @@ sys.path.insert(0, os.path.abspath("../src/"))
 
 # -- Project information -----------------------------------------------------
 
-project = "onto_crawler"
+project = "onto-crawler"
 copyright = f"{date.today().year}, Harshad Hegde"
 author = "Harshad Hegde"
 
