@@ -57,7 +57,7 @@ def main(verbose: int, quiet: bool):
 )
 @click.option(
     "-t",
-    "--title",
+    "--title-search",
     help="Filter based on a search for pattern within title of issue.",
 )
 @click.option(
@@ -65,9 +65,9 @@ def main(verbose: int, quiet: bool):
     "--label",
     help="Filter based on a search for label of issue.",
 )
-def issues(repo: str, state: str, title: str, label: str, output: TextIO):
+def issues(repo: str, state: str, title_search: str, label: str, output: TextIO):
     for issue in get_issues(
-        repository_name=repo, state=state, title=title, label=label
+        repository_name=repo, state=state, title_search=title_search, label=label
     ):
         print(issue, file=output)
 
