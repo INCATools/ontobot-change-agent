@@ -45,9 +45,10 @@ jobs:
     # install dependencies if cache does not exist 
     #----------------------------------------------
     - name: Install dependencies
-      run: poetry add pytest
+      run: poetry install --no-interaction
 
     - name: Run tests
       run: |
-        echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
+        echo ${GITHUB_WORKSPACE} 
+        # echo ${{ secrets.GH_TOKEN }} >> ${GITHUB_WORKSPACE}/token.txt
         tox -e py
