@@ -4,6 +4,7 @@
 name = "onto-crawler"
 version = "0.1.0"
 description = "Crawl github for ontology related issues."
+readme = "README.md"
 authors = ["Harshad Hegde <hhegde@lbl.gov>"]
 license = "MIT"
 
