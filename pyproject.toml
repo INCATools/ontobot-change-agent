@@ -23,7 +23,7 @@ pytest = "^7.1.2"
 ocrawl = "onto_crawler.cli:main"
 
 [tool.poetry.extras]
-docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-mermaid", "sphinx-autodoc-typehints", "sphinx-click"]
+docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-mermaid"]
 
 [tool.black]
 line-length = 79

@@ -56,21 +56,14 @@ modindex_common_prefix = ["onto_crawler."]
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "sphinx.ext.autosummary",
     "sphinx.ext.autodoc",
-    "sphinx.ext.coverage",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.todo",
-    "sphinx.ext.mathjax",
-    "sphinx.ext.viewcode",
-    "sphinx_autodoc_typehints",
-    "sphinx_automodapi.automodapi",
-    "sphinx_automodapi.smart_resolver",
+    "sphinx.ext.githubpages",
+    "sphinx_rtd_theme",
     # 'texext',
 ]
 
 
-extensions.append("sphinx_click.ext")
+# extensions.append("sphinx_click.ext")
 
 
 # generate autosummary pages
@@ -98,7 +91,7 @@ language = "en"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = "sphinx"
