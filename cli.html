@@ -111,6 +111,24 @@
 
 <section id="onto-crawler-issues">
 <h3>issues<a class="headerlink" href="#onto-crawler-issues" title="Permalink to this heading"></a></h3>
+<p>Get issues of specific states, title or labels from a Github repository.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param repo</dt>
+<dd class="field-odd"><p>GitHub repository name [org/repo_name]</p>
+</dd>
+<dt class="field-even">param state</dt>
+<dd class="field-even"><p>State of issue [“open”, “close” etc.]</p>
+</dd>
+<dt class="field-odd">param title_search</dt>
+<dd class="field-odd"><p>String lookup in title of issue.</p>
+</dd>
+<dt class="field-even">param label</dt>
+<dd class="field-even"><p>Label lookup for issues.</p>
+</dd>
+<dt class="field-odd">param output</dt>
+<dd class="field-odd"><p>Output location.</p>
+</dd>
+</dl>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>onto_crawler issues <span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
 </div>
@@ -135,7 +153,7 @@
 
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-onto_crawler-issues-t">
-<span id="cmdoption-onto-crawler-issues-t"></span><span id="cmdoption-onto_crawler-issues-title"></span><span id="cmdoption-onto-crawler-issues-title"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--title</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;title&gt;</span></span><a class="headerlink" href="#cmdoption-onto_crawler-issues-t" title="Permalink to this definition"></a></dt>
+<span id="cmdoption-onto-crawler-issues-t"></span><span id="cmdoption-onto_crawler-issues-title-search"></span><span id="cmdoption-onto-crawler-issues-title-search"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--title-search</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;title_search&gt;</span></span><a class="headerlink" href="#cmdoption-onto_crawler-issues-t" title="Permalink to this definition"></a></dt>
 <dd><p>Filter based on a search for pattern within title of issue.</p>
 </dd></dl>
 

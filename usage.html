@@ -74,13 +74,13 @@
 <p>Onto-crawl API section.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="onto_crawler.api.get_issues">
-<span class="sig-prename descclassname"><span class="pre">onto_crawler.api.</span></span><span class="sig-name descname"><span class="pre">get_issues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'synonym'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'open'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onto_crawler.api.get_issues" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">onto_crawler.api.</span></span><span class="sig-name descname"><span class="pre">get_issues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_search</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'open'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onto_crawler.api.get_issues" title="Permalink to this definition"></a></dt>
 <dd><p>Get issues of specific states from a Github repository.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>repository_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Name of the repository [org/repo]</p></li>
-<li><p><strong>search</strong> – Regex for title of the issue.</p></li>
+<li><p><strong>title_search</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Regex for title of the issue.</p></li>
 <li><p><strong>state</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – State of the issue e.g. open, close etc., defaults to “open”</p></li>
 </ul>
 </dd>
