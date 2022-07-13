@@ -60,8 +60,8 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.githubpages",
     "sphinx_rtd_theme",
-    "sphinx-click",
-    "sphinx-autodoc-typehints",
+    "sphinx_click",
+    "sphinx_autodoc_typehints",
     # 'texext',
 ]
 
