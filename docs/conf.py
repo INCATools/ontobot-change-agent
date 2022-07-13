@@ -19,7 +19,7 @@ import sys
 from datetime import date
 from onto_crawler import __version__
 
-sys.path.insert(0, os.path.abspath("../src"))
+sys.path.insert(0, os.path.abspath("../src/"))
 
 # -- Project information -----------------------------------------------------
 
