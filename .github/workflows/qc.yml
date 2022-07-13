@@ -45,10 +45,9 @@ jobs:
     # install dependencies if cache does not exist 
     #----------------------------------------------
     - name: Install dependencies
-      run: poetry install --no-interaction
+      run: poetry install --no-interactions
 
     - name: Run tests
-      run: |
-        echo ${GITHUB_WORKSPACE} 
-        # echo ${{ secrets.GH_TOKEN }} >> ${GITHUB_WORKSPACE}/token.txt
-        tox -e py
+      run: | 
+        echo ${{ secrets.GH_TOKEN }} >> ${GITHUB_WORKSPACE}/token.txt
+        poetry run pytest
