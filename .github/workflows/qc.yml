@@ -49,5 +49,5 @@ jobs:
 
     - name: Run tests
       run: | 
-        echo ${{ secrets.GH_TOKEN }} >> ${GITHUB_WORKSPACE}/token.txt
+        echo ${{ secrets.GH_TOKEN }} >> ${GITHUB_WORKSPACE}/src/onto_crawler/token.txt
         poetry run pytest
