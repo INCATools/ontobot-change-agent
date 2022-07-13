@@ -4,7 +4,7 @@
 name = "onto-crawler"
 version = "0.1.0"
 description = "Crawl github for ontology related issues."
-authors = ["Harshad Hegde <hegdehb@gmail.com>"]
+authors = ["Harshad Hegde <hhegde@lbl.gov>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
@@ -23,7 +23,7 @@ pytest = "^7.1.2"
 ocrawl = "onto_crawler.cli:main"
 
 [tool.poetry.extras]
-docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-mermaid"]
+docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-mermaid", "sphinx-autodoc-typehints", "sphinx-click"]
 
 [tool.black]
 line-length = 79
