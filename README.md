@@ -15,7 +15,7 @@ Next, run:
 ```shell
 $ poetry run ocrawl issues --label synonym
 ```
-This should return a list of issue titles tagged with the label `synonym`. By default, we've chosen the [mondo repository](https://github.com/monarch-initiative/mondo). If you need to test it with another repository, add an option `-r` and follow it with the `organization/repository_name`. 
+This should return a list of issue titles tagged with the label `synonym`. By default, we've chosen the [mondo repository](https://github.com/monarch-initiative/mondo). If you need to test with another repository, add an option `-r` and follow it with the `organization/repository_name`. 
 
 ### Command Line Interface
 
