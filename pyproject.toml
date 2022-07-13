@@ -12,12 +12,17 @@ python = "^3.9"
 oaklib = "^0.1.31"
 PyGithub = "^1.55"
 
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
+Sphinx = "^5.0.2"
+sphinx-rtd-theme = "^1.0.0"
+sphinx-autodoc-typehints = "^1.18.3"
+sphinx-click = "^4.3.0"
 
 [tool.poetry.scripts]
 ocrawl = "onto_crawler.cli:main"
@@ -28,8 +33,6 @@ docs = [
     "sphinx_rtd_theme",
     "sphinx-autodoc-typehints",
     "sphinx-click",
-    "sphinx.ext.githubpages",
-    "docutils"
     ]
 
 [tool.black]
