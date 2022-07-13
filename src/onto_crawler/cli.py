@@ -65,9 +65,22 @@ def main(verbose: int, quiet: bool):
     "--label",
     help="Filter based on a search for label of issue.",
 )
-def issues(repo: str, state: str, title_search: str, label: str, output: TextIO):
+def issues(
+    repo: str, state: str, title_search: str, label: str, output: TextIO
+):
+    """Get issues of specific states, title or labels from a Github repository.
+
+    :param repo: GitHub repository name [org/repo_name]
+    :param state: State of issue ["open", "close" etc.]
+    :param title_search: String lookup in title of issue.
+    :param label: Label lookup for issues.
+    :param output: Output location.
+    """
     for issue in get_issues(
-        repository_name=repo, state=state, title_search=title_search, label=label
+        repository_name=repo,
+        state=state,
+        title_search=title_search,
+        label=label,
     ):
         print(issue, file=output)
 

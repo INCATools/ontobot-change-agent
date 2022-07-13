@@ -19,6 +19,7 @@ with open(TOKEN_FILE, "r") as t:
 
 # Example for API: https://pygithub.readthedocs.io/en/latest/examples.html
 
+
 def get_issues(
     repository_name: str,
     title_search: Optional[str] = None,
