@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 """Onto-crawl API section."""
 import re
-from os import getcwd
 from os.path import join
 from pathlib import Path
-from typing import Generator
+from typing import Generator, Optional
 
 from github import Github
 
@@ -23,25 +22,26 @@ with open(TOKEN_FILE, "r") as t:
 
 def get_issues(
     repository_name: str,
-    title: str,
-    label: str = "synonym",
+    title_search: Optional[str] = None,
+    label: Optional[str] = None,
     state: str = "open",
 ) -> Generator:
     """Get issues of specific states from a Github repository.
 
     :param repository_name: Name of the repository [org/repo]
-    :param search: Regex for title of the issue.
+    :param title_search: Regex for title of the issue.
     :param state: State of the issue e.g. open, close etc., defaults to "open"
     :yield: Issue names that match the regex.
     """
     g = Github(TOKEN)
     repo = g.get_repo(repository_name)
+    label_object = None
     if label:
         label_object = repo.get_label(label)
 
     issues = repo.get_issues(state=state)
     for issue in issues:
-        if title and re.match(title, issue.title):
-            yield issue.title
+        if title_search and re.match(title_search, issue.title):
+            yield issue
         if label_object and label_object in issue.labels:
-            yield issue.title
+            yield issue

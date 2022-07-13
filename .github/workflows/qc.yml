@@ -1,0 +1,53 @@
+name: onto-crawler qc
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10"]
+        os: [ ubuntu-latest ]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        pip install tox
+
+    - name: Check code quality with flake8
+      run: tox -e flake8
+    
+    - name: Run mypy check.
+      run: tox -e mypy
+
+    - name: Run docstring coverage
+      run: tox -e docstr-coverage
+
+    #----------------------------------------------
+    #          install & configure poetry
+    #----------------------------------------------
+    - name: Install Poetry
+      uses: snok/install-poetry@v1.3
+    
+    #----------------------------------------------
+    # install dependencies if cache does not exist 
+    #----------------------------------------------
+    - name: Install dependencies
+      run: poetry install --no-interaction
+
+    - name: Run tests
+      run: | 
+        echo ${{ secrets.GH_TOKEN }} >> ${GITHUB_WORKSPACE}/src/onto_crawler/token.txt
+        poetry run pytest
