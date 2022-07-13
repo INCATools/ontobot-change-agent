@@ -21,11 +21,11 @@ $ pip install onto-crawler
 ```
 -->
 
-The most recent code and data can be installed directly from GitHub with:
+<!-- The most recent code and data can be installed directly from GitHub with:
 
 ```bash
 $ pip install git+https://github.com/hrshdhgd/onto-crawler.git
-```
+``` -->
 
 <!-- ## Contributing
 
