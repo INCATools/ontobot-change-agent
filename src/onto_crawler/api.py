@@ -17,6 +17,7 @@ TOKEN_FILE = join(SRC, "token.txt")
 with open(TOKEN_FILE, "r") as t:
     TOKEN = t.read().rstrip()
 
+g = Github(TOKEN)
 # Example for API: https://pygithub.readthedocs.io/en/latest/examples.html
 
 
@@ -33,7 +34,6 @@ def get_issues(
     :param state: State of the issue e.g. open, close etc., defaults to "open"
     :yield: Issue names that match the regex.
     """
-    g = Github(TOKEN)
     repo = g.get_repo(repository_name)
     label_object = None
     if label:
@@ -45,3 +45,13 @@ def get_issues(
             yield issue
         if label_object and label_object in issue.labels:
             yield issue
+
+
+def get_all_labels_from_repo(repository_name: str) -> dict:
+    """Get all labels available in a repository for tagging issues on creation.
+
+    :param repository_name: Name of the repository.
+    :return: A dictionary of {name: description}
+    """
+    repo = g.get_repo(repository_name)
+    return {label.name: label.description for label in repo.get_labels()}

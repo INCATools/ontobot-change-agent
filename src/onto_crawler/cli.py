@@ -8,7 +8,7 @@ from typing import TextIO
 import click
 
 from onto_crawler import __version__
-from onto_crawler.api import get_issues
+from onto_crawler.api import get_all_labels_from_repo, get_issues
 
 __all__ = [
     "main",
@@ -37,13 +37,17 @@ def main(verbose: int, quiet: bool):
         logger.setLevel(level=logging.ERROR)
 
 
-@main.command()
-@click.option(
+# All frequently used options.
+repo_option = click.option(
     "-r",
     "--repo",
     default="monarch-initiative/mondo",
     help="Org/name of the github repo.",
 )
+
+
+@main.command()
+@repo_option
 @click.option(
     "-s",
     "--state",
@@ -83,6 +87,16 @@ def issues(
         label=label,
     ):
         print(issue, file=output)
+
+
+@main.command("get-labels")
+@repo_option
+def get_all_labels(repo: str):
+    """Get all labels available in a repository for tagging issues on creation.
+
+    :param repo: Name of the repository.
+    """
+    print(get_all_labels_from_repo(repo))
 
 
 if __name__ == "__main__":
