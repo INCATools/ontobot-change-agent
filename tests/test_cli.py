@@ -7,7 +7,7 @@ import unittest
 from click.testing import CliRunner
 
 from onto_crawler.api import TOKEN
-from onto_crawler.cli import issues
+from onto_crawler.cli import get_labels, issues
 
 
 class TestVersion(unittest.TestCase):
@@ -25,6 +25,13 @@ class TestVersion(unittest.TestCase):
         result = self.runner.invoke(
             issues, ["--label", "test", "--repo", self.repo_name]
         )
+        result.stdout
+        result.stderr
+        self.assertEqual(0, result.exit_code)
+
+    def test_get_labels(self):
+        """Test get_labels CLI command."""
+        result = self.runner.invoke(get_labels, ["--repo", self.repo_name])
         result.stdout
         result.stderr
         self.assertEqual(0, result.exit_code)

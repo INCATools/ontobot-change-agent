@@ -8,7 +8,7 @@ from typing import TextIO
 import click
 
 from onto_crawler import __version__
-from onto_crawler.api import get_issues
+from onto_crawler.api import get_all_labels_from_repo, get_issues
 
 __all__ = [
     "main",
@@ -37,13 +37,17 @@ def main(verbose: int, quiet: bool):
         logger.setLevel(level=logging.ERROR)
 
 
-@main.command()
-@click.option(
+# All frequently used options.
+repo_option = click.option(
     "-r",
     "--repo",
     default="monarch-initiative/mondo",
     help="Org/name of the github repo.",
 )
+
+
+@main.command()
+@repo_option
 @click.option(
     "-s",
     "--state",
@@ -65,8 +69,19 @@ def main(verbose: int, quiet: bool):
     "--label",
     help="Filter based on a search for label of issue.",
 )
+@click.option(
+    "-n",
+    "--number",
+    type=int,
+    help="Filter based on issue number.",
+)
 def issues(
-    repo: str, state: str, title_search: str, label: str, output: TextIO
+    repo: str,
+    state: str,
+    title_search: str,
+    label: str,
+    number: int,
+    output: TextIO,
 ):
     """Get issues of specific states, title or labels from a Github repository.
 
@@ -81,8 +96,19 @@ def issues(
         state=state,
         title_search=title_search,
         label=label,
+        number=number,
     ):
         print(issue, file=output)
+
+
+@main.command("get-labels")
+@repo_option
+def get_labels(repo: str):
+    """Get all labels available in a repository for tagging issues on creation.
+
+    :param repo: Name of the repository.
+    """
+    print(get_all_labels_from_repo(repo))
 
 
 if __name__ == "__main__":
