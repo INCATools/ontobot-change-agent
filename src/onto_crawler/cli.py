@@ -83,7 +83,7 @@ def issues(
     number: int,
     output: TextIO,
 ):
-    """Get issues of specific states, title, labels or number from a Github repository.
+    """Get issues based on different options.
 
     :param repo: GitHub repository name [org/repo_name]
     :param state: State of issue ["open", "close" etc.]
