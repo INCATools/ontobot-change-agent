@@ -31,9 +31,7 @@ class TestVersion(unittest.TestCase):
 
     def test_get_labels(self):
         """Test get_labels CLI command."""
-        result = self.runner.invoke(
-            get_labels, ["--repo", self.repo_name]
-        )
+        result = self.runner.invoke(get_labels, ["--repo", self.repo_name])
         result.stdout
         result.stderr
         self.assertEqual(0, result.exit_code)
