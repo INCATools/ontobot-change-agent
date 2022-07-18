@@ -69,8 +69,19 @@ repo_option = click.option(
     "--label",
     help="Filter based on a search for label of issue.",
 )
+@click.option(
+    "-n",
+    "--number",
+    type=int,
+    help="Filter based on issue number.",
+)
 def issues(
-    repo: str, state: str, title_search: str, label: str, output: TextIO
+    repo: str,
+    state: str,
+    title_search: str,
+    label: str,
+    number: int,
+    output: TextIO,
 ):
     """Get issues of specific states, title or labels from a Github repository.
 
@@ -85,6 +96,7 @@ def issues(
         state=state,
         title_search=title_search,
         label=label,
+        number=number,
     ):
         print(issue, file=output)
 

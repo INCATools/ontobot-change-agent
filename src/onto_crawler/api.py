@@ -25,6 +25,7 @@ def get_issues(
     repository_name: str,
     title_search: Optional[str] = None,
     label: Optional[str] = None,
+    number: Optional[int] = 0,
     state: str = "open",
 ) -> Generator:
     """Get issues of specific states from a Github repository.
@@ -42,12 +43,14 @@ def get_issues(
     issues = repo.get_issues(state=state)
 
     for issue in issues:
-        if title_search is None and label_object is None:
+        if title_search is None and label_object is None and number == 0:
             yield issue
         else:
             if title_search and re.match(title_search, issue.title):
                 yield issue
             if label_object and label_object in issue.labels:
+                yield issue
+            if number and number == issue.number:
                 yield issue
 
 
