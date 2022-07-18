@@ -83,7 +83,7 @@ def issues(
     number: int,
     output: TextIO,
 ):
-    """Get issues of specific states, title or labels from a Github repository.
+    """Get issues of specific states, title, labels or number from a Github repository.
 
     :param repo: GitHub repository name [org/repo_name]
     :param state: State of issue ["open", "close" etc.]
@@ -104,7 +104,7 @@ def issues(
 @main.command("get-labels")
 @repo_option
 def get_labels(repo: str):
-    """Get all labels available in a repository for tagging issues on creation.
+    """Get all labels for issues.
 
     :param repo: Name of the repository.
     """
