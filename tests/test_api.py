@@ -48,7 +48,7 @@ class TestAPI(unittest.TestCase):
         self.assertTrue(issues[0].labels[0].name, self.label)
 
     def test_get_all_labels_from_repo(self):
-        """Test if 'get_labels'returns the correct dict of labels."""
+        """Test if get labels returns the correct dict of labels."""
         label_dict = {}
         label_dict = get_all_labels_from_repo(self.repo_name)
 
