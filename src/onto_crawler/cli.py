@@ -91,7 +91,7 @@ def issues(
 
 @main.command("get-labels")
 @repo_option
-def get_all_labels(repo: str):
+def get_labels(repo: str):
     """Get all labels available in a repository for tagging issues on creation.
 
     :param repo: Name of the repository.

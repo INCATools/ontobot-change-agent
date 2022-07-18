@@ -6,7 +6,7 @@ import unittest
 
 from github.Issue import Issue
 
-from onto_crawler.api import TOKEN, get_issues
+from onto_crawler.api import TOKEN, get_all_labels_from_repo, get_issues
 
 
 class TestAPI(unittest.TestCase):
@@ -46,3 +46,10 @@ class TestAPI(unittest.TestCase):
         self.assertTrue(issues[0].number, 2)
         self.assertTrue(issues[0].title, self.issue_title)
         self.assertTrue(issues[0].labels[0].name, self.label)
+
+    def test_get_all_labels_from_repo(self):
+        """Test if 'get_all_labels_from_repo' returns the correct dict of labels."""
+        label_dict = {}
+        label_dict = get_all_labels_from_repo(self.repo_name)
+
+        self.assertEqual(len(label_dict), 10)
