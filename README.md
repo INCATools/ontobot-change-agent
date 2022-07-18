@@ -4,7 +4,7 @@
 </p>
 -->
 
-Crawl github for ontology related issues.
+Crawl github for ontology specific issues.
 
 ## Getting Started
 
