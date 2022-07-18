@@ -44,8 +44,9 @@
 <li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Interface</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#onto-crawler">onto_crawler</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#onto-crawler-issues">issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ocrawl">ocrawl</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ocrawl-get-labels">get-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ocrawl-issues">issues</a></li>
 </ul>
 </li>
 </ul>
@@ -78,10 +79,10 @@
              
   <section id="command-line-interface">
 <h1>Command Line Interface<a class="headerlink" href="#command-line-interface" title="Permalink to this heading"></a></h1>
-<p>onto_crawler automatically installs the command <code class="code docutils literal notranslate"><span class="pre">onto_crawler</span></code>. See
-<code class="code docutils literal notranslate"><span class="pre">onto_crawler</span> <span class="pre">--help</span></code> for usage details.</p>
-<section id="onto-crawler">
-<h2>onto_crawler<a class="headerlink" href="#onto-crawler" title="Permalink to this heading"></a></h2>
+<p>onto_crawler automatically installs the command <code class="code docutils literal notranslate"><span class="pre">ocrawl</span></code>. See
+<code class="code docutils literal notranslate"><span class="pre">ocrawl</span> <span class="pre">--help</span></code> for usage details.</p>
+<section id="ocrawl">
+<h2>ocrawl<a class="headerlink" href="#ocrawl" title="Permalink to this heading"></a></h2>
 <p>CLI for onto_crawler.</p>
 <dl class="field-list simple">
 <dt class="field-odd">param verbose</dt>
@@ -91,28 +92,47 @@
 <dd class="field-even"><p>Boolean to be quiet or verbose.</p>
 </dd>
 </dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>onto_crawler <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ocrawl <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
 </pre></div>
 </div>
 <p class="rubric">Options</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-onto_crawler-v">
-<span id="cmdoption-onto-crawler-v"></span><span id="cmdoption-onto_crawler-verbose"></span><span id="cmdoption-onto-crawler-verbose"></span><span class="sig-name descname"><span class="pre">-v</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--verbose</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-onto_crawler-v" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ocrawl-v">
+<span id="cmdoption-ocrawl-verbose"></span><span class="sig-name descname"><span class="pre">-v</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--verbose</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-ocrawl-v" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-onto_crawler-q">
-<span id="cmdoption-onto-crawler-q"></span><span id="cmdoption-onto_crawler-quiet"></span><span id="cmdoption-onto-crawler-quiet"></span><span class="sig-name descname"><span class="pre">-q</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--quiet</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;quiet&gt;</span></span><a class="headerlink" href="#cmdoption-onto_crawler-q" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ocrawl-q">
+<span id="cmdoption-ocrawl-quiet"></span><span class="sig-name descname"><span class="pre">-q</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--quiet</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;quiet&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-q" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-onto_crawler-version">
-<span id="cmdoption-onto-crawler-version"></span><span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-onto_crawler-version" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ocrawl-version">
+<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-ocrawl-version" title="Permalink to this definition"></a></dt>
 <dd><p>Show the version and exit.</p>
 </dd></dl>
 
-<section id="onto-crawler-issues">
-<h3>issues<a class="headerlink" href="#onto-crawler-issues" title="Permalink to this heading"></a></h3>
+<section id="ocrawl-get-labels">
+<h3>get-labels<a class="headerlink" href="#ocrawl-get-labels" title="Permalink to this heading"></a></h3>
+<p>Get all labels available in a repository for tagging issues on creation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param repo</dt>
+<dd class="field-odd"><p>Name of the repository.</p>
+</dd>
+</dl>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ocrawl get-labels <span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-ocrawl-get-labels-r">
+<span id="cmdoption-ocrawl-get-labels-repo"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--repo</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;repo&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-get-labels-r" title="Permalink to this definition"></a></dt>
+<dd><p>Org/name of the github repo.</p>
+</dd></dl>
+
+</section>
+<section id="ocrawl-issues">
+<h3>issues<a class="headerlink" href="#ocrawl-issues" title="Permalink to this heading"></a></h3>
 <p>Get issues of specific states, title or labels from a Github repository.</p>
 <dl class="field-list simple">
 <dt class="field-odd">param repo</dt>
@@ -131,37 +151,37 @@
 <dd class="field-odd"><p>Output location.</p>
 </dd>
 </dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>onto_crawler issues <span class="o">[</span>OPTIONS<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ocrawl issues <span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
 </div>
 <p class="rubric">Options</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-onto_crawler-issues-r">
-<span id="cmdoption-onto-crawler-issues-r"></span><span id="cmdoption-onto_crawler-issues-repo"></span><span id="cmdoption-onto-crawler-issues-repo"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--repo</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;repo&gt;</span></span><a class="headerlink" href="#cmdoption-onto_crawler-issues-r" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ocrawl-issues-r">
+<span id="cmdoption-ocrawl-issues-repo"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--repo</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;repo&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-issues-r" title="Permalink to this definition"></a></dt>
 <dd><p>Org/name of the github repo.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-onto_crawler-issues-s">
-<span id="cmdoption-onto-crawler-issues-s"></span><span id="cmdoption-onto_crawler-issues-state"></span><span id="cmdoption-onto-crawler-issues-state"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--state</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;state&gt;</span></span><a class="headerlink" href="#cmdoption-onto_crawler-issues-s" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ocrawl-issues-s">
+<span id="cmdoption-ocrawl-issues-state"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--state</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;state&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-issues-s" title="Permalink to this definition"></a></dt>
 <dd><p>State of the issue. [open, close etc.]</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-onto_crawler-issues-o">
-<span id="cmdoption-onto-crawler-issues-o"></span><span id="cmdoption-onto_crawler-issues-output"></span><span id="cmdoption-onto-crawler-issues-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-onto_crawler-issues-o" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ocrawl-issues-o">
+<span id="cmdoption-ocrawl-issues-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-issues-o" title="Permalink to this definition"></a></dt>
 <dd><p>Output could be a file or sys.stdout.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-onto_crawler-issues-t">
-<span id="cmdoption-onto-crawler-issues-t"></span><span id="cmdoption-onto_crawler-issues-title-search"></span><span id="cmdoption-onto-crawler-issues-title-search"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--title-search</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;title_search&gt;</span></span><a class="headerlink" href="#cmdoption-onto_crawler-issues-t" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ocrawl-issues-t">
+<span id="cmdoption-ocrawl-issues-title-search"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--title-search</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;title_search&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-issues-t" title="Permalink to this definition"></a></dt>
 <dd><p>Filter based on a search for pattern within title of issue.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-onto_crawler-issues-l">
-<span id="cmdoption-onto-crawler-issues-l"></span><span id="cmdoption-onto_crawler-issues-label"></span><span id="cmdoption-onto-crawler-issues-label"></span><span class="sig-name descname"><span class="pre">-l</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--label</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;label&gt;</span></span><a class="headerlink" href="#cmdoption-onto_crawler-issues-l" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ocrawl-issues-l">
+<span id="cmdoption-ocrawl-issues-label"></span><span class="sig-name descname"><span class="pre">-l</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--label</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;label&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-issues-l" title="Permalink to this definition"></a></dt>
 <dd><p>Filter based on a search for label of issue.</p>
 </dd></dl>
 
