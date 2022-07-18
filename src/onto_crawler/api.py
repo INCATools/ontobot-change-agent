@@ -40,11 +40,15 @@ def get_issues(
         label_object = repo.get_label(label)
 
     issues = repo.get_issues(state=state)
+
     for issue in issues:
-        if title_search and re.match(title_search, issue.title):
+        if title_search is None and label_object is None:
             yield issue
-        if label_object and label_object in issue.labels:
-            yield issue
+        else:
+            if title_search and re.match(title_search, issue.title):
+                yield issue
+            if label_object and label_object in issue.labels:
+                yield issue
 
 
 def get_all_labels_from_repo(repository_name: str) -> dict:
