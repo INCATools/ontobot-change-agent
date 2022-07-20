@@ -41,8 +41,21 @@ def main(verbose: int, quiet: bool):
 repo_option = click.option(
     "-r",
     "--repo",
-    default="monarch-initiative/mondo",
+    default="hrshdhgd/mondo",
     help="Org/name of the github repo.",
+)
+
+issue_number_option = click.option(
+    "-n",
+    "--number",
+    type=int,
+    help="Filter based on issue number.",
+)
+
+output_option = click.option(
+    "-o",
+    "--output",
+    help="Output could be a file or sys.stdout.",
 )
 
 
@@ -54,11 +67,7 @@ repo_option = click.option(
     default="open",
     help="State of the issue. [open, close etc.]",
 )
-@click.option(
-    "-o",
-    "--output",
-    help="Output could be a file or sys.stdout.",
-)
+@output_option
 @click.option(
     "-t",
     "--title-search",
@@ -69,12 +78,7 @@ repo_option = click.option(
     "--label",
     help="Filter based on a search for label of issue.",
 )
-@click.option(
-    "-n",
-    "--number",
-    type=int,
-    help="Filter based on issue number.",
-)
+@issue_number_option
 def issues(
     repo: str,
     state: str,
