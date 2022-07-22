@@ -15,7 +15,7 @@ from oaklib.selector import get_resource_from_shorthand
 HOME_DIR = Path(__file__).resolve().parents[2]
 SRC = HOME_DIR / "src/onto_crawler"
 TESTS = HOME_DIR / "tests"
-ONTOLOGY_RESOURCE = TESTS / "input/fbbt.obo"
+ONTOLOGY_RESOURCE = TESTS / "resources/fbbt.obo"
 
 # Token.txt unique to every user.
 # For more information:
@@ -108,9 +108,8 @@ def process_issue_via_oak(body: list):
     """
     resource = get_resource_from_shorthand(str(ONTOLOGY_RESOURCE))
     impl_class = resource.implementation_class
-    impl_obj:PatcherInterface = impl_class(resource)
+    impl_obj: PatcherInterface = impl_class(resource)
     for command in body:
         # Run Command
         change = kgcl_parser.parse_statement(command)
         impl_obj.apply_patch(change)
-
