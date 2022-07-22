@@ -64,6 +64,13 @@ label_option = click.option(
     help="Filter based on a search for label of issue.",
 )
 
+state_option = click.option(
+    "-s",
+    "--state",
+    default="open",
+    help="State of the issue. [open, close etc.]",
+)
+
 output_option = click.option(
     "-o",
     "--output",
@@ -73,12 +80,7 @@ output_option = click.option(
 
 @main.command()
 @repo_option
-@click.option(
-    "-s",
-    "--state",
-    default="open",
-    help="State of the issue. [open, close etc.]",
-)
+@state_option
 @output_option
 @click.option(
     "-t",
@@ -111,7 +113,6 @@ def issues(
         number=number,
     ):
         print(issue, file=output)
-        yield issue
 
 
 @main.command("get-labels")
@@ -127,17 +128,16 @@ def get_labels(repo: str):
 @main.command()
 @repo_option
 @label_option
-@output_option
+@state_option
 @click.pass_context
-def process_issue(ctx: click.Context, repo: str, label: str, output: TextIO):
+def process_issue(ctx: click.Context, repo: str, label: str, state: str):
     """Run processes based on issue label.
 
     :param repo: GitHub repository name [org/repo_name]
-    :param label:Label of issues.
-    :param output: Output location.
+    :param label: Label of issues.
+    :param state: State of issue ["open", "close" etc.]
     """
-    kwargs = {"repo": repo, "label": label, "output": output}
-    for issue in ctx.invoke(issues, **kwargs):
+    for issue in get_issues(repository_name=repo, label=label, state=state):
         process_issue_via_oak(issue[BODY])
 
 

@@ -6,8 +6,11 @@ from os.path import join
 from pathlib import Path
 from typing import Generator, Optional
 
+import kgcl_schema.grammar.parser as kgcl_parser
 from github import Github
 from github.Issue import Issue
+from oaklib.interfaces.patcher_interface import PatcherInterface
+from oaklib.selector import get_resource_from_shorthand
 
 HOME_DIR = Path(__file__).resolve().parents[2]
 SRC = HOME_DIR / "src/onto_crawler"
@@ -103,6 +106,11 @@ def process_issue_via_oak(body: list):
 
     :param body: A list of commands.
     """
+    resource = get_resource_from_shorthand(str(ONTOLOGY_RESOURCE))
+    impl_class = resource.implementation_class
+    impl_obj:PatcherInterface = impl_class(resource)
     for command in body:
         # Run Command
-        print(command)
+        change = kgcl_parser.parse_statement(command)
+        impl_obj.apply_patch(change)
+
