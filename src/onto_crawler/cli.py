@@ -11,7 +11,7 @@ from onto_crawler import __version__
 from onto_crawler.api import (
     get_all_labels_from_repo,
     get_issues,
-    process_issue_via_oak,
+    process_issue_via_kgcl,
 )
 
 __all__ = [
@@ -138,7 +138,7 @@ def process_issue(ctx: click.Context, repo: str, label: str, state: str):
     :param state: State of issue ["open", "close" etc.]
     """
     for issue in get_issues(repository_name=repo, label=label, state=state):
-        process_issue_via_oak(issue[BODY])
+        process_issue_via_kgcl(issue[BODY])
 
 
 if __name__ == "__main__":
