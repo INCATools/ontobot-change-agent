@@ -11,7 +11,7 @@ from onto_crawler import __version__
 from onto_crawler.api import (
     get_all_labels_from_repo,
     get_issues,
-    process_issue_based_on_label,
+    process_issue_via_oak,
 )
 
 __all__ = [
@@ -138,7 +138,7 @@ def process_issue(ctx: click.Context, repo: str, label: str, output: TextIO):
     """
     kwargs = {"repo": repo, "label": label, "output": output}
     for issue in ctx.invoke(issues, **kwargs):
-        process_issue_based_on_label(issue[BODY])
+        process_issue_via_oak(issue[BODY])
 
 
 if __name__ == "__main__":

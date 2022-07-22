@@ -98,7 +98,7 @@ def get_all_labels_from_repo(repository_name: str) -> dict:
     return {label.name: label.description for label in repo.get_labels()}
 
 
-def process_issue_based_on_label(body: list):
+def process_issue_via_oak(body: list):
     """Pass KGCL commands in the body to OAK.
 
     :param body: A list of commands.
