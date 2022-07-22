@@ -9,6 +9,11 @@ from typing import Generator, Optional
 from github import Github
 from github.Issue import Issue
 
+HOME_DIR = Path(__file__).resolve().parents[2]
+SRC = HOME_DIR / "src/onto_crawler"
+TESTS = HOME_DIR / "tests"
+ONTOLOGY_RESOURCE = TESTS / "input/fbbt.obo"
+
 # Token.txt unique to every user.
 # For more information:
 #   https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
@@ -32,9 +37,9 @@ ISSUE_KEYS = [
     "labels",
     # 'assignee',
     # 'assignees',
-    "comments",
-    "created_at",
-    "updated_at",
+    # "comments",
+    # "created_at",
+    # "updated_at",
     "body",
 ]
 
@@ -75,16 +80,12 @@ def get_issues(
 def _extract_info_from_issue_object(issue: Issue) -> dict:
     issue_as_dict = issue.__dict__
     important_info = {k: issue_as_dict[RAW_DATA][k] for k in ISSUE_KEYS}
-    # important_info["body"] = _make_sense_of_body(important_info["body"])
+    important_info["body"] = _make_sense_of_body(important_info["body"])
     return important_info
 
 
-# def _make_sense_of_body(body: str) -> dict:
-
-#     import pdb
-
-#     pdb.set_trace()
-#     return {}
+def _make_sense_of_body(body: str) -> list:
+    return body.replace("\r", "").replace("\n", "").split("* ")[1:]
 
 
 def get_all_labels_from_repo(repository_name: str) -> dict:
@@ -95,3 +96,13 @@ def get_all_labels_from_repo(repository_name: str) -> dict:
     """
     repo = g.get_repo(repository_name)
     return {label.name: label.description for label in repo.get_labels()}
+
+
+def process_issue_based_on_label(body: list):
+    """Pass KGCL commands in the body to OAK.
+
+    :param body: A list of commands.
+    """
+    for command in body:
+        # Run Command
+        print(command)

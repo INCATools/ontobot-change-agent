@@ -8,13 +8,19 @@ from typing import TextIO
 import click
 
 from onto_crawler import __version__
-from onto_crawler.api import get_all_labels_from_repo, get_issues
+from onto_crawler.api import (
+    get_all_labels_from_repo,
+    get_issues,
+    process_issue_based_on_label,
+)
 
 __all__ = [
     "main",
 ]
 
 logger = logging.getLogger(__name__)
+
+BODY = "body"
 
 
 @click.group()
@@ -52,6 +58,12 @@ issue_number_option = click.option(
     help="Filter based on issue number.",
 )
 
+label_option = click.option(
+    "-l",
+    "--label",
+    help="Filter based on a search for label of issue.",
+)
+
 output_option = click.option(
     "-o",
     "--output",
@@ -73,11 +85,7 @@ output_option = click.option(
     "--title-search",
     help="Filter based on a search for pattern within title of issue.",
 )
-@click.option(
-    "-l",
-    "--label",
-    help="Filter based on a search for label of issue.",
-)
+@label_option
 @issue_number_option
 def issues(
     repo: str,
@@ -103,6 +111,7 @@ def issues(
         number=number,
     ):
         print(issue, file=output)
+        yield issue
 
 
 @main.command("get-labels")
@@ -110,9 +119,26 @@ def issues(
 def get_labels(repo: str):
     """Get all labels for issues.
 
-    :param repo: Name of the repository.
+    :param repo: GitHub repository name [org/repo_name]
     """
     print(get_all_labels_from_repo(repo))
+
+
+@main.command()
+@repo_option
+@label_option
+@output_option
+@click.pass_context
+def process_issue(ctx: click.Context, repo: str, label: str, output: TextIO):
+    """Run processes based on issue label.
+
+    :param repo: GitHub repository name [org/repo_name]
+    :param label:Label of issues.
+    :param output: Output location.
+    """
+    kwargs = {"repo": repo, "label": label, "output": output}
+    for issue in ctx.invoke(issues, **kwargs):
+        process_issue_based_on_label(issue[BODY])
 
 
 if __name__ == "__main__":
