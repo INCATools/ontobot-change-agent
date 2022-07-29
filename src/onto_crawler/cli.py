@@ -3,7 +3,7 @@
 """Command line interface for :mod:`onto_crawler`."""
 
 import logging
-from typing import TextIO
+from typing import TextIO, Union
 
 import click
 
@@ -131,16 +131,18 @@ def get_labels(repo: str):
 @issue_number_option
 @state_option
 @output_option
-def process_issue(repo: str, label: str, number:int, state: str, output: TextIO):
+def process_issue(repo: str, label: str, number: int, state: str, output: str):
     """Run processes based on issue label.
 
     :param repo: GitHub repository name [org/repo_name]
     :param label: Label of issues.
     :param state: State of issue ["open", "close" etc.]
     """
-    for issue in get_issues(repository_name=repo, label=label, number=number, state=state):
+    for issue in get_issues(
+        repository_name=repo, label=label, number=number, state=state
+    ):
         if output:
-            new_output = str(issue["number"]) +"_" + output
+            new_output = str(issue["number"]) + "_" + output
         else:
             new_output = output
         process_issue_via_kgcl(issue[BODY], new_output)
