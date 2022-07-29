@@ -128,17 +128,23 @@ def get_labels(repo: str):
 @main.command()
 @repo_option
 @label_option
+@issue_number_option
 @state_option
-@click.pass_context
-def process_issue(ctx: click.Context, repo: str, label: str, state: str):
+@output_option
+def process_issue(repo: str, label: str, number:int, state: str, output: TextIO):
     """Run processes based on issue label.
 
     :param repo: GitHub repository name [org/repo_name]
     :param label: Label of issues.
     :param state: State of issue ["open", "close" etc.]
     """
-    for issue in get_issues(repository_name=repo, label=label, state=state):
-        process_issue_via_kgcl(issue[BODY])
+    for issue in get_issues(repository_name=repo, label=label, number=number, state=state):
+        if output:
+            new_output = str(issue["number"]) +"_" + output
+        else:
+            new_output = output
+        process_issue_via_kgcl(issue[BODY], new_output)
+        # Open a new PR corresponding to the issue
 
 
 if __name__ == "__main__":

@@ -2,15 +2,16 @@
 """Onto-crawl API section."""
 
 import re
-from os.path import join
+from os.path import join, splitext
 from pathlib import Path
-from typing import Generator, Optional
+from typing import Generator, Optional, TextIO
 
 import kgcl_schema.grammar.parser as kgcl_parser
 from github import Github
 from github.Issue import Issue
 from oaklib.interfaces.patcher_interface import PatcherInterface
 from oaklib.selector import get_resource_from_shorthand
+from oaklib.cli import query_terms_iterator
 
 HOME_DIR = Path(__file__).resolve().parents[2]
 SRC = HOME_DIR / "src/onto_crawler"
@@ -101,7 +102,7 @@ def get_all_labels_from_repo(repository_name: str) -> dict:
     return {label.name: label.description for label in repo.get_labels()}
 
 
-def process_issue_via_kgcl(body: list):
+def process_issue_via_kgcl(body: list, output: TextIO = None):
     """Pass KGCL commands in the body to OAK.
 
     :param body: A list of commands.
@@ -109,7 +110,24 @@ def process_issue_via_kgcl(body: list):
     resource = get_resource_from_shorthand(str(ONTOLOGY_RESOURCE))
     impl_class = resource.implementation_class
     impl_obj: PatcherInterface = impl_class(resource)
+
+    if output:
+        _, ext = splitext(output)
+    else:
+        fn, ext = splitext(str(resource.local_path))
+        output = fn + "_new" + ext
+        
+    output_format = ext.replace(".", "")
+
+
     for command in body:
-        # Run Command
         change = kgcl_parser.parse_statement(command)
+        # TODO: There must be a better way to identify label in command.
+        if ":" not in command:
+            change.about_node = list(query_terms_iterator([change.about_node], impl_obj))[0]
+            
         impl_obj.apply_patch(change)
+
+    impl_obj.dump(output, output_format)
+
+        
