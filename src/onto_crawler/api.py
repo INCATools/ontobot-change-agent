@@ -4,7 +4,7 @@
 import re
 from os.path import join, splitext
 from pathlib import Path
-from typing import Generator, Optional, TextIO, Union
+from typing import Generator, Optional
 
 import kgcl_schema.grammar.parser as kgcl_parser
 from github import Github
