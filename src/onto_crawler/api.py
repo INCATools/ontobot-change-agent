@@ -17,6 +17,9 @@ HOME_DIR = Path(__file__).resolve().parents[2]
 SRC = HOME_DIR / "src/onto_crawler"
 TESTS = HOME_DIR / "tests"
 ONTOLOGY_RESOURCE = TESTS / "resources/fbbt.obo"
+RESOURCE_PATH_DICT = {
+    "hrshdhgd/mondo": "src/ontology/mondo-edit.obo"
+}
 
 # Token.txt unique to every user.
 # For more information:
@@ -102,10 +105,14 @@ def get_all_labels_from_repo(repository_name: str) -> dict:
     return {label.name: label.description for label in repo.get_labels()}
 
 
-def process_issue_via_kgcl(body: list, output: str = None):
+def process_issue_via_kgcl(
+    repository_name: str, body: list, output: str = None
+):
     """Pass KGCL commands in the body to OAK.
 
+    :param repository_name: Name of the repository.
     :param body: A list of commands.
+    :param output: Path to where the output is written, defaults to None
     """
     resource = get_resource_from_shorthand(str(ONTOLOGY_RESOURCE))
     impl_class = resource.implementation_class
@@ -130,3 +137,15 @@ def process_issue_via_kgcl(body: list, output: str = None):
         impl_obj.apply_patch(change)
 
     impl_obj.dump(output, output_format)
+    # Update content of file
+    # repo = g.get_repo(repository_name)
+    # resource_content = repo.get_contents(path=RESOURCE_PATH_DICT[repository_name])
+    # repo.update_file(resource_content.path,"test",resource_content.sha, branch="test")
+
+    # Create PR
+    # body = '''
+    # SUMMARY
+    # Add synonyms to ontology
+    # '''
+    # pr = repo.create_pull(title="Add synonyms to ontology", body=body, head="develop", base="master")
+

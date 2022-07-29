@@ -145,7 +145,9 @@ def process_issue(repo: str, label: str, number: int, state: str, output: str):
             new_output = str(issue["number"]) + "_" + output
         else:
             new_output = output
-        process_issue_via_kgcl(issue[BODY], new_output)
+        process_issue_via_kgcl(
+            repository_name=repo, body=issue[BODY], output=new_output
+        )
         # Open a new PR corresponding to the issue
 
 
