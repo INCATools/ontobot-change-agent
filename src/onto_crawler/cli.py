@@ -3,7 +3,7 @@
 """Command line interface for :mod:`onto_crawler`."""
 
 import logging
-from typing import TextIO, Union
+from typing import TextIO
 
 import click
 
