@@ -17,9 +17,7 @@ HOME_DIR = Path(__file__).resolve().parents[2]
 SRC = HOME_DIR / "src/onto_crawler"
 TESTS = HOME_DIR / "tests"
 ONTOLOGY_RESOURCE = TESTS / "resources/fbbt.obo"
-RESOURCE_PATH_DICT = {
-    "hrshdhgd/mondo": "src/ontology/mondo-edit.obo"
-}
+RESOURCE_DICT = {"hrshdhgd/mondo": "src/ontology/mondo-edit.obo"}
 
 # Token.txt unique to every user.
 # For more information:
@@ -139,13 +137,16 @@ def process_issue_via_kgcl(
     impl_obj.dump(output, output_format)
     # Update content of file
     # repo = g.get_repo(repository_name)
-    # resource_content = repo.get_contents(path=RESOURCE_PATH_DICT[repository_name])
-    # repo.update_file(resource_content.path,"test",resource_content.sha, branch="test")
+    # content = repo.get_contents(path=RESOURCE_DICT[repository_name])
+    # repo.update_file(content.path,"test",content.sha, branch="test")
 
     # Create PR
     # body = '''
     # SUMMARY
     # Add synonyms to ontology
     # '''
-    # pr = repo.create_pull(title="Add synonyms to ontology", body=body, head="develop", base="master")
-
+    # pr = repo.create_pull(
+    #       title="Add synonyms to ontology",
+    #       body=body, head="develop",
+    #       base="master"
+    # )
