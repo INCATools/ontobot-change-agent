@@ -28,7 +28,6 @@ jobs:
         uses: actions/github-script@v6.1.1
         with:
           github-token: ${{ secrets.GH_TOKEN }}
-          result-encoding: string
           script: |
             const issue_number = context.issue.number
             console.log(issue_number)
