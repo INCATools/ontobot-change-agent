@@ -28,8 +28,7 @@ jobs:
         uses: actions/github-script@v6.1.1
         with:
           github-token: ${{ secrets.GH_TOKEN }}
-          script: |
-            echo "::set-env name=ISSUE_NUMBER::context.issue.number"
+          script: return context.issue.number"
           
       - name: Install dependencies
         run: poetry install
@@ -38,7 +37,7 @@ jobs:
         id: ocrawl
         run: |
           echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
-          poetry run ocrawl process-issue -n ${ISSUE_NUMBER} -o test.obo
+          poetry run ocrawl process-issue -n ${{steps.gh-script.outputs.result}} -o test.obo
 
       - name: Set branch name
         id: vars
