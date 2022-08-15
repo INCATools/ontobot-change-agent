@@ -28,6 +28,7 @@ jobs:
         uses: actions/github-script@v6.1.1
         with:
           github-token: ${{ secrets.GH_TOKEN }}
+          result-encoding: string
           script: return context.issue.number
 
       - name: Set issue_number
