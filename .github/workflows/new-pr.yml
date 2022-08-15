@@ -36,8 +36,8 @@ jobs:
             const issue_number = context.issue.number
             console.log(issue_number)
           
-      # - name: Install dependencies
-      #   run: poetry add onto-crawler
+      - name: Install dependencies
+        run: poetry install
 
       - name: Run ocrawl
         id: ocrawl
