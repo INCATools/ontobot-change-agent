@@ -28,19 +28,21 @@ jobs:
       - name: GH-Script
         uses: actions/github-script@v6.1.1
         with:
-          github-token: ${{github.token}}
+          github-token: ${{ secrets.GH_TOKEN }}
           script: |
-            const label = context.payload.label;
-            core.exportVariable('LABEL', 'label');
-
-      - name: Test
-        run: console.log(`::${LABEL}::`)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+            const opts = github.rest.issues.listForRepo.endpoint.merge({
+              ...context.issue,
+              state: 'opened'
+            })
+            const issues = await github.paginate(opts)
+            for (const issue of issues) {
+              echo(issue.number)
+              echo(context.issue.number)
+          
 
             
-            # const prNumber = context.payload.number;
-            # core.exportVariable('PULL_NUMBER', prNumber);
+          # const prNumber = context.payload.number;
+          # core.exportVariable('PULL_NUMBER', prNumber);
       # - name: Install dependencies
       #   run: poetry add onto-crawler
 
