@@ -52,3 +52,4 @@ jobs:
           labels: Automated
           body: ${{ steps.update.outputs.BR_BODY }}
           title: ${{ steps.update.outputs.BR_TITLE }}
+          base: ${{ github.head_ref }}
