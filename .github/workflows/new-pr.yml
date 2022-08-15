@@ -1,0 +1,59 @@
+name: Create new pull request
+
+on:
+  workflow_dispatch:
+  issues:
+    types: [ opened, edited ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  ISSUE_NUMBER: 9
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: ["3.9"]
+        os: [ ubuntu-latest ]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.3
+
+      - name: GH-Script
+        uses: actions/github-script@v6.1.1
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            const issue_number = context.issue.number
+            console.log(issue_number)
+          
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run ocrawl
+        id: ocrawl
+        run: |
+          echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
+          poetry run ocrawl process-issue -n ${ISSUE_NUMBER} -o test.obo
+      - name: Set branch name
+        id: vars
+        run: echo ::set-output name=branch-name::"test-1234"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch-suffix: short-commit-hash
+          labels: Automated
+          body: ${{ steps.ocrawl.outputs.BR_BODY }}
+          title: ${{ steps.ocrawl.outputs.BR_TITLE }}
+          base: ${{ github.head_ref }}
+          branch: ${{ steps.vars.outputs.branch-name }}
