@@ -30,14 +30,7 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
-            const opts = github.rest.issues.listForRepo.endpoint.merge({
-              ...context.issue,
-              state: 'open'
-            })
-            const issues = await github.paginate(opts)
-            for (const issue of issues) {
-              console.log(context.issue.number)
-            }
+            console.log(context.issue.number)
           
 
             
