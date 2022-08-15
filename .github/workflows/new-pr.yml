@@ -36,8 +36,8 @@ jobs:
             })
             const issues = await github.paginate(opts)
             for (const issue of issues) {
-              echo(issue.number)
-              echo(context.issue.number)
+              console.log(issue.number)
+              console.log(context.issue.number)
             }
           
 
