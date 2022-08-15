@@ -41,7 +41,7 @@ jobs:
 
       - name: Run ocrawl
         id: ocrawl
-        run: ocrawl process-issue -n ${ISSUE_NUMBER} -o test.obo
+        run: poetry run ocrawl process-issue -n ${ISSUE_NUMBER} -o test.obo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
