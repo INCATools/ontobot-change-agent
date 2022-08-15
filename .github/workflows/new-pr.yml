@@ -41,9 +41,11 @@ jobs:
 
       - name: Run ocrawl
         id: ocrawl
-        run: poetry run ocrawl process-issue -n ${ISSUE_NUMBER} -o test.obo
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
+          poetry run ocrawl process-issue -n ${ISSUE_NUMBER} -o test.obo
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Create Pull Request
       #   uses: peter-evans/create-pull-request@v3
