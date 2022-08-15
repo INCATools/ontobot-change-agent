@@ -1,4 +1,4 @@
-name: "Create new pull request"
+name: Create new pull request
 
 on:
   workflow_dispatch:
@@ -6,12 +6,13 @@ on:
     types: [ opened ]
 
 jobs:
-  register:
-    name: Run new command
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [ 3.9 ]
+        python-version: ["3.9"]
+        os: [ ubuntu-latest ]
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -28,8 +29,6 @@ jobs:
           github-token: ${{github.token}}
           script: |
             const core = require('@actions/core')
-            # const prNumber = context.payload.number;
-            # core.exportVariable('PULL_NUMBER', prNumber);
             const label = context.payload.label;
             core.exportVariable('LABEL', label');
 
@@ -39,7 +38,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
             
-
+            # const prNumber = context.payload.number;
+            # core.exportVariable('PULL_NUMBER', prNumber);
       # - name: Install dependencies
       #   run: poetry add onto-crawler
 
