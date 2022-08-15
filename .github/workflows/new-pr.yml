@@ -20,9 +20,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install Poetry
-        uses: snok/install-poetry@v1.3
-
       - name: GH-Script
         id: gh-script
         uses: actions/github-script@v6.1.1
@@ -32,47 +29,41 @@ jobs:
             const issue_number = context.issue.number
             return issue_number
 
-      - name: Set branch name and issue number
+      - name: Set branch name
         id: vars
         run: |
           echo ::set-output name=branch-name::"automated_branch"
-          echo ::set-env name=ISSUE_NUMBER::${{ steps.gh-script.outputs.result }}
-
-      # - name: Set issue_number
-      #   run: |
-      #     echo "${{ steps.gh-script.outputs.result }}"
-      #     echo "ISSUE_NUMBER= "${{ steps.gh-script.outputs.result }}"" >> $GITHUB_ENV
 
       #----------------------------------------------
       #          install & configure poetry
       #----------------------------------------------
-      # - name: Install Poetry
-      #   uses: snok/install-poetry@v1.3
-      #   with:
-      #     virtualenvs-create: true
-      #     virtualenvs-in-project: true
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.3
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
       #----------------------------------------------
       #       load cached venv if cache exists      
       #----------------------------------------------
-      # - name: Load cached venv
-      #   id: cached-poetry-dependencies
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: .venv
-      #     key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       #----------------------------------------------
       # install dependencies if cache does not exist 
       #----------------------------------------------
-      # - name: Install dependencies
-      #   if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      #   run: poetry install --no-interaction --no-root
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
 
-      # - name: Run ocrawl
-      #   id: ocrawl
-      #   run: |
-      #     echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
-      #     poetry run ocrawl process-issue -n $ISSUE_NUMBER -o test.obo
+      - name: Run ocrawl
+        id: ocrawl
+        run: |
+          echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
+          poetry run ocrawl process-issue -n ${{ steps.vars.outputs.result }} -o test.obo
 
       
 
