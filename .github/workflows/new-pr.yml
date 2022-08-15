@@ -31,12 +31,18 @@ jobs:
           result-encoding: string
           script: |
             const issue_number = context.issue.number
-            return issue_number
+            echo "$issue_number"
 
-      - name: Set issue_number
+      - name: Set branch name and issue number
+        id: vars
         run: |
-          echo "${{ steps.gh-script.outputs.result }}"
-          echo "ISSUE_NUMBER= "${{ steps.gh-script.outputs.result }}"" >> $GITHUB_ENV
+          echo ::set-output name=branch-name::"automated_branch"
+          echo ::set-env name=ISSUE_NUMBER::"${context.issue.number}"
+
+      # - name: Set issue_number
+      #   run: |
+      #     echo "${{ steps.gh-script.outputs.result }}"
+      #     echo "ISSUE_NUMBER= "${{ steps.gh-script.outputs.result }}"" >> $GITHUB_ENV
 
       #----------------------------------------------
       #          install & configure poetry
@@ -59,26 +65,24 @@ jobs:
       #----------------------------------------------
       # install dependencies if cache does not exist 
       #----------------------------------------------
-      - name: Install dependencies
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --no-root
+      # - name: Install dependencies
+      #   if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      #   run: poetry install --no-interaction --no-root
 
-      - name: Run ocrawl
-        id: ocrawl
-        run: |
-          echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
-          poetry run ocrawl process-issue -n $ISSUE_NUMBER -o test.obo
+      # - name: Run ocrawl
+      #   id: ocrawl
+      #   run: |
+      #     echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
+      #     poetry run ocrawl process-issue -n $ISSUE_NUMBER -o test.obo
 
-      - name: Set branch name
-        id: vars
-        run: echo ::set-output name=branch-name::"test-1234"
+      
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          branch-suffix: short-commit-hash
-          labels: Automated
-          body: ${{ steps.ocrawl.outputs.BR_BODY }}
-          title: ${{ steps.ocrawl.outputs.BR_TITLE }}
-          base: ${{ github.head_ref }}
-          branch: ${{ steps.vars.outputs.branch-name }}
+      # - name: Create Pull Request
+      #   uses: peter-evans/create-pull-request@v3
+      #   with:
+      #     branch-suffix: short-commit-hash
+      #     labels: Automated
+      #     body: ${{ steps.ocrawl.outputs.BR_BODY }}
+      #     title: ${{ steps.ocrawl.outputs.BR_TITLE }}
+      #     base: ${{ github.head_ref }}
+      #     branch: ${{ steps.vars.outputs.branch-name }}
