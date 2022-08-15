@@ -29,7 +29,12 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: return context.issue.number
-          
+
+      - name: Set issue_number
+        run: |
+          echo "${{ steps.gh-script.outputs.result }}"
+          echo "ISSUE_NUMBER= "${{ steps.gh-script.outputs.result }}""
+
       #----------------------------------------------
       #          install & configure poetry
       #----------------------------------------------
@@ -59,7 +64,7 @@ jobs:
         id: ocrawl
         run: |
           echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
-          poetry run ocrawl process-issue -n ${{ steps.gh-script.outputs.result }} -o test.obo
+          poetry run ocrawl process-issue -n $ISSUE_NUMBER -o test.obo
 
       - name: Set branch name
         id: vars
