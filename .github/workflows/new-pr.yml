@@ -28,7 +28,7 @@ jobs:
         uses: actions/github-script@v6.1.1
         with:
           github-token: ${{ secrets.GH_TOKEN }}
-          script: return context.issue.number"
+          script: return context.issue.number
           
       - name: Install dependencies
         run: poetry install
