@@ -32,7 +32,7 @@ jobs:
           script: |
             const opts = github.rest.issues.listForRepo.endpoint.merge({
               ...context.issue,
-              state: 'opened'
+              state: 'open'
             })
             const issues = await github.paginate(opts)
             for (const issue of issues) {
