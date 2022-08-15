@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   issues:
     types: [ opened, edited ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
