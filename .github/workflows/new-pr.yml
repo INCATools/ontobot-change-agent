@@ -31,7 +31,7 @@ jobs:
           result-encoding: string
           script: |
             const issue_number = context.issue.number
-            echo "$issue_number"
+            console.log(issue_number)
 
       - name: Set branch name and issue number
         id: vars
