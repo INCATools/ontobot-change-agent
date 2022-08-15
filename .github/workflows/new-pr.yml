@@ -32,7 +32,7 @@ jobs:
           script: |
             const core = require('@actions/core');
             const label = context.payload.label;
-            core.exportVariable('LABEL', label');
+            core.exportVariable('LABEL', 'label');
 
       - name: Test
         run: echo "$LABEL"
