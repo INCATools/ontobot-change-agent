@@ -35,7 +35,7 @@ jobs:
             core.exportVariable('LABEL', 'label');
 
       - name: Test
-        run: echo "$LABEL"
+        run: console.log(`::${LABEL}::`)
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
