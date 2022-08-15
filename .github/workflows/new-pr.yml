@@ -29,7 +29,9 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           result-encoding: string
-          script: return ${{context.issue.number}}
+          script: |
+            const issue_number = context.issue.number
+            return issue_number
 
       - name: Set issue_number
         run: |
