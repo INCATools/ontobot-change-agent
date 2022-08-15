@@ -1,11 +1,23 @@
 # -*- coding: utf-8 -*-
 """Onto-crawl API section."""
+
 import re
-from os.path import join
+from os.path import join, splitext
 from pathlib import Path
 from typing import Generator, Optional
 
+import kgcl_schema.grammar.parser as kgcl_parser
 from github import Github
+from github.Issue import Issue
+from oaklib.cli import query_terms_iterator
+from oaklib.interfaces.patcher_interface import PatcherInterface
+from oaklib.selector import get_resource_from_shorthand
+
+HOME_DIR = Path(__file__).resolve().parents[2]
+SRC = HOME_DIR / "src/onto_crawler"
+TESTS = HOME_DIR / "tests"
+ONTOLOGY_RESOURCE = TESTS / "resources/fbbt.obo"
+RESOURCE_DICT = {"hrshdhgd/mondo": "src/ontology/mondo-edit.obo"}
 
 # Token.txt unique to every user.
 # For more information:
@@ -20,6 +32,22 @@ with open(TOKEN_FILE, "r") as t:
 g = Github(TOKEN)
 # Example for API: https://pygithub.readthedocs.io/en/latest/examples.html
 
+RAW_DATA = "_rawData"
+ISSUE_KEYS = [
+    # 'repository_url',
+    # 'html_url',
+    "number",
+    "title",
+    # 'user',
+    "labels",
+    # 'assignee',
+    # 'assignees',
+    # "comments",
+    # "created_at",
+    # "updated_at",
+    "body",
+]
+
 
 def get_issues(
     repository_name: str,
@@ -33,7 +61,7 @@ def get_issues(
     :param repository_name: Name of the repository [org/repo]
     :param title_search: Regex for title of the issue.
     :param state: State of the issue e.g. open, close etc., defaults to "open"
-    :yield: Issue names that match the regex.
+    :yield: Issue names that match the regex/label/number.
     """
     repo = g.get_repo(repository_name)
     label_object = None
@@ -47,11 +75,22 @@ def get_issues(
             yield issue
         else:
             if title_search and re.match(title_search, issue.title):
-                yield issue
+                yield _extract_info_from_issue_object(issue)
             if label_object and label_object in issue.labels:
-                yield issue
+                yield _extract_info_from_issue_object(issue)
             if number and number == issue.number:
-                yield issue
+                yield _extract_info_from_issue_object(issue)
+
+
+def _extract_info_from_issue_object(issue: Issue) -> dict:
+    issue_as_dict = issue.__dict__
+    important_info = {k: issue_as_dict[RAW_DATA][k] for k in ISSUE_KEYS}
+    important_info["body"] = _make_sense_of_body(important_info["body"])
+    return important_info
+
+
+def _make_sense_of_body(body: str) -> list:
+    return body.replace("\r", "").replace("\n", "").split("* ")[1:]
 
 
 def get_all_labels_from_repo(repository_name: str) -> dict:
@@ -62,3 +101,52 @@ def get_all_labels_from_repo(repository_name: str) -> dict:
     """
     repo = g.get_repo(repository_name)
     return {label.name: label.description for label in repo.get_labels()}
+
+
+def process_issue_via_kgcl(
+    repository_name: str, body: list, output: str = None
+):
+    """Pass KGCL commands in the body to OAK.
+
+    :param repository_name: Name of the repository.
+    :param body: A list of commands.
+    :param output: Path to where the output is written, defaults to None
+    """
+    resource = get_resource_from_shorthand(str(ONTOLOGY_RESOURCE))
+    impl_class = resource.implementation_class
+    impl_obj: PatcherInterface = impl_class(resource)
+
+    if output:
+        _, ext = splitext(str(output))
+    else:
+        fn, ext = splitext(str(resource.local_path))
+        output = fn + "_new" + ext
+
+    output_format = ext.replace(".", "")
+
+    for command in body:
+        change = kgcl_parser.parse_statement(command)
+        # TODO: There must be a better way to identify label in command.
+        if ":" not in command:
+            change.about_node = list(
+                query_terms_iterator([change.about_node], impl_obj)
+            )[0]
+
+        impl_obj.apply_patch(change)
+
+    impl_obj.dump(output, output_format)
+    # Update content of file
+    # repo = g.get_repo(repository_name)
+    # content = repo.get_contents(path=RESOURCE_DICT[repository_name])
+    # repo.update_file(content.path,"test",content.sha, branch="test")
+
+    # Create PR
+    # body = '''
+    # SUMMARY
+    # Add synonyms to ontology
+    # '''
+    # pr = repo.create_pull(
+    #       title="Add synonyms to ontology",
+    #       body=body, head="develop",
+    #       base="master"
+    # )
