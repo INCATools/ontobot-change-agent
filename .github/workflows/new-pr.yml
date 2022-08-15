@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 env:
-  ISSUE_NUMBER: ${{ issue_number }}
+  ISSUE_NUMBER: 9
 
 jobs:
   build:
@@ -34,6 +34,7 @@ jobs:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
             const issue_number = context.issue.number
+            console.log(issue_number)
           
       - name: Install dependencies
         run: poetry add onto-crawler
