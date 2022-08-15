@@ -47,6 +47,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#ocrawl">ocrawl</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#ocrawl-get-labels">get-labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ocrawl-issues">issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ocrawl-process-issue">process-issue</a></li>
 </ul>
 </li>
 </ul>
@@ -114,10 +115,10 @@
 
 <section id="ocrawl-get-labels">
 <h3>get-labels<a class="headerlink" href="#ocrawl-get-labels" title="Permalink to this heading"></a></h3>
-<p>Get all labels available in a repository for tagging issues on creation.</p>
+<p>Get all labels for issues.</p>
 <dl class="field-list simple">
 <dt class="field-odd">param repo</dt>
-<dd class="field-odd"><p>Name of the repository.</p>
+<dd class="field-odd"><p>GitHub repository name [org/repo_name]</p>
 </dd>
 </dl>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ocrawl get-labels <span class="o">[</span>OPTIONS<span class="o">]</span>
@@ -133,7 +134,7 @@
 </section>
 <section id="ocrawl-issues">
 <h3>issues<a class="headerlink" href="#ocrawl-issues" title="Permalink to this heading"></a></h3>
-<p>Get issues of specific states, title or labels from a Github repository.</p>
+<p>Get issues based on different options.</p>
 <dl class="field-list simple">
 <dt class="field-odd">param repo</dt>
 <dd class="field-odd"><p>GitHub repository name [org/repo_name]</p>
@@ -189,6 +190,55 @@
 <dt class="sig sig-object std" id="cmdoption-ocrawl-issues-n">
 <span id="cmdoption-ocrawl-issues-number"></span><span class="sig-name descname"><span class="pre">-n</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--number</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;number&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-issues-n" title="Permalink to this definition"></a></dt>
 <dd><p>Filter based on issue number.</p>
+</dd></dl>
+
+</section>
+<section id="ocrawl-process-issue">
+<h3>process-issue<a class="headerlink" href="#ocrawl-process-issue" title="Permalink to this heading"></a></h3>
+<p>Run processes based on issue label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param repo</dt>
+<dd class="field-odd"><p>GitHub repository name [org/repo_name]</p>
+</dd>
+<dt class="field-even">param label</dt>
+<dd class="field-even"><p>Label of issues.</p>
+</dd>
+<dt class="field-odd">param state</dt>
+<dd class="field-odd"><p>State of issue [“open”, “close” etc.]</p>
+</dd>
+</dl>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ocrawl process-issue <span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-ocrawl-process-issue-r">
+<span id="cmdoption-ocrawl-process-issue-repo"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--repo</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;repo&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-process-issue-r" title="Permalink to this definition"></a></dt>
+<dd><p>Org/name of the github repo.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-ocrawl-process-issue-l">
+<span id="cmdoption-ocrawl-process-issue-label"></span><span class="sig-name descname"><span class="pre">-l</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--label</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;label&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-process-issue-l" title="Permalink to this definition"></a></dt>
+<dd><p>Filter based on a search for label of issue.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-ocrawl-process-issue-n">
+<span id="cmdoption-ocrawl-process-issue-number"></span><span class="sig-name descname"><span class="pre">-n</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--number</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;number&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-process-issue-n" title="Permalink to this definition"></a></dt>
+<dd><p>Filter based on issue number.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-ocrawl-process-issue-s">
+<span id="cmdoption-ocrawl-process-issue-state"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--state</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;state&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-process-issue-s" title="Permalink to this definition"></a></dt>
+<dd><p>State of the issue. [open, close etc.]</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-ocrawl-process-issue-o">
+<span id="cmdoption-ocrawl-process-issue-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-process-issue-o" title="Permalink to this definition"></a></dt>
+<dd><p>Output could be a file or sys.stdout.</p>
 </dd></dl>
 
 </section>
