@@ -53,3 +53,4 @@ jobs:
           body: ${{ steps.update.outputs.BR_BODY }}
           title: ${{ steps.update.outputs.BR_TITLE }}
           base: ${{ github.head_ref }}
+          branch: ${{ steps.vars.outputs.branch-name }}
