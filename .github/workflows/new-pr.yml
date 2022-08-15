@@ -29,12 +29,14 @@ jobs:
         uses: snok/install-poetry@v1.3
 
       - name: GH-Script
+        id: gh-script
         uses: actions/github-script@v6.1.1
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
             const issue_number = context.issue.number
             console.log(issue_number)
+          run: echo ::set-output name=ISSUE_NUMBER::issue_number
           
       - name: Install dependencies
         run: poetry install
@@ -43,7 +45,8 @@ jobs:
         id: ocrawl
         run: |
           echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
-          poetry run ocrawl process-issue -n ${ISSUE_NUMBER} -o test.obo
+          poetry run ocrawl process-issue -n ${{ steps.gh-script.outputs.ISSUE_NUMBER}} -o test.obo
+
       - name: Set branch name
         id: vars
         run: echo ::set-output name=branch-name::"test-1234"
