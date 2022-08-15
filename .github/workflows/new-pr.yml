@@ -38,6 +38,7 @@ jobs:
             for (const issue of issues) {
               echo(issue.number)
               echo(context.issue.number)
+              }
           
 
             
