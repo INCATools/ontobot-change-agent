@@ -62,6 +62,7 @@ jobs:
       - name: Run ocrawl
         id: ocrawl
         run: |
+          poetry add onto-crawler
           echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
           poetry run ocrawl process-issue -n ${{ steps.vars.outputs.result }} -o test.obo
 
