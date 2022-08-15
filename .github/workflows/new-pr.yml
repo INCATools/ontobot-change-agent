@@ -3,7 +3,7 @@ name: Create new pull request
 on:
   workflow_dispatch:
   issues:
-    types: [ opened ]
+    types: [ opened, edited ]
 
 jobs:
   build:
