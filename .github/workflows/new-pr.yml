@@ -4,11 +4,6 @@ on:
   workflow_dispatch:
   issues:
     types: [ opened, edited ]
-  pull_request:
-    branches: [ main ]
-
-env:
-  ISSUE_NUMBER: 9
 
 jobs:
   build:
