@@ -13,9 +13,6 @@ jobs:
         python-version: ["3.9"]
         os: [ ubuntu-latest ]
 
-    env:
-      ISSUE_NUMBER: ${{ steps.gh-script.outputs.ISSUE_NUMBER}}
-
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -34,7 +31,7 @@ jobs:
           script: |
             const issue_number = context.issue.number
             console.log(issue_number)
-          run: echo ::set-output name=ISSUE_NUMBER::issue_number
+          run: echo :"ISSUE_NUMBER=issue_number" >> $GITHUB_ENV
           
       - name: Install dependencies
         run: poetry install
