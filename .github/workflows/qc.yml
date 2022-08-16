@@ -50,4 +50,4 @@ jobs:
     - name: Run tests
       run: | 
         echo ${{ secrets.GH_TOKEN }} >> ${GITHUB_WORKSPACE}/src/onto_crawler/token.txt
-        poetry run pytest
+        poetry run pytest tests/test_cli.py -k test_process_issues
