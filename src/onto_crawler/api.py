@@ -145,18 +145,3 @@ def process_issue_via_kgcl(input: str, body: list, output: str = None):
         impl_obj.apply_patch(change)
 
     impl_obj.dump(output, output_format)
-    # Update content of file
-    # repo = g.get_repo(repository_name)
-    # content = repo.get_contents(path=RESOURCE_DICT[repository_name])
-    # repo.update_file(content.path,"test",content.sha, branch="test")
-
-    # Create PR
-    # body = '''
-    # SUMMARY
-    # Add synonyms to ontology
-    # '''
-    # pr = repo.create_pull(
-    #       title="Add synonyms to ontology",
-    #       body=body, head="develop",
-    #       base="master"
-    # )
