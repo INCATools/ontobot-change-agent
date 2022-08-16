@@ -174,7 +174,6 @@ def _list_to_markdown(list: list) -> str:
     md = ""
     for line in list:
         md += bullet + line + "\r"
-
     return md
 
 
