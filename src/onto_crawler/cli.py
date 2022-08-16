@@ -49,6 +49,7 @@ input_argument = click.argument("input", required=True, type=click.Path())
 repo_option = click.option(
     "-r",
     "--repo",
+    required=True,
     help="Org/name of the github repo.",
 )
 
