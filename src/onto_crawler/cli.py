@@ -21,6 +21,7 @@ __all__ = [
 logger = logging.getLogger(__name__)
 
 BODY = "body"
+TITLE = "title"
 
 
 @click.group()
@@ -150,11 +151,20 @@ def process_issue(
             new_output = str(issue["number"]) + "_" + output
         else:
             new_output = output
+        import pdb
+
+        pdb.set_trace()
         process_issue_via_kgcl(
             input=input,
             body=issue[BODY],
             output=new_output,
         )
+    click.echo(
+        f"""
+          ::set-output name=PR_BODY::{issue[BODY]}
+          ::set-output name=PR_TITLE::{issue[TITLE]}
+        """
+    )
 
 
 if __name__ == "__main__":
