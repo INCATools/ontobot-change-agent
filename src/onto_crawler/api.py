@@ -94,7 +94,7 @@ def _extract_info_from_issue_object(issue: Issue) -> dict:
 
 def _make_sense_of_body(body: str) -> list:
     bullet = "- "
-    if "*" in body:
+    if "* " in body:
         bullet = "* "
 
     return (
