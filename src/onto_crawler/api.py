@@ -101,10 +101,7 @@ def _make_sense_of_body(body: str) -> list:
     splitter += bullet
 
     return (
-        body.lstrip(bullet)
-        .replace("<", "")
-        .replace(">", "")
-        .split(splitter)
+        body.lstrip(bullet).replace("<", "").replace(">", "").split(splitter)
     )
 
 
