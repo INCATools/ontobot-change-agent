@@ -10,7 +10,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-oaklib = "^0.1.31"
+oaklib = "^0.1.35"
 PyGithub = "^1.55"
 
 
