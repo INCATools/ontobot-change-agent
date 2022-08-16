@@ -40,7 +40,7 @@ class TestVersion(unittest.TestCase):
     def test_process_issues(self):
         """Test process_issue CLI command."""
         result = self.runner.invoke(
-            process_issue, [self.resource, "--repo", self.repo_name]
+            process_issue, [self.resource, "--repo", self.repo_name, "-n", 10]
         )
         result.stdout
         result.stderr
