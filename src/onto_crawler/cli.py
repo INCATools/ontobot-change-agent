@@ -150,9 +150,10 @@ def process_issue(
         repository_name=repo, label=label, number=number, state=state
     ):
         if output:
-            new_output = str(issue["number"]) + "_" + output
+            new_output = output
         else:
             new_output = input
+
         process_issue_via_kgcl(
             input=input,
             body=issue[BODY],

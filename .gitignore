@@ -86,3 +86,4 @@ venv.bak/
 # User defined files.
 src/onto_crawler/token.txt
 **/__pycache__/**
+tests/resources/tmp/*
