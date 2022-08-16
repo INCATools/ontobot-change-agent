@@ -144,7 +144,7 @@ def process_issue(
     :param label: Label of issues.
     :param state: State of issue ["open", "close" etc.]
     """
-    formatted_body = "The following commands were executed: \\r\\n"
+    formatted_body = "The following commands were executed: \r\n"
 
     for issue in get_issues(
         repository_name=repo, label=label, number=number, state=state
@@ -174,7 +174,7 @@ def _list_to_markdown(list: list) -> str:
     bullet = "- "
     md = ""
     for line in list:
-        md += bullet + line + "\\r\\n"
+        md += bullet + line + "\r\n"
     return md
 
 
