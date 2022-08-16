@@ -93,12 +93,16 @@ def _extract_info_from_issue_object(issue: Issue) -> dict:
 
 
 def _make_sense_of_body(body: str) -> list:
+    bullet = "- "
+    if "*" in body:
+        bullet = "* "
+
     return (
         body.replace("\r", "")
         .replace("\n", "")
         .replace("<", "")
         .replace(">", "")
-        .split("* ")[1:]
+        .split(bullet)[1:]
     )
 
 
@@ -123,11 +127,10 @@ def process_issue_via_kgcl(input: str, body: list, output: str = None):
     impl_class = resource.implementation_class
     impl_obj: PatcherInterface = impl_class(resource)
 
-    if output:
-        _, ext = splitext(str(output))
-    else:
-        output = str(resource.local_path)
-        _, ext = splitext(output)
+    _, ext = splitext(str(output))
+    # else:
+    #     output = str(resource.local_path)
+    #     _, ext = splitext(output)
 
     output_format = ext.replace(".", "")
 
