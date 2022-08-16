@@ -45,9 +45,11 @@ jobs:
     # install dependencies if cache does not exist 
     #----------------------------------------------
     - name: Install dependencies
-      run: poetry install --no-interaction
+      run: |
+        poetry install --no-interaction
+        poetry run pip install kgcl-schema==0.3.0rc1
 
     - name: Run tests
       run: | 
         echo ${{ secrets.GH_TOKEN }} >> ${GITHUB_WORKSPACE}/src/onto_crawler/token.txt
-        poetry run ocrawl process-issue tests/resources/fbbt.obo -r "hrshdhgd/onto-crawler" -n 10 -o tests/tmp/test.obo
+        poetry run pytest
