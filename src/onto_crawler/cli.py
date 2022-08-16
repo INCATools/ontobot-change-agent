@@ -151,9 +151,6 @@ def process_issue(
             new_output = str(issue["number"]) + "_" + output
         else:
             new_output = output
-        import pdb
-
-        pdb.set_trace()
         process_issue_via_kgcl(
             input=input,
             body=issue[BODY],

@@ -126,8 +126,8 @@ def process_issue_via_kgcl(input: str, body: list, output: str = None):
     if output:
         _, ext = splitext(str(output))
     else:
-        fn, ext = splitext(str(resource.local_path))
-        output = fn + "_new" + ext
+        # fn, ext = splitext(str(resource.local_path))
+        output = resource.local_path
 
     output_format = ext.replace(".", "")
 
