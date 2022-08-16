@@ -43,11 +43,12 @@ def main(verbose: int, quiet: bool):
         logger.setLevel(level=logging.ERROR)
 
 
+# Input arguments for obo/owl
+input_argument = click.argument("input", required=True, type=click.Path())
 # All frequently used options.
 repo_option = click.option(
     "-r",
     "--repo",
-    default="hrshdhgd/mondo",
     help="Org/name of the github repo.",
 )
 
@@ -126,12 +127,15 @@ def get_labels(repo: str):
 
 
 @main.command()
+@input_argument
 @repo_option
 @label_option
 @issue_number_option
 @state_option
 @output_option
-def process_issue(repo: str, label: str, number: int, state: str, output: str):
+def process_issue(
+    input: str, repo: str, label: str, number: int, state: str, output: str
+):
     """Run processes based on issue label.
 
     :param repo: GitHub repository name [org/repo_name]
@@ -146,7 +150,7 @@ def process_issue(repo: str, label: str, number: int, state: str, output: str):
         else:
             new_output = output
         process_issue_via_kgcl(
-            repository_name=repo,
+            input=input,
             body=issue[BODY],
             output=new_output,
         )

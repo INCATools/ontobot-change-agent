@@ -17,10 +17,10 @@ HOME_DIR = Path(__file__).resolve().parents[2]
 SRC = HOME_DIR / "src/onto_crawler"
 TESTS = HOME_DIR / "tests"
 ONTOLOGY_RESOURCE = TESTS / "resources/fbbt.obo"
-RESOURCE_DICT = {
-    "hrshdhgd/mondo": "src/ontology/mondo-edit.obo",
-    "hrshdhgd/onto-crawler": ONTOLOGY_RESOURCE,
-}
+# RESOURCE_DICT = {
+#     "hrshdhgd/mondo": "src/ontology/mondo-edit.obo",
+#     "hrshdhgd/onto-crawler": ONTOLOGY_RESOURCE,
+# }
 
 # Token.txt unique to every user.
 # For more information:
@@ -106,16 +106,14 @@ def get_all_labels_from_repo(repository_name: str) -> dict:
     return {label.name: label.description for label in repo.get_labels()}
 
 
-def process_issue_via_kgcl(
-    repository_name: str, body: list, output: str = None
-):
+def process_issue_via_kgcl(input: str, body: list, output: str = None):
     """Pass KGCL commands in the body to OAK.
 
-    :param repository_name: Name of the repository.
+    :param input: Path of resource to be worked on.
     :param body: A list of commands.
     :param output: Path to where the output is written, defaults to None
     """
-    resource = get_resource_from_shorthand(RESOURCE_DICT[repository_name])
+    resource = get_resource_from_shorthand(input)
     impl_class = resource.implementation_class
     impl_obj: PatcherInterface = impl_class(resource)
 
