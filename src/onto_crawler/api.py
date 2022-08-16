@@ -93,7 +93,13 @@ def _extract_info_from_issue_object(issue: Issue) -> dict:
 
 
 def _make_sense_of_body(body: str) -> list:
-    return body.replace("\r", "").replace("\n", "").split("* ")[1:]
+    return (
+        body.replace("\r", "")
+        .replace("\n", "")
+        .replace("<", "")
+        .replace(">", "")
+        .split("* ")[1:]
+    )
 
 
 def get_all_labels_from_repo(repository_name: str) -> dict:
