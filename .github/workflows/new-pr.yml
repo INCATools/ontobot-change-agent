@@ -1,79 +1,79 @@
-name: Create new pull request
+# name: Create new pull request
 
-on:
-  workflow_dispatch:
-  issues:
-    types: [ opened, edited ]
+# on:
+#   workflow_dispatch:
+#   issues:
+#     types: [ opened, edited ]
 
-jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        python-version: ["3.9"]
-        os: [ ubuntu-latest ]
+# jobs:
+#   build:
+#     runs-on: ${{ matrix.os }}
+#     strategy:
+#       matrix:
+#         python-version: ["3.9"]
+#         os: [ ubuntu-latest ]
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
-        with:
-          python-version: ${{ matrix.python-version }}
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Set up Python ${{ matrix.python-version }}
+#         uses: actions/setup-python@v3
+#         with:
+#           python-version: ${{ matrix.python-version }}
 
-      - name: GH-Script
-        id: gh-script
-        uses: actions/github-script@v6.1.1
-        with:
-          github-token: ${{ secrets.GH_TOKEN }}
-          script: |
-            const issue_number = context.issue.number
-            return issue_number
+#       - name: GH-Script
+#         id: gh-script
+#         uses: actions/github-script@v6.1.1
+#         with:
+#           github-token: ${{ secrets.GH_TOKEN }}
+#           script: |
+#             const issue_number = context.issue.number
+#             return issue_number
 
-      - name: Set branch name
-        id: vars
-        run: |
-          echo ::set-output name=branch-name::"automated_branch"
+#       - name: Set branch name
+#         id: vars
+#         run: |
+#           echo ::set-output name=branch-name::"automated_branch"
 
-      #----------------------------------------------
-      #          install & configure poetry
-      #----------------------------------------------
-      - name: Install Poetry
-        uses: snok/install-poetry@v1.3
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-      #----------------------------------------------
-      #       load cached venv if cache exists      
-      #----------------------------------------------
-      - name: Load cached venv
-        id: cached-poetry-dependencies
-        uses: actions/cache@v3
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+#       #----------------------------------------------
+#       #          install & configure poetry
+#       #----------------------------------------------
+#       - name: Install Poetry
+#         uses: snok/install-poetry@v1.3
+#         with:
+#           virtualenvs-create: true
+#           virtualenvs-in-project: true
+#       #----------------------------------------------
+#       #       load cached venv if cache exists      
+#       #----------------------------------------------
+#       - name: Load cached venv
+#         id: cached-poetry-dependencies
+#         uses: actions/cache@v3
+#         with:
+#           path: .venv
+#           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
-      #----------------------------------------------
-      # install dependencies if cache does not exist 
-      #----------------------------------------------
-      - name: Install dependencies
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --no-root
+#       #----------------------------------------------
+#       # install dependencies if cache does not exist 
+#       #----------------------------------------------
+#       - name: Install dependencies
+#         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+#         run: poetry install --no-interaction --no-root
 
-      - name: Run ocrawl
-        id: ocrawl
-        run: |
-          poetry add onto-crawler
-          echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
-          poetry run ocrawl process-issue -n ${{ steps.vars.outputs.result }} -o test.obo
+#       - name: Run ocrawl
+#         id: ocrawl
+#         run: |
+#           poetry add onto-crawler
+#           echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
+#           poetry run ocrawl process-issue -n ${{ steps.vars.outputs.result }} -o test.obo
 
       
 
-      # - name: Create Pull Request
-      #   uses: peter-evans/create-pull-request@v3
-      #   with:
-      #     branch-suffix: short-commit-hash
-      #     labels: Automated
-      #     body: ${{ steps.ocrawl.outputs.BR_BODY }}
-      #     title: ${{ steps.ocrawl.outputs.BR_TITLE }}
-      #     base: ${{ github.head_ref }}
-      #     branch: ${{ steps.vars.outputs.branch-name }}
+#       # - name: Create Pull Request
+#       #   uses: peter-evans/create-pull-request@v3
+#       #   with:
+#       #     branch-suffix: short-commit-hash
+#       #     labels: Automated
+#       #     body: ${{ steps.ocrawl.outputs.BR_BODY }}
+#       #     title: ${{ steps.ocrawl.outputs.BR_TITLE }}
+#       #     base: ${{ github.head_ref }}
+#       #     branch: ${{ steps.vars.outputs.branch-name }}
