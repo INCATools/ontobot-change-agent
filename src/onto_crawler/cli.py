@@ -144,6 +144,8 @@ def process_issue(
     :param label: Label of issues.
     :param state: State of issue ["open", "close" etc.]
     """
+    formatted_body = "The following commands were executed: \r"
+
     for issue in get_issues(
         repository_name=repo, label=label, number=number, state=state
     ):
@@ -156,12 +158,25 @@ def process_issue(
             body=issue[BODY],
             output=new_output,
         )
-        click.echo(
-            f"""
-            ::set-output name=PR_BODY::{issue[BODY]}
-            ::set-output name=PR_TITLE::{issue[TITLE]}
-            """
-        )
+
+    formatted_body += _list_to_markdown(issue[BODY])
+    import pdb; pdb.set_trace()
+    
+    click.echo(
+        f"""
+        ::set-output name=PR_BODY::{formatted_body}
+        ::set-output name=PR_TITLE::{issue[TITLE]}
+        """
+    )
+
+
+def _list_to_markdown(list: list) -> str:
+    bullet = "- "
+    md = ""
+    for line in list:
+        md += bullet + line + "\r"
+
+    return md
 
 
 if __name__ == "__main__":
