@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usage &mdash; onto-crawler 0.1.1 documentation</title>
+  <title>Usage &mdash; onto-crawler 0.1.2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -114,12 +114,12 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="onto_crawler.api.process_issue_via_kgcl">
-<span class="sig-prename descclassname"><span class="pre">onto_crawler.api.</span></span><span class="sig-name descname"><span class="pre">process_issue_via_kgcl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onto_crawler.api.process_issue_via_kgcl" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">onto_crawler.api.</span></span><span class="sig-name descname"><span class="pre">process_issue_via_kgcl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onto_crawler.api.process_issue_via_kgcl" title="Permalink to this definition"></a></dt>
 <dd><p>Pass KGCL commands in the body to OAK.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>repository_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Name of the repository.</p></li>
+<li><p><strong>input</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path of resource to be worked on.</p></li>
 <li><p><strong>body</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – A list of commands.</p></li>
 <li><p><strong>output</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Path to where the output is written, defaults to None</p></li>
 </ul>
