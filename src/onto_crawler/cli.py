@@ -160,8 +160,7 @@ def process_issue(
         )
 
     formatted_body += _list_to_markdown(issue[BODY])
-    import pdb; pdb.set_trace()
-    
+
     click.echo(
         f"""
         ::set-output name=PR_BODY::{formatted_body}
