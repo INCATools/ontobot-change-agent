@@ -87,3 +87,4 @@ venv.bak/
 src/onto_crawler/token.txt
 **/__pycache__/**
 tests/resources/tmp/*.obo
+.vscode/*
