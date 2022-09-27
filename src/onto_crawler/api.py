@@ -140,7 +140,7 @@ def process_issue_via_oak(input: str, body: list, output: str = None):
     for command in body:
         change = kgcl_parser.parse_statement(command)
         # TODO: There must be a better way to identify label in command.
-        if ":" not in command:
+        if ":" not in command and change.about_node is None:
             change.about_node = list(
                 query_terms_iterator([change.old_value.strip("'").strip('"')], impl_obj)
             )[0]
