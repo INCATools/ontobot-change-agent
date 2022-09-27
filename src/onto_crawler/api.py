@@ -138,7 +138,7 @@ def process_issue_via_kgcl(input: str, body: list, output: str = None):
         # TODO: There must be a better way to identify label in command.
         if ":" not in command:
             change.about_node = list(
-                query_terms_iterator([change.about_node], impl_obj)
+                query_terms_iterator([change.old_value.strip("'").strip('"')], impl_obj)
             )[0]
 
         impl_obj.apply_patch(change)
