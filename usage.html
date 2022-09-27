@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -43,7 +44,12 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="first_run.html">First Run</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#onto_crawler.api.get_issues"><code class="docutils literal notranslate"><span class="pre">get_issues()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#onto_crawler.api.get_all_labels_from_repo"><code class="docutils literal notranslate"><span class="pre">get_all_labels_from_repo()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#onto_crawler.api.process_issue_via_oak"><code class="docutils literal notranslate"><span class="pre">process_issue_via_oak()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Interface</a></li>
 </ul>
 
@@ -113,8 +119,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="onto_crawler.api.process_issue_via_kgcl">
-<span class="sig-prename descclassname"><span class="pre">onto_crawler.api.</span></span><span class="sig-name descname"><span class="pre">process_issue_via_kgcl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onto_crawler.api.process_issue_via_kgcl" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="onto_crawler.api.process_issue_via_oak">
+<span class="sig-prename descclassname"><span class="pre">onto_crawler.api.</span></span><span class="sig-name descname"><span class="pre">process_issue_via_oak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onto_crawler.api.process_issue_via_oak" title="Permalink to this definition"></a></dt>
 <dd><p>Pass KGCL commands in the body to OAK.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
