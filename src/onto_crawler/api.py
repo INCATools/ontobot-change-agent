@@ -128,7 +128,7 @@ def process_issue_via_oak(input: str, body: list, output: str = None):
     """
     resource = get_resource_from_shorthand(input)
     impl_class = resource.implementation_class
-    #! Detour: Implementation class: SimpleObo if Pronto chosen by default
+    # #! Detour: Implementation class: SimpleObo if Pronto chosen by default
     if impl_class == ProntoImplementation:
         impl_class = SimpleOboImplementation
     impl_obj: PatcherInterface = impl_class(resource)
