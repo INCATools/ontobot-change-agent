@@ -11,6 +11,7 @@ from github import Github
 from github.Issue import Issue
 from oaklib.cli import query_terms_iterator
 from oaklib.interfaces.patcher_interface import PatcherInterface
+from oaklib.implementations import SimpleOboImplementation, ProntoImplementation
 from oaklib.selector import get_resource_from_shorthand
 
 HOME_DIR = Path(__file__).resolve().parents[2]
@@ -115,7 +116,7 @@ def get_all_labels_from_repo(repository_name: str) -> dict:
     return {label.name: label.description for label in repo.get_labels()}
 
 
-def process_issue_via_kgcl(input: str, body: list, output: str = None):
+def process_issue_via_oak(input: str, body: list, output: str = None):
     """Pass KGCL commands in the body to OAK.
 
     :param input: Path of resource to be worked on.
@@ -123,7 +124,10 @@ def process_issue_via_kgcl(input: str, body: list, output: str = None):
     :param output: Path to where the output is written, defaults to None
     """
     resource = get_resource_from_shorthand(input)
-    impl_class = resource.implementation_class
+    impl_class = resource.implementation_class 
+    #! Detour: Implementation class: SimpleObo if Pronto chosen by default
+    if impl_class == ProntoImplementation:
+        impl_class = SimpleOboImplementation
     impl_obj: PatcherInterface = impl_class(resource)
 
     _, ext = splitext(str(output))

@@ -11,7 +11,7 @@ from onto_crawler import __version__
 from onto_crawler.api import (
     get_all_labels_from_repo,
     get_issues,
-    process_issue_via_kgcl,
+    process_issue_via_oak,
 )
 
 __all__ = [
@@ -154,7 +154,7 @@ def process_issue(
         else:
             new_output = input
 
-        process_issue_via_kgcl(
+        process_issue_via_oak(
             input=input,
             body=issue[BODY],
             output=new_output,
