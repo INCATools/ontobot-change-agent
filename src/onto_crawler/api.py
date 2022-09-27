@@ -10,8 +10,11 @@ import kgcl_schema.grammar.parser as kgcl_parser
 from github import Github
 from github.Issue import Issue
 from oaklib.cli import query_terms_iterator
+from oaklib.implementations import (
+    ProntoImplementation,
+    SimpleOboImplementation,
+)
 from oaklib.interfaces.patcher_interface import PatcherInterface
-from oaklib.implementations import SimpleOboImplementation, ProntoImplementation
 from oaklib.selector import get_resource_from_shorthand
 
 HOME_DIR = Path(__file__).resolve().parents[2]
@@ -124,7 +127,7 @@ def process_issue_via_oak(input: str, body: list, output: str = None):
     :param output: Path to where the output is written, defaults to None
     """
     resource = get_resource_from_shorthand(input)
-    impl_class = resource.implementation_class 
+    impl_class = resource.implementation_class
     #! Detour: Implementation class: SimpleObo if Pronto chosen by default
     if impl_class == ProntoImplementation:
         impl_class = SimpleOboImplementation
@@ -142,7 +145,9 @@ def process_issue_via_oak(input: str, body: list, output: str = None):
         # TODO: There must be a better way to identify label in command.
         if ":" not in command and change.about_node is None:
             change.about_node = list(
-                query_terms_iterator([change.old_value.strip("'").strip('"')], impl_obj)
+                query_terms_iterator(
+                    [change.old_value.strip("'").strip('"')], impl_obj
+                )
             )[0]
 
         impl_obj.apply_patch(change)
