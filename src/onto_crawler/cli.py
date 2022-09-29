@@ -153,21 +153,31 @@ def process_issue(
             new_output = output
         else:
             new_output = input
+        
+        label_names = [label['name'] for label in issue['labels']]
 
-        process_issue_via_oak(
-            input=input,
-            body=issue[BODY],
-            output=new_output,
+        if label in label_names and issue['number'] == number:
+            process_issue_via_oak(
+                input=input,
+                body=issue[BODY],
+                output=new_output,
+            )
+
+            formatted_body += _list_to_markdown(issue[BODY])
+
+            click.echo(
+                f"""
+                ::set-output name=PR_BODY::{formatted_body}
+                ::set-output name=PR_TITLE::{issue[TITLE]}
+                """
+            )
+            break
+        else:
+            click.echo(
+            f"""
+            {issue[TITLE]} does not need the bot's attention.
+            """
         )
-
-    formatted_body += _list_to_markdown(issue[BODY])
-
-    click.echo(
-        f"""
-        ::set-output name=PR_BODY::{formatted_body}
-        ::set-output name=PR_TITLE::{issue[TITLE]}
-        """
-    )
 
 
 def _list_to_markdown(list: list) -> str:
