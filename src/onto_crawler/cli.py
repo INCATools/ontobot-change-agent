@@ -153,10 +153,10 @@ def process_issue(
             new_output = output
         else:
             new_output = input
-        
-        label_names = [label['name'] for label in issue['labels']]
 
-        if label in label_names and issue['number'] == number:
+        label_names = [label["name"] for label in issue["labels"]]
+
+        if label in label_names and issue["number"] == number:
             process_issue_via_oak(
                 input=input,
                 body=issue[BODY],
@@ -174,10 +174,10 @@ def process_issue(
             break
         else:
             click.echo(
-            f"""
+                f"""
             {issue[TITLE]} does not need the bot's attention.
             """
-        )
+            )
 
 
 def _list_to_markdown(list: list) -> str:

@@ -60,4 +60,4 @@ class TestAPI(unittest.TestCase):
         label_dict = {}
         label_dict = get_all_labels_from_repo(self.repo_name)
 
-        self.assertEqual(len(label_dict), 11)
+        self.assertEqual(len(label_dict), 12)
