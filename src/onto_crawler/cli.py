@@ -164,7 +164,7 @@ def process_issue(
             )
 
             formatted_body += _list_to_markdown(issue[BODY])
-            formatted_body += "</br>Fixes #"+str(issue["number"])
+            formatted_body += "</br>Fixes #" + str(issue["number"])
 
             click.echo(
                 f"""
