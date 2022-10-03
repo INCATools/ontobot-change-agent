@@ -164,6 +164,7 @@ def process_issue(
             )
 
             formatted_body += _list_to_markdown(issue[BODY])
+            formatted_body += "</br>Fixes #"+str(issue["number"])
 
             click.echo(
                 f"""
@@ -171,6 +172,7 @@ def process_issue(
                 ::set-output name=PR_TITLE::{issue[TITLE]}
                 """
             )
+
             break
         else:
             click.echo(
