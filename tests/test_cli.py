@@ -58,7 +58,6 @@ class TestVersion(unittest.TestCase):
 
     def test_process_issues_fail(self):
         """Test process_issue CLI command."""
-        # with self.assertRaises(ValueError):
         result = self.runner.invoke(
             process_issue,
             [
