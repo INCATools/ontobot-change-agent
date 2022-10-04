@@ -47,7 +47,7 @@ class TestVersion(unittest.TestCase):
                 "--repo",
                 self.repo_name,
                 "-n",
-                10,
+                30,
                 "-o",
                 self.output,
             ],

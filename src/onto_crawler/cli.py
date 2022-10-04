@@ -180,7 +180,7 @@ def process_issue(
                 output=new_output,
             )
 
-            formatted_body += _list_to_markdown(issue[BODY])
+            formatted_body += _list_to_markdown(KGCL_COMMANDS)
             formatted_body += "</br>Fixes #" + str(issue["number"])
 
             click.echo(
@@ -200,7 +200,7 @@ def process_issue(
 
 
 def _list_to_markdown(list: list) -> str:
-    bullet = "- "
+    bullet = "* "
     md = ""
     for line in list:
         md += bullet + line + "</br>"
