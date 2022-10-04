@@ -22,6 +22,8 @@ logger = logging.getLogger(__name__)
 
 BODY = "body"
 TITLE = "title"
+KGCL_BLOCK_BEGIN = "## KGCL"
+KGCL_BLOCK_END = "---"
 
 
 @click.group()
@@ -155,11 +157,26 @@ def process_issue(
             new_output = input
 
         label_names = [label["name"] for label in issue["labels"]]
+        begin_index = "\t".join(issue[BODY]).index(KGCL_BLOCK_BEGIN) + len(
+            KGCL_BLOCK_BEGIN
+        )
+        end_index = (
+            "\t".join(issue[BODY]).index(KGCL_BLOCK_END)
+            - len(KGCL_BLOCK_END)  # noqa E502
+            + 1  # noqa E502
+        )
+        KGCL_COMMANDS = "\t".join(issue[BODY])[begin_index:end_index].split(
+            "\r\n * "
+        )[1:]
 
-        if label in label_names and issue["number"] == number:
+        if (
+            label in label_names
+            and issue["number"] == number  # noqa W503
+            and len(KGCL_COMMANDS) > 0  # noqa W503
+        ):
             process_issue_via_oak(
                 input=input,
-                body=issue[BODY],
+                commands=KGCL_COMMANDS,
                 output=new_output,
             )
 

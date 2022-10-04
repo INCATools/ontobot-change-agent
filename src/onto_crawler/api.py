@@ -119,11 +119,11 @@ def get_all_labels_from_repo(repository_name: str) -> dict:
     return {label.name: label.description for label in repo.get_labels()}
 
 
-def process_issue_via_oak(input: str, body: list, output: str = None):
+def process_issue_via_oak(input: str, commands: list, output: str = None):
     """Pass KGCL commands in the body to OAK.
 
     :param input: Path of resource to be worked on.
-    :param body: A list of commands.
+    :param commands: A list of commands.
     :param output: Path to where the output is written, defaults to None
     """
     resource = get_resource_from_shorthand(input)
@@ -140,7 +140,7 @@ def process_issue_via_oak(input: str, body: list, output: str = None):
 
     output_format = ext.replace(".", "")
 
-    for command in body:
+    for command in commands:
         change = kgcl_parser.parse_statement(command)
         # TODO: There must be a better way to identify label in command.
         if ":" not in command and change.about_node is None:
