@@ -72,4 +72,3 @@ class TestVersion(unittest.TestCase):
             ],
         )
         self.assertIsInstance(result.exception, ValueError)
-
