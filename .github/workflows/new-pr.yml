@@ -32,7 +32,7 @@
 #       - name: Set branch name
 #         id: vars
 #         run: |
-#           echo ::set-output name=branch-name::"automated_branch"
+#           echo ::set-output name=branch-name::"automated_branch"_${{ steps.gh-script-issue.outputs.result }}
 
 #       #----------------------------------------------
 #       #          install & configure poetry
