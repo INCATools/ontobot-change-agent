@@ -97,15 +97,18 @@ def _extract_info_from_issue_object(issue: Issue) -> dict:
 
 
 def _make_sense_of_body(body: str) -> list:
-    splitter = "\r\n"
-    if "* " in body:
-        bullet = "* "
-    else:
-        bullet = "- "
-    splitter += bullet
+    # splitter = "\r\n"
+    # if "* " in body:
+    #     bullet = "* "
+    # else:
+    #     bullet = "- "
+    # splitter += bullet
 
+    # return (
+    #     body.lstrip(bullet).replace("<", "").replace(">", "").split(splitter)
+    # )
     return (
-        body.lstrip(bullet).replace("<", "").replace(">", "").split(splitter)
+        body.replace("<", "").replace(">", "").replace("\r\n", "")
     )
 
 
