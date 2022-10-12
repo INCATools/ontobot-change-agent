@@ -18,12 +18,12 @@ from oaklib.interfaces.patcher_interface import PatcherInterface
 from oaklib.selector import get_resource_from_shorthand
 
 HOME_DIR = Path(__file__).resolve().parents[2]
-SRC = HOME_DIR / "src/onto_crawler"
+SRC = HOME_DIR / "src/ontobot_change_agent"
 TESTS = HOME_DIR / "tests"
 ONTOLOGY_RESOURCE = TESTS / "resources/fbbt.obo"
 # RESOURCE_DICT = {
 #     "hrshdhgd/mondo": "src/ontology/mondo-edit.obo",
-#     "hrshdhgd/onto-crawler": ONTOLOGY_RESOURCE,
+#     "hrshdhgd/ontobot-change-agent": ONTOLOGY_RESOURCE,
 # }
 
 # Token.txt unique to every user.

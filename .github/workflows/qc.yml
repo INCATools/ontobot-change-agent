@@ -1,4 +1,4 @@
-name: onto-crawler qc
+name: ontobot-change-agent qc
 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
@@ -51,5 +51,5 @@ jobs:
 
     - name: Run tests
       run: | 
-        echo ${{ secrets.GH_TOKEN }} >> ${GITHUB_WORKSPACE}/src/onto_crawler/token.txt
+        echo ${{ secrets.GH_TOKEN }} >> ${GITHUB_WORKSPACE}/src/ontobot_change_agent/token.txt
         poetry run pytest

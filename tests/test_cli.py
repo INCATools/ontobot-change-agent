@@ -6,8 +6,8 @@ import unittest
 
 from click.testing import CliRunner
 
-from onto_crawler.api import ONTOLOGY_RESOURCE, TESTS, TOKEN
-from onto_crawler.cli import get_labels, issues, process_issue
+from ontobot_change_agent.api import ONTOLOGY_RESOURCE, TESTS, TOKEN
+from ontobot_change_agent.cli import get_labels, issues, process_issue
 
 
 class TestVersion(unittest.TestCase):
@@ -17,7 +17,7 @@ class TestVersion(unittest.TestCase):
         """Set up variables."""
         runner = CliRunner(mix_stderr=False)
         self.runner = runner
-        self.repo_name = "hrshdhgd/onto-crawler"
+        self.repo_name = "hrshdhgd/ontobot-change-agent"
         self.resource = str(ONTOLOGY_RESOURCE)
         self.token = TOKEN
         self.output = TESTS / "resources/tmp/test.obo"

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Command line interface for :mod:`onto_crawler`."""
+"""Command line interface for :mod:`ontobot_change_agent`."""
 
 import logging
 import re
@@ -8,8 +8,8 @@ from typing import TextIO
 
 import click
 
-from onto_crawler import __version__
-from onto_crawler.api import (
+from ontobot_change_agent import __version__
+from ontobot_change_agent.api import (
     get_all_labels_from_repo,
     get_issues,
     process_issue_via_oak,
@@ -30,7 +30,7 @@ TITLE = "title"
 @click.option("-q", "--quiet")
 @click.version_option(__version__)
 def main(verbose: int, quiet: bool):
-    """CLI for onto_crawler.
+    """CLI for ontobot_change_agent.
 
     :param verbose: Verbosity while running.
     :param quiet: Boolean to be quiet or verbose.

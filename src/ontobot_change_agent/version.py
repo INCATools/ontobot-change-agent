@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""Version information for :mod:`onto_crawler`.
+"""Version information for :mod:`ontobot_change_agent`.
 
-Run with ``python -m onto_crawler.version``
+Run with ``python -m ontobot_change_agent.version``
 """
 
 import os
@@ -18,7 +18,7 @@ VERSION = "0.0.1-dev"
 
 
 def get_git_hash() -> str:
-    """Get the :mod:`onto_crawler` git hash.
+    """Get the :mod:`ontobot_change_agent` git hash.
 
     :return: git hash.
     """
@@ -36,7 +36,7 @@ def get_git_hash() -> str:
 
 
 def get_version(with_git_hash: bool = False):
-    """Get the :mod:`onto_crawler` version string, including a git hash.
+    """Get the :mod:`ontobot_change_agent` version string, including a git hash.
 
     :param with_git_hash: Get version with git hash.    , defaults to False
     :return: None

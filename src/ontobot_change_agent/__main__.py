@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Entrypoint module, in case you use `python -m onto_crawler`.
+"""Entrypoint module, in case you use `python -m ontobot_change_agent`.
 
 Why does this file exist, and why ``__main__``? For more info, read:
 

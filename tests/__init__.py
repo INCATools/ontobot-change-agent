@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-"""Tests for :mod:`onto_crawler`."""
+"""Tests for :mod:`ontobot_change_agent`."""

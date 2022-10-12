@@ -1,8 +1,8 @@
 Command Line Interface
 ======================
-onto_crawler automatically installs the command :code:`ocrawl`. See
+ontobot_change_agent automatically installs the command :code:`ocrawl`. See
 :code:`ocrawl --help` for usage details.
 
-.. click:: onto_crawler.cli:main
+.. click:: ontobot_change_agent.cli:main
    :prog: ocrawl
    :show-nested:
