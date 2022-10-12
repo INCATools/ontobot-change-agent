@@ -45,10 +45,10 @@
 <li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Interface</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#ocrawl">ocrawl</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ocrawl-get-labels">get-labels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ocrawl-issues">issues</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ocrawl-process-issue">process-issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ochange">ochange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ochange-get-labels">get-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ochange-issues">issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ochange-process-issue">process-issue</a></li>
 </ul>
 </li>
 </ul>
@@ -81,10 +81,10 @@
              
   <section id="command-line-interface">
 <h1>Command Line Interface<a class="headerlink" href="#command-line-interface" title="Permalink to this heading"></a></h1>
-<p>ontobot_change_agent automatically installs the command <code class="code docutils literal notranslate"><span class="pre">ocrawl</span></code>. See
-<code class="code docutils literal notranslate"><span class="pre">ocrawl</span> <span class="pre">--help</span></code> for usage details.</p>
-<section id="ocrawl">
-<h2>ocrawl<a class="headerlink" href="#ocrawl" title="Permalink to this heading"></a></h2>
+<p>ontobot_change_agent automatically installs the command <code class="code docutils literal notranslate"><span class="pre">ochange</span></code>. See
+<code class="code docutils literal notranslate"><span class="pre">ochange</span> <span class="pre">--help</span></code> for usage details.</p>
+<section id="ochange">
+<h2>ochange<a class="headerlink" href="#ochange" title="Permalink to this heading"></a></h2>
 <p>CLI for ontobot_change_agent.</p>
 <dl class="field-list simple">
 <dt class="field-odd">param verbose</dt>
@@ -94,47 +94,47 @@
 <dd class="field-even"><p>Boolean to be quiet or verbose.</p>
 </dd>
 </dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ocrawl <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ochange <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
 </pre></div>
 </div>
 <p class="rubric">Options</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-v">
-<span id="cmdoption-ocrawl-verbose"></span><span class="sig-name descname"><span class="pre">-v</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--verbose</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-ocrawl-v" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-v">
+<span id="cmdoption-ochange-verbose"></span><span class="sig-name descname"><span class="pre">-v</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--verbose</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-ochange-v" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-q">
-<span id="cmdoption-ocrawl-quiet"></span><span class="sig-name descname"><span class="pre">-q</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--quiet</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;quiet&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-q" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-q">
+<span id="cmdoption-ochange-quiet"></span><span class="sig-name descname"><span class="pre">-q</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--quiet</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;quiet&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-q" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-version">
-<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-ocrawl-version" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-version">
+<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-ochange-version" title="Permalink to this definition"></a></dt>
 <dd><p>Show the version and exit.</p>
 </dd></dl>
 
-<section id="ocrawl-get-labels">
-<h3>get-labels<a class="headerlink" href="#ocrawl-get-labels" title="Permalink to this heading"></a></h3>
+<section id="ochange-get-labels">
+<h3>get-labels<a class="headerlink" href="#ochange-get-labels" title="Permalink to this heading"></a></h3>
 <p>Get all labels for issues.</p>
 <dl class="field-list simple">
 <dt class="field-odd">param repo</dt>
 <dd class="field-odd"><p>GitHub repository name [org/repo_name]</p>
 </dd>
 </dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ocrawl get-labels <span class="o">[</span>OPTIONS<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ochange get-labels <span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
 </div>
 <p class="rubric">Options</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-get-labels-r">
-<span id="cmdoption-ocrawl-get-labels-repo"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--repo</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;repo&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-get-labels-r" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-get-labels-r">
+<span id="cmdoption-ochange-get-labels-repo"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--repo</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;repo&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-get-labels-r" title="Permalink to this definition"></a></dt>
 <dd><p><strong>Required</strong> Org/name of the github repo.</p>
 </dd></dl>
 
 </section>
-<section id="ocrawl-issues">
-<h3>issues<a class="headerlink" href="#ocrawl-issues" title="Permalink to this heading"></a></h3>
+<section id="ochange-issues">
+<h3>issues<a class="headerlink" href="#ochange-issues" title="Permalink to this heading"></a></h3>
 <p>Get issues based on different options.</p>
 <dl class="field-list simple">
 <dt class="field-odd">param repo</dt>
@@ -153,49 +153,49 @@
 <dd class="field-odd"><p>Output location.</p>
 </dd>
 </dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ocrawl issues <span class="o">[</span>OPTIONS<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ochange issues <span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
 </div>
 <p class="rubric">Options</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-issues-r">
-<span id="cmdoption-ocrawl-issues-repo"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--repo</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;repo&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-issues-r" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-issues-r">
+<span id="cmdoption-ochange-issues-repo"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--repo</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;repo&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-issues-r" title="Permalink to this definition"></a></dt>
 <dd><p><strong>Required</strong> Org/name of the github repo.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-issues-s">
-<span id="cmdoption-ocrawl-issues-state"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--state</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;state&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-issues-s" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-issues-s">
+<span id="cmdoption-ochange-issues-state"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--state</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;state&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-issues-s" title="Permalink to this definition"></a></dt>
 <dd><p>State of the issue. [open, close etc.]</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-issues-o">
-<span id="cmdoption-ocrawl-issues-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-issues-o" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-issues-o">
+<span id="cmdoption-ochange-issues-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-issues-o" title="Permalink to this definition"></a></dt>
 <dd><p>Output could be a file or sys.stdout.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-issues-t">
-<span id="cmdoption-ocrawl-issues-title-search"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--title-search</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;title_search&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-issues-t" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-issues-t">
+<span id="cmdoption-ochange-issues-title-search"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--title-search</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;title_search&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-issues-t" title="Permalink to this definition"></a></dt>
 <dd><p>Filter based on a search for pattern within title of issue.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-issues-l">
-<span id="cmdoption-ocrawl-issues-label"></span><span class="sig-name descname"><span class="pre">-l</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--label</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;label&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-issues-l" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-issues-l">
+<span id="cmdoption-ochange-issues-label"></span><span class="sig-name descname"><span class="pre">-l</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--label</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;label&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-issues-l" title="Permalink to this definition"></a></dt>
 <dd><p>Filter based on a search for label of issue.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-issues-n">
-<span id="cmdoption-ocrawl-issues-number"></span><span class="sig-name descname"><span class="pre">-n</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--number</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;number&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-issues-n" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-issues-n">
+<span id="cmdoption-ochange-issues-number"></span><span class="sig-name descname"><span class="pre">-n</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--number</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;number&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-issues-n" title="Permalink to this definition"></a></dt>
 <dd><p>Filter based on issue number.</p>
 </dd></dl>
 
 </section>
-<section id="ocrawl-process-issue">
-<h3>process-issue<a class="headerlink" href="#ocrawl-process-issue" title="Permalink to this heading"></a></h3>
+<section id="ochange-process-issue">
+<h3>process-issue<a class="headerlink" href="#ochange-process-issue" title="Permalink to this heading"></a></h3>
 <p>Run processes based on issue label.</p>
 <dl class="field-list simple">
 <dt class="field-odd">param repo</dt>
@@ -208,44 +208,44 @@
 <dd class="field-odd"><p>State of issue [“open”, “close” etc.]</p>
 </dd>
 </dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ocrawl process-issue <span class="o">[</span>OPTIONS<span class="o">]</span> INPUT
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ochange process-issue <span class="o">[</span>OPTIONS<span class="o">]</span> INPUT
 </pre></div>
 </div>
 <p class="rubric">Options</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-process-issue-r">
-<span id="cmdoption-ocrawl-process-issue-repo"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--repo</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;repo&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-process-issue-r" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-process-issue-r">
+<span id="cmdoption-ochange-process-issue-repo"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--repo</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;repo&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-process-issue-r" title="Permalink to this definition"></a></dt>
 <dd><p><strong>Required</strong> Org/name of the github repo.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-process-issue-l">
-<span id="cmdoption-ocrawl-process-issue-label"></span><span class="sig-name descname"><span class="pre">-l</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--label</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;label&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-process-issue-l" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-process-issue-l">
+<span id="cmdoption-ochange-process-issue-label"></span><span class="sig-name descname"><span class="pre">-l</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--label</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;label&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-process-issue-l" title="Permalink to this definition"></a></dt>
 <dd><p>Filter based on a search for label of issue.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-process-issue-n">
-<span id="cmdoption-ocrawl-process-issue-number"></span><span class="sig-name descname"><span class="pre">-n</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--number</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;number&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-process-issue-n" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-process-issue-n">
+<span id="cmdoption-ochange-process-issue-number"></span><span class="sig-name descname"><span class="pre">-n</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--number</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;number&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-process-issue-n" title="Permalink to this definition"></a></dt>
 <dd><p>Filter based on issue number.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-process-issue-s">
-<span id="cmdoption-ocrawl-process-issue-state"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--state</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;state&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-process-issue-s" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-process-issue-s">
+<span id="cmdoption-ochange-process-issue-state"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--state</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;state&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-process-issue-s" title="Permalink to this definition"></a></dt>
 <dd><p>State of the issue. [open, close etc.]</p>
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-process-issue-o">
-<span id="cmdoption-ocrawl-process-issue-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-ocrawl-process-issue-o" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-process-issue-o">
+<span id="cmdoption-ochange-process-issue-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-ochange-process-issue-o" title="Permalink to this definition"></a></dt>
 <dd><p>Output could be a file or sys.stdout.</p>
 </dd></dl>
 
 <p class="rubric">Arguments</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-ocrawl-process-issue-arg-INPUT">
-<span id="cmdoption-ocrawl-process-issue-arg-input"></span><span class="sig-name descname"><span class="pre">INPUT</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-ocrawl-process-issue-arg-INPUT" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object std" id="cmdoption-ochange-process-issue-arg-INPUT">
+<span id="cmdoption-ochange-process-issue-arg-input"></span><span class="sig-name descname"><span class="pre">INPUT</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-ochange-process-issue-arg-INPUT" title="Permalink to this definition"></a></dt>
 <dd><p>Required argument</p>
 </dd></dl>
 
