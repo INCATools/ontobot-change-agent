@@ -1,4 +1,4 @@
 Usage
 =====
-.. automodule:: onto_crawler.api
+.. automodule:: ontobot_change_agent.api
     :members:

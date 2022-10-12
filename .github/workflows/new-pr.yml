@@ -62,8 +62,8 @@
 #       - name: Run ocrawl
 #         id: ocrawl
 #         run: |
-#           poetry add onto-crawler
-#           echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
+#           poetry add ontobot-change-agent
+#           echo ${{ secrets.GH_TOKEN }} >> src/ontobot_change_agent/token.txt
 #           poetry run ocrawl process-issue -n ${{ steps.vars.outputs.result }} -o test.obo
 
       

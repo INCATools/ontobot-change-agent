@@ -17,13 +17,13 @@ import os
 import re
 import sys
 from datetime import date
-from onto_crawler import __version__
+from ontobot_change_agent import __version__
 
 sys.path.insert(0, os.path.abspath("../src/"))
 
 # -- Project information -----------------------------------------------------
 
-project = "onto-crawler"
+project = "ontobot-change-agent"
 copyright = f"{date.today().year}, Harshad Hegde"
 author = "Harshad Hegde"
 
@@ -51,7 +51,7 @@ release = __version__
 # add_module_names = False
 
 # A list of prefixes that are ignored when creating the module index. (new in Sphinx 0.6)
-# modindex_common_prefix = ["onto_crawler."]
+# modindex_common_prefix = ["ontobot_change_agent."]
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -164,7 +164,7 @@ htmlhelp_basename = "doc"
 # latex_documents = [
 #     (
 #         master_doc,
-#         'onto_crawler.tex',
+#         'ontobot_change_agent.tex',
 #         ' Documentation',
 #         author,
 #         'manual',
@@ -178,7 +178,7 @@ htmlhelp_basename = "doc"
 man_pages = [
     (
         master_doc,
-        "onto_crawler",
+        "ontobot_change_agent",
         " Documentation",
         [author],
         1,
@@ -193,7 +193,7 @@ man_pages = [
 texinfo_documents = [
     (
         master_doc,
-        "onto_crawler",
+        "ontobot_change_agent",
         " Documentation",
         author,
         "Harshad Hegde",

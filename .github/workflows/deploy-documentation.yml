@@ -25,7 +25,7 @@ jobs:
         
     - name: Build documentation.
       run: |
-        echo ${{ secrets.GH_TOKEN }} >> src/onto_crawler/token.txt
+        echo ${{ secrets.GH_TOKEN }} >> src/ontobot_change_agent/token.txt
         mkdir gh-pages
         touch gh-pages/.nojekyll
         cd docs/

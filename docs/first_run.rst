@@ -2,7 +2,7 @@ First Run
 =========
 
 Firstly, generate a personalized token as instructed `here <https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token>`_
-and save it in :code:`src/onto_crawler/token.txt`.
+and save it in :code:`src/ontobot_change_agent/token.txt`.
 
 Next, run:
 

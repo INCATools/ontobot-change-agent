@@ -84,7 +84,7 @@ env.bak/
 venv.bak/
 
 # User defined files.
-src/onto_crawler/token.txt
+src/ontobot_change_agent/token.txt
 **/__pycache__/**
 tests/resources/tmp/*.obo
 .vscode/*
