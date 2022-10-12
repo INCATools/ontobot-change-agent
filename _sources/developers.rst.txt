@@ -9,8 +9,8 @@ To install in development mode, use the following:
 .. code-block:: shell
 
     $ pip install poetry
-    $ git clone git+https://github.com/hrshdhgd/onto-crawler.git
-    $ cd onto-crawler
+    $ git clone git+https://github.com/hrshdhgd/ontobot-change-agent.git
+    $ cd ontobot-change-agent
     $ poetry install
 
 Testing
@@ -23,4 +23,4 @@ the unit tests in the :code:`tests/` folder can be run reproducibly with:
 
     $ tox
 
-Additionally, these tests are automatically re-run with each commit in a `GitHub Action <https://github.com/hrshdhgd/onto-crawler/actions?query=workflow%3ATests>`_.
+Additionally, these tests are automatically re-run with each commit in a `GitHub Action <https://github.com/hrshdhgd/ontobot-change-agent/actions?query=workflow%3ATests>`_.

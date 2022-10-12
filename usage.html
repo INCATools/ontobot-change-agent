@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usage &mdash; onto-crawler 0.1.11 documentation</title>
+  <title>Usage &mdash; ontobot-change-agent 0.2.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -29,7 +29,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> onto-crawler
+            <a href="index.html" class="icon icon-home"> ontobot-change-agent
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -45,9 +45,9 @@
 <li class="toctree-l1"><a class="reference internal" href="first_run.html">First Run</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#onto_crawler.api.get_issues"><code class="docutils literal notranslate"><span class="pre">get_issues()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#onto_crawler.api.get_all_labels_from_repo"><code class="docutils literal notranslate"><span class="pre">get_all_labels_from_repo()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#onto_crawler.api.process_issue_via_oak"><code class="docutils literal notranslate"><span class="pre">process_issue_via_oak()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ontobot_change_agent.api.get_issues"><code class="docutils literal notranslate"><span class="pre">get_issues()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ontobot_change_agent.api.get_all_labels_from_repo"><code class="docutils literal notranslate"><span class="pre">get_all_labels_from_repo()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ontobot_change_agent.api.process_issue_via_oak"><code class="docutils literal notranslate"><span class="pre">process_issue_via_oak()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Interface</a></li>
@@ -59,7 +59,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">onto-crawler</a>
+          <a href="index.html">ontobot-change-agent</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -77,12 +77,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-onto_crawler.api">
-<span id="usage"></span><h1>Usage<a class="headerlink" href="#module-onto_crawler.api" title="Permalink to this heading"></a></h1>
+  <section id="module-ontobot_change_agent.api">
+<span id="usage"></span><h1>Usage<a class="headerlink" href="#module-ontobot_change_agent.api" title="Permalink to this heading"></a></h1>
 <p>API section.</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="onto_crawler.api.get_issues">
-<span class="sig-prename descclassname"><span class="pre">onto_crawler.api.</span></span><span class="sig-name descname"><span class="pre">get_issues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_search</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'open'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onto_crawler.api.get_issues" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ontobot_change_agent.api.get_issues">
+<span class="sig-prename descclassname"><span class="pre">ontobot_change_agent.api.</span></span><span class="sig-name descname"><span class="pre">get_issues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_search</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'open'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ontobot_change_agent.api.get_issues" title="Permalink to this definition"></a></dt>
 <dd><p>Get issues of specific states from a Github repository.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -102,8 +102,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="onto_crawler.api.get_all_labels_from_repo">
-<span class="sig-prename descclassname"><span class="pre">onto_crawler.api.</span></span><span class="sig-name descname"><span class="pre">get_all_labels_from_repo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onto_crawler.api.get_all_labels_from_repo" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ontobot_change_agent.api.get_all_labels_from_repo">
+<span class="sig-prename descclassname"><span class="pre">ontobot_change_agent.api.</span></span><span class="sig-name descname"><span class="pre">get_all_labels_from_repo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ontobot_change_agent.api.get_all_labels_from_repo" title="Permalink to this definition"></a></dt>
 <dd><p>Get all labels available in a repository for tagging issues on creation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -119,8 +119,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="onto_crawler.api.process_issue_via_oak">
-<span class="sig-prename descclassname"><span class="pre">onto_crawler.api.</span></span><span class="sig-name descname"><span class="pre">process_issue_via_oak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onto_crawler.api.process_issue_via_oak" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ontobot_change_agent.api.process_issue_via_oak">
+<span class="sig-prename descclassname"><span class="pre">ontobot_change_agent.api.</span></span><span class="sig-name descname"><span class="pre">process_issue_via_oak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ontobot_change_agent.api.process_issue_via_oak" title="Permalink to this definition"></a></dt>
 <dd><p>Pass KGCL commands in the body to OAK.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
