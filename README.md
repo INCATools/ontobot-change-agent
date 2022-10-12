@@ -4,7 +4,7 @@
 </p>
 -->
 
-Crawl github for ontology specific issues.
+Update ontologies using change language.
 
 ## Getting Started
 
