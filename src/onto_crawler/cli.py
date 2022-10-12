@@ -3,6 +3,7 @@
 """Command line interface for :mod:`onto_crawler`."""
 
 import logging
+import re
 from typing import TextIO
 
 import click
@@ -149,41 +150,57 @@ def process_issue(
     for issue in get_issues(
         repository_name=repo, label=label, number=number, state=state
     ):
+        body_text = "\t".join(issue[BODY]).replace("\r\n", "")
+
+        begin_match = re.match(r"(.*)ontobot(.*)apply(.*): \*", body_text)
+        end_match = re.match(r"(.*)---", body_text)
+
+        if begin_match:
+            begin_index = begin_match.end() - 1
+        else:
+            begin_index = 0
+
+        if end_match is not None:
+            end_index = end_match.end() - 3
+        else:
+            end_index = 0
+
         if output:
             new_output = output
         else:
             new_output = input
 
-        label_names = [label["name"] for label in issue["labels"]]
+        if begin_index < end_index:
+            KGCL_COMMANDS = body_text[begin_index:end_index].split("* ")[1:]
+            KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
 
-        if label in label_names and issue["number"] == number:
-            process_issue_via_oak(
-                input=input,
-                body=issue[BODY],
-                output=new_output,
-            )
+            if (
+                issue["number"] == number  # noqa W503
+                and len(KGCL_COMMANDS) > 0  # noqa W503
+            ):
+                process_issue_via_oak(
+                    input=input,
+                    commands=KGCL_COMMANDS,
+                    output=new_output,
+                )
 
-            formatted_body += _list_to_markdown(issue[BODY])
-            formatted_body += "</br>Fixes #" + str(issue["number"])
+                formatted_body += _list_to_markdown(KGCL_COMMANDS)
+                formatted_body += "</br>Fixes #" + str(issue["number"])
 
-            click.echo(
-                f"""
-                ::set-output name=PR_BODY::{formatted_body}
-                ::set-output name=PR_TITLE::{issue[TITLE]}
-                """
-            )
-
-            break
+                click.echo(
+                    f"""
+                    ::set-output name=PR_BODY::{formatted_body}
+                    ::set-output name=PR_TITLE::{issue[TITLE]}
+                    """
+                )
         else:
             click.echo(
-                f"""
-            {issue[TITLE]} does not need the bot's attention.
-            """
+                f"""{issue[TITLE]} does not need ontobot's attention."""
             )
 
 
 def _list_to_markdown(list: list) -> str:
-    bullet = "- "
+    bullet = "* "
     md = ""
     for line in list:
         md += bullet + line + "</br>"
