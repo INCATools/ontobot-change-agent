@@ -56,18 +56,18 @@ class TestVersion(unittest.TestCase):
         result.stderr
         self.assertEqual(0, result.exit_code)
 
-    def test_process_issues_fail(self):
-        """Test process_issue CLI command."""
-        result = self.runner.invoke(
-            process_issue,
-            [
-                self.resource,
-                "--repo",
-                self.repo_name,
-                "-n",
-                10,
-                "-o",
-                self.output,
-            ],
-        )
-        self.assertIsInstance(result.exception, ValueError)
+    # def test_process_issues_fail(self):
+    #     """Test process_issue CLI command."""
+    #     result = self.runner.invoke(
+    #         process_issue,
+    #         [
+    #             self.resource,
+    #             "--repo",
+    #             self.repo_name,
+    #             "-n",
+    #             10,
+    #             "-o",
+    #             self.output,
+    #         ],
+    #     )
+    #     self.assertIsInstance(result.exception, ValueError)

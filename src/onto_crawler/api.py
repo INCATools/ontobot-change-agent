@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Onto-crawl API section."""
+"""API section."""
 
 import re
 from os.path import join, splitext
