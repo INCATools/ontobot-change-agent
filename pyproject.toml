@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ontobot-change-agent"
-version = "0.1.10"
+version = "0.2.0"
 description = "Update ontologies using change language."
 authors = ["Harshad Hegde <hhegde@lbl.gov>"]
 license = "MIT"
