@@ -59,12 +59,12 @@
 #         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
 #         run: poetry install --no-interaction --no-root
 
-#       - name: Run ocrawl
-#         id: ocrawl
+#       - name: Run ochange
+#         id: ochange
 #         run: |
 #           poetry add ontobot-change-agent
 #           echo ${{ secrets.GH_TOKEN }} >> src/ontobot_change_agent/token.txt
-#           poetry run ocrawl process-issue -n ${{ steps.vars.outputs.result }} -o test.obo
+#           poetry run ochange process-issue -n ${{ steps.vars.outputs.result }} -o test.obo
 
       
 
@@ -73,7 +73,7 @@
 #       #   with:
 #       #     branch-suffix: short-commit-hash
 #       #     labels: Automated
-#       #     body: ${{ steps.ocrawl.outputs.BR_BODY }}
-#       #     title: ${{ steps.ocrawl.outputs.BR_TITLE }}
+#       #     body: ${{ steps.ochange.outputs.BR_BODY }}
+#       #     title: ${{ steps.ochange.outputs.BR_TITLE }}
 #       #     base: ${{ github.head_ref }}
 #       #     branch: ${{ steps.vars.outputs.branch-name }}
