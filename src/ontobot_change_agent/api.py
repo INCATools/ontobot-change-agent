@@ -96,7 +96,7 @@ def _extract_info_from_issue_object(issue: Issue) -> dict:
     return important_info
 
 
-def _make_sense_of_body(body: str) -> list:
+def _make_sense_of_body(body: str) -> str:
     # splitter = "\r\n"
     # if "* " in body:
     #     bullet = "* "
@@ -107,9 +107,7 @@ def _make_sense_of_body(body: str) -> list:
     # return (
     #     body.lstrip(bullet).replace("<", "").replace(">", "").split(splitter)
     # )
-    return (
-        body.replace("<", "").replace(">", "").replace("\r\n", "")
-    )
+    return body.replace("<", "").replace(">", "").replace("\r\n", "")
 
 
 def get_all_labels_from_repo(repository_name: str) -> dict:
