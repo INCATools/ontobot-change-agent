@@ -20,20 +20,34 @@
 #         with:
 #           python-version: ${{ matrix.python-version }}
 
-#       - name: GH-Script
-#         id: gh-script
+#       - name: Return issue number
+#         id: gh-script-issue
 #         uses: actions/github-script@v6.1.1
 #         with:
-#           github-token: ${{ secrets.GH_TOKEN }}
+#           # github-token: ${{ secrets.GH_TOKEN }}
 #           script: |
 #             const issue_number = context.issue.number
+#             const repo = context.repo.owner+"/"+context.repo.repo
 #             return issue_number
+      
+#       - name: Return repository name
+#         id: gh-script-repo
+#         uses: actions/github-script@v6.1.1
+#         with:
+#           # github-token: ${{ secrets.GH_TOKEN }}
+#           script: |
+#             const repo = context.repo.owner+"/"+context.repo.repo
+#             return repo
 
 #       - name: Set branch name
 #         id: vars
 #         run: |
-#           echo ::set-output name=branch-name::"automated_branch"_${{ steps.gh-script-issue.outputs.result }}
-
+#           echo "resource=src/ontology/mondo-edit.obo" >> $GITHUB_ENV
+#           echo "branch-name=ochange_automation_"${{ steps.gh-script-issue.outputs.result }} >> $GITHUB_ENV
+      
+#       # echo ::set-output name=resource::"src/ontology/mondo-edit.obo"
+#       # echo ::set-output name=branch-name::"ochange_automation"_${{ steps.gh-script-issue.outputs.result }}
+#       # old resource = "tests/resources/fbbt.obo"
 #       #----------------------------------------------
 #       #          install & configure poetry
 #       #----------------------------------------------
@@ -42,38 +56,29 @@
 #         with:
 #           virtualenvs-create: true
 #           virtualenvs-in-project: true
-#       #----------------------------------------------
-#       #       load cached venv if cache exists      
-#       #----------------------------------------------
-#       - name: Load cached venv
-#         id: cached-poetry-dependencies
-#         uses: actions/cache@v3
-#         with:
-#           path: .venv
-#           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
 #       #----------------------------------------------
 #       # install dependencies if cache does not exist 
 #       #----------------------------------------------
 #       - name: Install dependencies
-#         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-#         run: poetry install --no-interaction --no-root
+#         run: |
+#           poetry install --no-interaction --no-root
+#           poetry run pip install kgcl-schema
 
 #       - name: Run ochange
 #         id: ochange
 #         run: |
-#           poetry add ontobot-change-agent
-#           echo ${{ secrets.GH_TOKEN }} >> src/ontobot_change_agent/token.txt
-#           poetry run ochange process-issue -n ${{ steps.vars.outputs.result }} -o test.obo
+#           echo ${{ secrets.GH_TOKEN }} >> /home/runner/work/mondo/mondo/.venv/lib/python3.9/site-packages/ontobot_change_agent/token.txt
+#           poetry run ochange process-issue ${{ env.resource }} \
+#           -r ${{ steps.gh-script-repo.outputs.result }} \
+#           -n ${{ steps.gh-script-issue.outputs.result }}
 
-      
-
-#       # - name: Create Pull Request
-#       #   uses: peter-evans/create-pull-request@v3
-#       #   with:
-#       #     branch-suffix: short-commit-hash
-#       #     labels: Automated
-#       #     body: ${{ steps.ochange.outputs.BR_BODY }}
-#       #     title: ${{ steps.ochange.outputs.BR_TITLE }}
-#       #     base: ${{ github.head_ref }}
-#       #     branch: ${{ steps.vars.outputs.branch-name }}
+#       - name: Create Pull Request
+#         uses: peter-evans/create-pull-request@v4.1.3
+#         with:
+#           branch-suffix: short-commit-hash
+#           labels: Automated
+#           body: ${{ steps.ochange.outputs.PR_BODY }}
+#           title: ${{ steps.ochange.outputs.PR_TITLE }}
+#           base: ${{ github.head_ref }}
+#           branch: ${{ env.branch-name }}
