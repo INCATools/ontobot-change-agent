@@ -96,7 +96,7 @@ python-versions = "*"
 
 [[package]]
 name = "bioregistry"
-version = "0.5.141"
+version = "0.5.142"
 description = "Integrated registry of biological databases and nomenclatures"
 category = "main"
 optional = false
@@ -284,7 +284,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "exceptiongroup"
-version = "1.0.0rc9"
+version = "1.0.0"
 description = "Backport of PEP 654 (exception groups)"
 category = "main"
 optional = false
@@ -562,7 +562,7 @@ linkml-runtime = ">=1.1.24,<2.0.0"
 
 [[package]]
 name = "kgcl-schema"
-version = "0.3.0"
+version = "0.3.1"
 description = "Schema for the KGCL project."
 category = "main"
 optional = false
@@ -798,7 +798,7 @@ viz = ["pygraphviz"]
 
 [[package]]
 name = "oaklib"
-version = "0.1.48"
+version = "0.1.49"
 description = "Ontology Access Kit: Python library for common ontology operations over a variety of backends"
 category = "main"
 optional = false
@@ -811,7 +811,7 @@ class-resolver = ">=0.3.10,<0.4.0"
 curies = ">=0.4.0,<0.5.0"
 funowl = ">=0.1.12,<0.2.0"
 kgcl-rdflib = ">=0.3.0,<0.4.0"
-kgcl-schema = ">=0.3.0,<0.4.0"
+kgcl-schema = ">=0.3.1,<0.4.0"
 lark = ">=1.1.2,<2.0.0"
 linkml-runtime = ">=1.2.15,<2.0.0"
 networkx = ">=2.7.1,<3.0.0"
@@ -1969,8 +1969,8 @@ bcp47 = [
     {file = "bcp47-0.0.4.tar.gz", hash = "sha256:4878d2f3e697ef39ef3891a147280705e4377d5a8d7eb0702129b8d4a3718702"},
 ]
 bioregistry = [
-    {file = "bioregistry-0.5.141-py3-none-any.whl", hash = "sha256:c9d737fee285f5a3aa72b46ccb574bc0caa4ef7f9a407244620bacbd51e5e632"},
-    {file = "bioregistry-0.5.141.tar.gz", hash = "sha256:2b4d259f842e3f5cd811041ede9bd5e4f0b46f9064def85613790974016b8278"},
+    {file = "bioregistry-0.5.142-py3-none-any.whl", hash = "sha256:5e975f323b24dd23b733f36cd77f348d0084340194f5c0a50235e891052fda7f"},
+    {file = "bioregistry-0.5.142.tar.gz", hash = "sha256:989bfc3a9ffcaa7536718633a166f33f6563a00eb5b4cbac4055252de0f5c363"},
 ]
 certifi = [
     {file = "certifi-2022.9.24-py3-none-any.whl", hash = "sha256:90c1a32f1d68f940488354e36370f6cca89f0f106db09518524c88d6ed83f382"},
@@ -2094,8 +2094,8 @@ et-xmlfile = [
     {file = "et_xmlfile-1.1.0.tar.gz", hash = "sha256:8eb9e2bc2f8c97e37a2dc85a09ecdcdec9d8a396530a6d5a33b30b9a92da0c5c"},
 ]
 exceptiongroup = [
-    {file = "exceptiongroup-1.0.0rc9-py3-none-any.whl", hash = "sha256:2e3c3fc1538a094aab74fad52d6c33fc94de3dfee3ee01f187c0e0c72aec5337"},
-    {file = "exceptiongroup-1.0.0rc9.tar.gz", hash = "sha256:9086a4a21ef9b31c72181c77c040a074ba0889ee56a7b289ff0afb0d97655f96"},
+    {file = "exceptiongroup-1.0.0-py3-none-any.whl", hash = "sha256:2ac84b496be68464a2da60da518af3785fff8b7ec0d090a581604bc870bdee41"},
+    {file = "exceptiongroup-1.0.0.tar.gz", hash = "sha256:affbabf13fb6e98988c38d9c5650e701569fe3c1de3233cfb61c5f33774690ad"},
 ]
 fastobo = [
     {file = "fastobo-0.12.1-cp310-cp310-macosx_10_15_universal2.whl", hash = "sha256:94448d0775a82e7dd6ef7a5fa054480c5e3796472fbf2c7a6e9eebed0a910c54"},
@@ -2324,8 +2324,8 @@ kgcl-rdflib = [
     {file = "kgcl_rdflib-0.3.0-py3-none-any.whl", hash = "sha256:0d81571187c2ae5b455e7699f27deb87f6f31ea41e94996d9a3ec07374790283"},
 ]
 kgcl-schema = [
-    {file = "kgcl_schema-0.3.0-py3-none-any.whl", hash = "sha256:9bee2f0f37304c52d7bf999e1972d7fe534753a1ad454b3fabb1875238d61dba"},
-    {file = "kgcl_schema-0.3.0.tar.gz", hash = "sha256:98eab248f49ffa6bef2527a5892b6581873068e250e589b49370d300e988af52"},
+    {file = "kgcl_schema-0.3.1-py3-none-any.whl", hash = "sha256:76c031bc79926dba045e70d673ed60fd3d347df8d558335fe0de11e003667fcf"},
+    {file = "kgcl_schema-0.3.1.tar.gz", hash = "sha256:62338917809d6a078e2bf66ee35866299188e44c3aa816ab1b4707cff5941295"},
 ]
 lark = [
     {file = "lark-1.1.3-py3-none-any.whl", hash = "sha256:45cd8b4d8b0487863f0f4cf3c305a1293db86af576d4a62cfb572e57a9b609e5"},
@@ -2505,8 +2505,8 @@ nxontology = [
     {file = "nxontology-0.4.1.tar.gz", hash = "sha256:8f1e5d6d7787542e9414be4ae34bb09e369dbaf2d6c646bba2d18b122c083d44"},
 ]
 oaklib = [
-    {file = "oaklib-0.1.48-py3-none-any.whl", hash = "sha256:5bc7c412c6af944626466957b1d64a36920d42915bbcb57a17604bb0f096fb56"},
-    {file = "oaklib-0.1.48.tar.gz", hash = "sha256:01874a00d30e67b54e196b931395e18bf069d77caaf64b1d6bfebd30ab9596c3"},
+    {file = "oaklib-0.1.49-py3-none-any.whl", hash = "sha256:7f29f0576d0dbf21125b00b6ed8fc893b8bcac56953bfe642bca38ffe2cf5b0d"},
+    {file = "oaklib-0.1.49.tar.gz", hash = "sha256:38f732767c1ef0dd0af180cbc708d13899b805e4d31c23050bd7b0ae362acd53"},
 ]
 ols-client = [
     {file = "ols_client-0.1.2-py3-none-any.whl", hash = "sha256:880a41aa99fd1dbcda95f408356e1c4307ad7c34dfa75c959b54973c85d9fa6e"},
