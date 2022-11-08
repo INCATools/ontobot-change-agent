@@ -150,9 +150,9 @@ def process_issue(
     for issue in get_issues(
         repository_name=repo, label=label, number=number, state=state
     ):
-
-        begin_match = re.match(r"(.*)ontobot(.*)apply(.*): \*", issue[BODY])
-        end_match = re.match(r"(.*)---", issue[BODY])
+        issue_body = issue[BODY].replace("\n", "  ")
+        begin_match = re.match(r"(.*)ontobot(.*)apply(.*):(.*)\*", issue_body)
+        end_match = re.match(r"(.*)---", issue_body)
 
         if begin_match:
             begin_index = begin_match.end() - 1
@@ -170,9 +170,8 @@ def process_issue(
             new_output = input
 
         if begin_index < end_index:
-            KGCL_COMMANDS = issue[BODY][begin_index:end_index].split("* ")[1:]
+            KGCL_COMMANDS = issue_body[begin_index:end_index].split("* ")[1:]
             KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
-
             if (
                 issue["number"] == number  # noqa W503
                 and len(KGCL_COMMANDS) > 0  # noqa W503
