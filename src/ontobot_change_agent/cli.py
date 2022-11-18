@@ -9,11 +9,7 @@ from typing import TextIO
 import click
 
 from ontobot_change_agent import __version__
-from ontobot_change_agent.api import (
-    get_all_labels_from_repo,
-    get_issues,
-    process_issue_via_oak,
-)
+from ontobot_change_agent.api import get_all_labels_from_repo, get_issues, process_issue_via_oak
 
 __all__ = [
     "main",
@@ -136,9 +132,7 @@ def get_labels(repo: str):
 @issue_number_option
 @state_option
 @output_option
-def process_issue(
-    input: str, repo: str, label: str, number: int, state: str, output: str
-):
+def process_issue(input: str, repo: str, label: str, number: int, state: str, output: str):
     """Run processes based on issue label.
 
     :param repo: GitHub repository name [org/repo_name]
@@ -147,9 +141,7 @@ def process_issue(
     """
     formatted_body = "The following commands were executed: </br>"
 
-    for issue in get_issues(
-        repository_name=repo, label=label, number=number, state=state
-    ):
+    for issue in get_issues(repository_name=repo, label=label, number=number, state=state):
         issue_body = issue[BODY].replace("\n", "  ")
         begin_match = re.match(r"(.*)ontobot(.*)apply(.*):(.*)\*", issue_body)
         end_match = re.match(r"(.*)---", issue_body)
@@ -159,10 +151,15 @@ def process_issue(
         else:
             begin_index = 0
 
-        if end_match is not None:
-            end_index = end_match.end() - 3
+        if end_match is None:
+            end_match = re.match(r"(.*):\d+", issue_body)
+            if end_match is None:
+                end_index = 0
+                click.echo(f"""Cannot find end of command: {issue_body[begin_index:]}""")
+            else:
+                end_index = end_match.end()
         else:
-            end_index = 0
+            end_index = end_match.end() - 3
 
         if output:
             new_output = output
@@ -172,10 +169,7 @@ def process_issue(
         if begin_index < end_index:
             KGCL_COMMANDS = issue_body[begin_index:end_index].split("* ")[1:]
             KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
-            if (
-                issue["number"] == number  # noqa W503
-                and len(KGCL_COMMANDS) > 0  # noqa W503
-            ):
+            if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503  # noqa W503
                 process_issue_via_oak(
                     input=input,
                     commands=KGCL_COMMANDS,
@@ -192,9 +186,7 @@ def process_issue(
                     """
                 )
         else:
-            click.echo(
-                f"""{issue[TITLE]} does not need ontobot's attention."""
-            )
+            click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
 
 
 def _list_to_markdown(list: list) -> str:

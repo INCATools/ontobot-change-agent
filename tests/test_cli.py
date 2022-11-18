@@ -24,9 +24,7 @@ class TestVersion(unittest.TestCase):
 
     def test_get_issues(self):
         """Test get_issues CLI command."""
-        result = self.runner.invoke(
-            issues, ["--label", "test", "--repo", self.repo_name]
-        )
+        result = self.runner.invoke(issues, ["--label", "test", "--repo", self.repo_name])
         result.stdout
         result.stderr
         self.assertEqual(0, result.exit_code)

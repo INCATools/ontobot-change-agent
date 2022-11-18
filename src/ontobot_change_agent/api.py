@@ -10,10 +10,7 @@ import kgcl_schema.grammar.parser as kgcl_parser
 from github import Github
 from github.Issue import Issue
 from oaklib.cli import query_terms_iterator
-from oaklib.implementations import (
-    ProntoImplementation,
-    SimpleOboImplementation,
-)
+from oaklib.implementations import ProntoImplementation, SimpleOboImplementation
 from oaklib.interfaces.patcher_interface import PatcherInterface
 from oaklib.selector import get_resource_from_shorthand
 
@@ -146,9 +143,7 @@ def process_issue_via_oak(input: str, commands: list, output: str = None):
         # TODO: There must be a better way to identify label in command.
         if ":" not in command and change.about_node is None:
             change.about_node = list(
-                query_terms_iterator(
-                    [change.old_value.strip("'").strip('"')], impl_obj
-                )
+                query_terms_iterator([change.old_value.strip("'").strip('"')], impl_obj)
             )[0]
 
         impl_obj.apply_patch(change)
