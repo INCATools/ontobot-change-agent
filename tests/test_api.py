@@ -6,11 +6,7 @@ import unittest
 
 from github.Issue import Issue
 
-from ontobot_change_agent.api import (
-    TOKEN,
-    get_all_labels_from_repo,
-    get_issues,
-)
+from ontobot_change_agent.api import TOKEN, get_all_labels_from_repo, get_issues
 
 
 class TestAPI(unittest.TestCase):
@@ -26,9 +22,7 @@ class TestAPI(unittest.TestCase):
     def test_get_issues_with_label(self):
         """Test if 'get_issues' returns the correct label."""
         issues = []
-        for issue in get_issues(
-            repository_name=self.repo_name, label=self.label
-        ):
+        for issue in get_issues(repository_name=self.repo_name, label=self.label):
             issues.append(issue)
 
         self.assertEqual(len(issues), 1)
@@ -40,9 +34,7 @@ class TestAPI(unittest.TestCase):
     def test_get_issues_with_title(self):
         """Test if 'get_issues' returns the correct title."""
         issues = []
-        for issue in get_issues(
-            repository_name=self.repo_name, title_search=self.issue_title
-        ):
+        for issue in get_issues(repository_name=self.repo_name, title_search=self.issue_title):
             issues.append(issue)
 
         self.assertEqual(len(issues), 1)
