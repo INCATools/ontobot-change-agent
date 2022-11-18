@@ -154,15 +154,22 @@ def process_issue(
         begin_match = re.match(r"(.*)ontobot(.*)apply(.*):(.*)\*", issue_body)
         end_match = re.match(r"(.*)---", issue_body)
 
+        if end_match is None:
+            end_match = re.match(r"(.*):\d+", issue_body)
+            if end_match is None:
+                end_index = 0
+                click.echo(
+                    f"""Cannot find end of command: {issue_body[begin_index:]}"""
+                )
+            else:
+                end_index = end_match.end()
+        else:
+            end_index = end_match.end() - 3
+
         if begin_match:
             begin_index = begin_match.end() - 1
         else:
             begin_index = 0
-
-        if end_match is not None:
-            end_index = end_match.end() - 3
-        else:
-            end_index = 0
 
         if output:
             new_output = output
