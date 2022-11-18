@@ -3,7 +3,6 @@
 """Command line interface for :mod:`ontobot_change_agent`."""
 
 import logging
-import re
 from typing import TextIO
 
 import click
@@ -142,64 +141,31 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
     formatted_body = "The following commands were executed: </br>"
 
     for issue in get_issues(repository_name=repo, label=label, number=number, state=state):
-        issue_body = issue[BODY].replace("\n", "  ")
-        begin_match = re.match(r"(.*)ontobot(.*)apply(.*):(.*)\*", issue_body)
-        end_index_contenders = []
-
-        if begin_match:
-            begin_index = begin_match.end() - 1
-        else:
-            begin_index = 0
-
-        # if issue has `---` as command end indicator
-        dash_end_match = re.match(r"(.*)---", issue_body)
-        end_index_contenders.append(dash_end_match.end() - 3 if dash_end_match is not None else 0)
-
-        # if issue has no command end indicator and ends with a CURIE
-        colon_end_match = re.match(r"(.*):\d+", issue_body)
-        end_index_contenders.append(colon_end_match.end() if colon_end_match is not None else 0)
-
-        # if issue has no command end indicator and ends with a URI
-        underscore_end_match = re.match(r"(.*)_\d+", issue_body)
-        end_index_contenders.append(
-            underscore_end_match.end() if underscore_end_match is not None else 0
-        )
-
-        # if issue has no command end indicator and ends with a label
-        quote_end_match = re.match(r"(.*)\'", issue_body)
-        end_index_contenders.append(quote_end_match.end() if quote_end_match is not None else 0)
-
-        end_index = max(end_index_contenders)
-
-        if end_index == 0:
-            click.echo(f"""Cannot find end of command: {issue_body[begin_index:]}""")
-
+        KGCL_COMMANDS = [
+            str(item).replace("* ", "") for item in issue[BODY].splitlines() if item.startswith("*")
+        ]
         if output:
             new_output = output
         else:
             new_output = input
 
-        if begin_index < end_index:
-            KGCL_COMMANDS = issue_body[begin_index:end_index].split("* ")[1:]
-            KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
-            if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503  # noqa W503
-                process_issue_via_oak(
-                    input=input,
-                    commands=KGCL_COMMANDS,
-                    output=new_output,
-                )
+        KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
+        if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503  # noqa W503
+            process_issue_via_oak(
+                input=input,
+                commands=KGCL_COMMANDS,
+                output=new_output,
+            )
 
-                formatted_body += _list_to_markdown(KGCL_COMMANDS)
-                formatted_body += "</br>Fixes #" + str(issue["number"])
+            formatted_body += _list_to_markdown(KGCL_COMMANDS)
+            formatted_body += "</br>Fixes #" + str(issue["number"])
 
-                click.echo(
-                    f"""
-                    ::set-output name=PR_BODY::{formatted_body}
-                    ::set-output name=PR_TITLE::{issue[TITLE]}
-                    """
-                )
-        else:
-            click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
+            click.echo(
+                f"""
+                ::set-output name=PR_BODY::{formatted_body}
+                ::set-output name=PR_TITLE::{issue[TITLE]}
+                """
+            )
 
 
 def _list_to_markdown(list: list) -> str:
