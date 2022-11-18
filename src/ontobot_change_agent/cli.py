@@ -144,22 +144,35 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
     for issue in get_issues(repository_name=repo, label=label, number=number, state=state):
         issue_body = issue[BODY].replace("\n", "  ")
         begin_match = re.match(r"(.*)ontobot(.*)apply(.*):(.*)\*", issue_body)
-        end_match = re.match(r"(.*)---", issue_body)
+        end_index_contenders = []
 
         if begin_match:
             begin_index = begin_match.end() - 1
         else:
             begin_index = 0
 
-        if end_match is None:
-            end_match = re.match(r"(.*):\d+", issue_body)
-            if end_match is None:
-                end_index = 0
-                click.echo(f"""Cannot find end of command: {issue_body[begin_index:]}""")
-            else:
-                end_index = end_match.end()
-        else:
-            end_index = end_match.end() - 3
+        # if issue has `---` as command end indicator
+        dash_end_match = re.match(r"(.*)---", issue_body)
+        end_index_contenders.append(dash_end_match.end() - 3 if dash_end_match is not None else 0)
+
+        # if issue has no command end indicator and ends with a CURIE
+        colon_end_match = re.match(r"(.*):\d+", issue_body)
+        end_index_contenders.append(colon_end_match.end() if colon_end_match is not None else 0)
+
+        # if issue has no command end indicator and ends with a URI
+        underscore_end_match = re.match(r"(.*)_\d+", issue_body)
+        end_index_contenders.append(
+            underscore_end_match.end() if underscore_end_match is not None else 0
+        )
+
+        # if issue has no command end indicator and ends with a label
+        quote_end_match = re.match(r"(.*)\'", issue_body)
+        end_index_contenders.append(quote_end_match.end() if quote_end_match is not None else 0)
+
+        end_index = max(end_index_contenders)
+
+        if end_index == 0:
+            click.echo(f"""Cannot find end of command: {issue_body[begin_index:]}""")
 
         if output:
             new_output = output
