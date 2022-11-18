@@ -36,7 +36,7 @@ class TestVersion(unittest.TestCase):
         result.stderr
         self.assertEqual(0, result.exit_code)
 
-    def test_process_issues(self):
+    def test_process_issues_with_end(self):
         """Test process_issue CLI command."""
         result = self.runner.invoke(
             process_issue,
@@ -46,6 +46,24 @@ class TestVersion(unittest.TestCase):
                 self.repo_name,
                 "-n",
                 30,
+                "-o",
+                self.output,
+            ],
+        )
+        result.stdout
+        result.stderr
+        self.assertEqual(0, result.exit_code)
+
+    def test_process_issues_without_end(self):
+        """Test process_issue CLI command."""
+        result = self.runner.invoke(
+            process_issue,
+            [
+                self.resource,
+                "--repo",
+                self.repo_name,
+                "-n",
+                38,
                 "-o",
                 self.output,
             ],
