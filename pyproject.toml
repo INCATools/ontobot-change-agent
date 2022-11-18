@@ -32,13 +32,13 @@ docs = [
     ]
 
 [tool.black]
-line-length = 79
+line-length = 100
 target-version = ["py38", "py39", "py310"]
 
 [tool.isort]
 profile = "black"
 multi_line_output = 3
-line_length = 79
+line_length = 100
 include_trailing_comma = true
 reverse_relative = true
 
