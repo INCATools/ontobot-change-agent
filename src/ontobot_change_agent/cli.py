@@ -141,9 +141,17 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
     formatted_body = "The following commands were executed: </br>"
 
     for issue in get_issues(repository_name=repo, label=label, number=number, state=state):
-        KGCL_COMMANDS = [
-            str(item).replace("* ", "") for item in issue[BODY].splitlines() if item.startswith("*")
-        ]
+        bullet_starters = ["* ", "- "]
+        KGCL_COMMANDS = []
+        for bullet in bullet_starters:
+
+            KGCL_COMMANDS.extend(
+                [
+                    str(item).replace(bullet, "")
+                    for item in issue[BODY].splitlines()
+                    if item.startswith(bullet)
+                ]
+            )
         if output:
             new_output = output
         else:
