@@ -3,6 +3,7 @@
 """Command line interface for :mod:`ontobot_change_agent`."""
 
 import logging
+import re
 from typing import TextIO
 
 import click
@@ -141,39 +142,43 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
     formatted_body = "The following commands were executed: </br>"
 
     for issue in get_issues(repository_name=repo, label=label, number=number, state=state):
-        bullet_starters = ["* ", "- "]
-        KGCL_COMMANDS = []
-        for bullet in bullet_starters:
+        # Make sure ontobot_change_agent needs to be triggered or no.
+        if re.match(r"(.*)ontobot(.*)apply(.*):(.*)\*", issue[BODY]):
+            bullet_starters = ["* ", "- "]
+            KGCL_COMMANDS = []
+            for bullet in bullet_starters:
 
-            KGCL_COMMANDS.extend(
-                [
-                    str(item).replace(bullet, "")
-                    for item in issue[BODY].splitlines()
-                    if item.startswith(bullet)
-                ]
-            )
-        if output:
-            new_output = output
+                KGCL_COMMANDS.extend(
+                    [
+                        str(item).replace(bullet, "")
+                        for item in issue[BODY].splitlines()
+                        if item.startswith(bullet)
+                    ]
+                )
+            if output:
+                new_output = output
+            else:
+                new_output = input
+
+            KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
+            if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503  # noqa W503
+                process_issue_via_oak(
+                    input=input,
+                    commands=KGCL_COMMANDS,
+                    output=new_output,
+                )
+
+                formatted_body += _list_to_markdown(KGCL_COMMANDS)
+                formatted_body += "</br>Fixes #" + str(issue["number"])
+
+                click.echo(
+                    f"""
+                    ::set-output name=PR_BODY::{formatted_body}
+                    ::set-output name=PR_TITLE::{issue[TITLE]}
+                    """
+                )
         else:
-            new_output = input
-
-        KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
-        if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503  # noqa W503
-            process_issue_via_oak(
-                input=input,
-                commands=KGCL_COMMANDS,
-                output=new_output,
-            )
-
-            formatted_body += _list_to_markdown(KGCL_COMMANDS)
-            formatted_body += "</br>Fixes #" + str(issue["number"])
-
-            click.echo(
-                f"""
-                ::set-output name=PR_BODY::{formatted_body}
-                ::set-output name=PR_TITLE::{issue[TITLE]}
-                """
-            )
+            click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
 
 
 def _list_to_markdown(list: list) -> str:
