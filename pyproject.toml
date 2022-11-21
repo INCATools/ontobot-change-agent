@@ -1,7 +1,7 @@
 [tool.poetry]
 
 name = "ontobot-change-agent"
-version = "0.3.0"
+version = "0.0.0"
 description = "Update ontologies using change language."
 
 authors = ["Harshad Hegde <hhegde@lbl.gov>"]
@@ -19,6 +19,11 @@ Sphinx = "^5.2.3"
 sphinx-rtd-theme = "^1.0.0"
 sphinx-autodoc-typehints = "^1.19.4"
 sphinx-click = "^4.3.0"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "pep440"
 
 [tool.poetry.scripts]
 ochange = "ontobot_change_agent.cli:main"
@@ -43,5 +48,5 @@ include_trailing_comma = true
 reverse_relative = true
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
