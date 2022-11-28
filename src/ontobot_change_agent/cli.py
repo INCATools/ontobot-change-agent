@@ -143,7 +143,7 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
 
     for issue in get_issues(repository_name=repo, label=label, number=number, state=state):
         # Make sure ontobot_change_agent needs to be triggered or no.
-        if re.match(r"(.*)ontobot(.*)apply(.*):(.*)\*", issue[BODY]):
+        if re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY]):
             bullet_starters = ["* ", "- "]
             KGCL_COMMANDS = []
             for bullet in bullet_starters:
