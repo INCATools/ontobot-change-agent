@@ -173,8 +173,8 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
 
                 click.echo(
                     f"""
-                    PR_BODY={formatted_body} >> $GITHUB_ENV
-                    PR_TITLE={issue[TITLE]} >> $GITHUB_ENV
+                    "PR_BODY={formatted_body}" >> $GITHUB_ENV
+                    "PR_TITLE={issue[TITLE]}" >> $GITHUB_ENV
                     """
                 )
         else:
