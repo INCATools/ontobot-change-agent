@@ -140,7 +140,7 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
     :param label: Label of issues.
     :param state: State of issue ["open", "close" etc.]
     """
-    formatted_body = "The following commands were executed: </br>"
+    formatted_body = "The following commands were executed: </br> "
 
     for issue in get_issues(repository_name=repo, label=label, number=number, state=state):
         # Make sure ontobot_change_agent needs to be triggered or no.
