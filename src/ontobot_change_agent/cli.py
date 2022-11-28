@@ -179,8 +179,8 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
 
                 click.echo(
                     f"""
-                    ::set-output name=PR_BODY::{formatted_body}
-                    ::set-output name=PR_TITLE::{issue[TITLE]}
+                    PR_BODY={formatted_body}
+                    PR_TITLE={issue[TITLE]}
                     """
                 )
         else:
