@@ -171,11 +171,11 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
 
                 formatted_body += _list_to_markdown(KGCL_COMMANDS)
                 formatted_body += "</br>Fixes #" + str(issue["number"])
-                #TODO: remove `set-output` when env var setting is confirmed.
+                # TODO: remove `set-output` when env var setting is confirmed.
                 with open(os.getenv("GITHUB_ENV"), "a") as env:
                     print(f"PR_BODY={formatted_body}", file=env)
                     print(f"PR_TITLE={issue[TITLE]}", file=env)
-                    
+
                 click.echo(
                     f"""
                     ::set-output name=PR_BODY::{formatted_body}
