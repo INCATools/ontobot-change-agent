@@ -3,6 +3,7 @@
 """Command line interface for :mod:`ontobot_change_agent`."""
 
 import logging
+import os
 import re
 from typing import TextIO
 
@@ -171,10 +172,14 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
                 formatted_body += _list_to_markdown(KGCL_COMMANDS)
                 formatted_body += "</br>Fixes #" + str(issue["number"])
 
+                with open(os.getenv("GITHUB_ENV"), "a") as env:
+                    print(f"PR_BODY={formatted_body}", file=env)
+                    print(f"PR_TITLE={issue[TITLE]}", file=env)
+                    
                 click.echo(
                     f"""
-                    "PR_BODY={formatted_body}" >> $GITHUB_ENV
-                    "PR_TITLE={issue[TITLE]}" >> $GITHUB_ENV
+                    ::set-output name=PR_BODY::{formatted_body}
+                    ::set-output name=PR_TITLE::{issue[TITLE]}
                     """
                 )
         else:
