@@ -77,14 +77,14 @@ def get_issues(
     for issue in issues:
         if title_search is None and label_object is None and number == 0:
             yield issue
+        elif title_search and re.match(title_search, issue.title):
+            yield _extract_info_from_issue_object(issue)
+        elif label_object and label_object in issue.labels:
+            yield _extract_info_from_issue_object(issue)
+        elif number and number == issue.number:
+            yield _extract_info_from_issue_object(issue)
         else:
-            if title_search and re.match(title_search, issue.title):
-                yield _extract_info_from_issue_object(issue)
-            if label_object and label_object in issue.labels:
-                yield _extract_info_from_issue_object(issue)
-            if number and number == issue.number:
-                yield _extract_info_from_issue_object(issue)
-
+            yield None
 
 def _extract_info_from_issue_object(issue: Issue) -> dict:
     issue_as_dict = issue.__dict__
