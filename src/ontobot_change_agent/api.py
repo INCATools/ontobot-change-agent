@@ -86,6 +86,7 @@ def get_issues(
         else:
             yield None
 
+
 def _extract_info_from_issue_object(issue: Issue) -> dict:
     issue_as_dict = issue.__dict__
     important_info = {k: issue_as_dict[RAW_DATA][k] for k in ISSUE_KEYS}
