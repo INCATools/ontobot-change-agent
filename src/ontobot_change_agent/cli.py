@@ -144,47 +144,51 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
 
     for issue in get_issues(repository_name=repo, label=label, number=number, state=state):
         # Make sure ontobot_change_agent needs to be triggered or no.
-        if re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY]):
-            bullet_starters = ["* ", "- "]
-            KGCL_COMMANDS = []
-            for bullet in bullet_starters:
+        if issue:
+            if re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY]):
+                bullet_starters = ["* ", "- "]
+                KGCL_COMMANDS = []
+                for bullet in bullet_starters:
 
-                KGCL_COMMANDS.extend(
-                    [
-                        str(item).replace(bullet, "")
-                        for item in issue[BODY].splitlines()
-                        if item.startswith(bullet)
-                    ]
-                )
-            if output:
-                new_output = output
+                    KGCL_COMMANDS.extend(
+                        [
+                            str(item).replace(bullet, "")
+                            for item in issue[BODY].splitlines()
+                            if item.startswith(bullet)
+                        ]
+                    )
+                if output:
+                    new_output = output
+                else:
+                    new_output = input
+
+                KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
+                if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503  # noqa W503
+                    process_issue_via_oak(
+                        input=input,
+                        commands=KGCL_COMMANDS,
+                        output=new_output,
+                    )
+
+                    formatted_body += _list_to_markdown(KGCL_COMMANDS)
+                    formatted_body += "</br>Fixes #" + str(issue["number"])
+                    # TODO: remove `set-output` when env var setting is confirmed.
+                    if os.getenv("GITHUB_ENV"):
+                        with open(os.getenv("GITHUB_ENV"), "a") as env:  # type: ignore
+                            print(f"PR_BODY={formatted_body}", file=env)
+                            print(f"PR_TITLE={issue[TITLE]}", file=env)
+
+                    click.echo(
+                        f"""
+                        PR_BODY={formatted_body}
+                        PR_TITLE={issue[TITLE]}
+                        """
+                    )
             else:
-                new_output = input
-
-            KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
-            if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503  # noqa W503
-                process_issue_via_oak(
-                    input=input,
-                    commands=KGCL_COMMANDS,
-                    output=new_output,
-                )
-
-                formatted_body += _list_to_markdown(KGCL_COMMANDS)
-                formatted_body += "</br>Fixes #" + str(issue["number"])
-                # TODO: remove `set-output` when env var setting is confirmed.
-                if os.getenv("GITHUB_ENV"):
-                    with open(os.getenv("GITHUB_ENV"), "a") as env:  # type: ignore
-                        print(f"PR_BODY={formatted_body}", file=env)
-                        print(f"PR_TITLE={issue[TITLE]}", file=env)
-
-                click.echo(
-                    f"""
-                    PR_BODY={formatted_body}
-                    PR_TITLE={issue[TITLE]}
-                    """
-                )
+                click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
         else:
-            click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
+            click.echo(f"""Issue number:{number} is either closed or does not exist.""")
+            break
 
 
 def _list_to_markdown(list: list) -> str:
