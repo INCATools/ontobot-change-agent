@@ -34,7 +34,7 @@ TOKEN_FILE = join(SRC, "token.txt")
 
 if os.getenv("GITHUB_ENV"):
     click.echo(
-        f"'${{ secrets.GH_TOKEN }}' >> {TOKEN_FILE}"
+        "${{ secrets.GH_TOKEN }} >> " + TOKEN_FILE
     )
 
 with open(TOKEN_FILE, "r") as t:
