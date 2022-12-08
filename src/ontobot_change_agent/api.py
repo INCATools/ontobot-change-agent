@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 """API section."""
 
-import os
 import re
 from os.path import join, splitext
 from pathlib import Path
 from typing import Generator, Optional
 
-import click
 import kgcl_schema.grammar.parser as kgcl_parser
 from github import Github
 from github.Issue import Issue
@@ -32,15 +30,6 @@ ONTOLOGY_RESOURCE = TESTS / "resources/fbbt.obo"
 SRC = Path(__file__).parent
 TOKEN_FILE = join(SRC, "token.txt")
 
-if os.getenv("GITHUB_ENV"):
-    click.echo(
-        "${{ secrets.GH_TOKEN }} >> " + TOKEN_FILE
-    )
-
-with open(TOKEN_FILE, "r") as t:
-    TOKEN = t.read().rstrip()
-
-g = Github(TOKEN)
 # Example for API: https://pygithub.readthedocs.io/en/latest/examples.html
 
 RAW_DATA = "_rawData"
@@ -62,6 +51,7 @@ ISSUE_KEYS = [
 
 def get_issues(
     repository_name: str,
+    token: str = None,
     title_search: Optional[str] = None,
     label: Optional[str] = None,
     number: Optional[int] = 0,
@@ -70,10 +60,19 @@ def get_issues(
     """Get issues of specific states from a Github repository.
 
     :param repository_name: Name of the repository [org/repo]
-    :param title_search: Regex for title of the issue.
+    :param token: Github token for authorization, defaults to None
+    :param title_search: Regex for title of the issue., defaults to None
+    :param label: Issue label, defaults to None
+    :param number: Issue number, defaults to 0
     :param state: State of the issue e.g. open, close etc., defaults to "open"
     :yield: Issue names that match the regex/label/number.
     """
+    if token is None:
+        token_file = TOKEN_FILE
+        with open(token_file, "r") as t:
+            token = t.read().rstrip()
+
+    g = Github(token)
     repo = g.get_repo(repository_name)
     label_object = None
     if label:
@@ -114,12 +113,19 @@ def _make_sense_of_body(body: str) -> str:
     return body.replace("<", "").replace(">", "")
 
 
-def get_all_labels_from_repo(repository_name: str) -> dict:
+def get_all_labels_from_repo(repository_name: str, token: str = None) -> dict:
     """Get all labels available in a repository for tagging issues on creation.
 
     :param repository_name: Name of the repository.
+    :param token: Github token for authorization, defaults to None
     :return: A dictionary of {name: description}
     """
+    if token is None:
+        token_file = TOKEN_FILE
+        with open(token_file, "r") as t:
+            token = t.read().rstrip()
+
+    g = Github(token)
     repo = g.get_repo(repository_name)
     return {label.name: label.description for label in repo.get_labels()}
 

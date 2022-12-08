@@ -51,6 +51,11 @@ repo_option = click.option(
     required=True,
     help="Org/name of the github repo.",
 )
+token_option = click.option(
+    "-g",
+    "--token",
+    help="Github token for the repository.",
+)
 
 issue_number_option = click.option(
     "-n",
@@ -88,10 +93,12 @@ output_option = click.option(
     "--title-search",
     help="Filter based on a search for pattern within title of issue.",
 )
+@token_option
 @label_option
 @issue_number_option
 def issues(
     repo: str,
+    token: str,
     state: str,
     title_search: str,
     label: str,
@@ -108,6 +115,7 @@ def issues(
     """
     for issue in get_issues(
         repository_name=repo,
+        token=token,
         state=state,
         title_search=title_search,
         label=label,
@@ -118,22 +126,26 @@ def issues(
 
 @main.command("get-labels")
 @repo_option
-def get_labels(repo: str):
+@token_option
+def get_labels(repo: str, token: str):
     """Get all labels for issues.
 
     :param repo: GitHub repository name [org/repo_name]
     """
-    print(get_all_labels_from_repo(repo))
+    print(get_all_labels_from_repo(repo, token))
 
 
 @main.command()
 @input_argument
 @repo_option
+@token_option
 @label_option
 @issue_number_option
 @state_option
 @output_option
-def process_issue(input: str, repo: str, label: str, number: int, state: str, output: str):
+def process_issue(
+    input: str, repo: str, token: str, label: str, number: int, state: str, output: str
+):
     """Run processes based on issue label.
 
     :param repo: GitHub repository name [org/repo_name]
@@ -142,7 +154,9 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
     """
     formatted_body = "The following commands were executed: </br> "
 
-    for issue in get_issues(repository_name=repo, label=label, number=number, state=state):
+    for issue in get_issues(
+        repository_name=repo, token=token, label=label, number=number, state=state
+    ):
         # Make sure ontobot_change_agent needs to be triggered or no.
         if issue:
             if re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY]):
