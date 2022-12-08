@@ -44,37 +44,24 @@
 #         run: |
 #           echo "resource=src/ontology/mondo-edit.obo" >> $GITHUB_ENV
 #           echo "branch-name=ochange_automation_"${{ steps.gh-script-issue.outputs.result }} >> $GITHUB_ENV
-      
-#       # echo ::set-output name=resource::"src/ontology/mondo-edit.obo"
-#       # echo ::set-output name=branch-name::"ochange_automation"_${{ steps.gh-script-issue.outputs.result }}
-#       # old resource = "tests/resources/fbbt.obo"
-#       #----------------------------------------------
-#       #          install & configure poetry
-#       #----------------------------------------------
-#       - name: Install Poetry
-#         uses: snok/install-poetry@v1.3
-#         with:
-#           virtualenvs-create: true
-#           virtualenvs-in-project: true
 
-#       #----------------------------------------------
-#       # install dependencies if cache does not exist 
-#       #----------------------------------------------
 #       - name: Install dependencies
 #         run: |
-#           poetry install --no-interaction --no-root
-#           poetry run pip install kgcl-schema
+#           pip install ontobot-change-agent
 
 #       - name: Run ochange
 #         id: ochange
 #         run: |
-#           echo ${{ secrets.GH_TOKEN }} >> /home/runner/work/mondo/mondo/.venv/lib/python3.9/site-packages/ontobot_change_agent/token.txt
-#           poetry run ochange process-issue ${{ env.resource }} \
+#           ochange process-issue ${{ env.resource }} \
 #           -r ${{ steps.gh-script-repo.outputs.result }} \
-#           -n ${{ steps.gh-script-issue.outputs.result }}
+#           -n ${{ steps.gh-script-issue.outputs.result }} \
+#           -g ${{ secrets.GH_TOKEN }}
 
 #       - name: Create Pull Request
 #         uses: peter-evans/create-pull-request@v4
+#         if: ${{ env.PR_TITLE}}
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 #         with:
 #           branch-suffix: short-commit-hash
 #           labels: Automated
