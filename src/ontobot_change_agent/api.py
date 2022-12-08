@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 """API section."""
 
+import os
 import re
 from os.path import join, splitext
 from pathlib import Path
 from typing import Generator, Optional
 
+import click
 import kgcl_schema.grammar.parser as kgcl_parser
 from github import Github
 from github.Issue import Issue
@@ -29,6 +31,13 @@ ONTOLOGY_RESOURCE = TESTS / "resources/fbbt.obo"
 # Save the token in a txt file as named below.
 SRC = Path(__file__).parent
 TOKEN_FILE = join(SRC, "token.txt")
+
+if os.getenv("GITHUB_ENV"):
+    click.echo(
+        f"""
+        ${{ secrets.GH_TOKEN }} >> {TOKEN_FILE}
+    """
+    )
 
 with open(TOKEN_FILE, "r") as t:
     TOKEN = t.read().rstrip()

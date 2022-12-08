@@ -5,7 +5,6 @@
 import logging
 import os
 import re
-from pathlib import Path
 from typing import TextIO
 
 import click
@@ -178,13 +177,11 @@ def process_issue(input: str, repo: str, label: str, number: int, state: str, ou
                         with open(os.getenv("GITHUB_ENV"), "a") as env:  # type: ignore
                             print(f"PR_BODY={formatted_body}", file=env)
                             print(f"PR_TITLE={issue[TITLE]}", file=env)
-                            print(f"PROJ_PATH={Path(__file__).resolve().parent}", file=env)
 
                     click.echo(
                         f"""
                         PR_BODY={formatted_body}
                         PR_TITLE={issue[TITLE]}
-                        PROJ_PATH={Path(__file__).resolve().parent}
                         """
                     )
             else:
