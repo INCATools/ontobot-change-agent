@@ -6,7 +6,7 @@ import unittest
 
 from github.Issue import Issue
 
-from ontobot_change_agent.api import TOKEN, get_all_labels_from_repo, get_issues
+from ontobot_change_agent.api import get_all_labels_from_repo, get_issues
 
 
 class TestAPI(unittest.TestCase):
@@ -15,7 +15,6 @@ class TestAPI(unittest.TestCase):
     def setUp(self) -> None:
         """Set up variables."""
         self.repo_name = "hrshdhgd/ontobot-change-agent"
-        self.token = TOKEN
         self.label = "test"
         self.issue_title = "Test issue"
 
