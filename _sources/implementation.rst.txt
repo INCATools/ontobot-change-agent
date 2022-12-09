@@ -17,4 +17,4 @@ Just uncomment the code and change the follwing:
 and enter it in the "Secrets" section of the ontology repository `as explained here <https://docs.github.com/en/actions/security-guides/encrypted-secrets>`_.
 
 Note: The variable name could be either :code:`GH_TOKEN` or anything else. But the variable names must match
-in the workflow (:code:`${{ secrets.GH_TOKEN }}`)and the repository secret section.
+in the workflow (:code:`${{ secrets.GH_TOKEN }}`) and the repository secret section.
