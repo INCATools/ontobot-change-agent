@@ -79,18 +79,17 @@
 repository for any ontology. The template for the workflow is provided by
 <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml">this repository</a>.
 Just uncomment the code and change the follwing:</p>
-<p>1. Change the resource to the <cite>*.obo</cite> file in the ontology’s repository.
-.. code-block:: shell</p>
-<blockquote>
-<div><dl class="simple">
-<dt>run: |</dt><dd><p>echo “resource=src/ontology/YOUR-RESOURCE-FILENAME.obo” &gt;&gt; $GITHUB_ENV</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>2. <a href="#id1"><span class="problematic" id="id2">`Create a personal access token&lt;https://docs.github.com/en/enterprise-server&#64;3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token&gt;`_</span></a>
-and enter it in the <cite>Secrets</cite> section of the ontology repository <a href="#id3"><span class="problematic" id="id4">`as explained here&lt;https://docs.github.com/en/actions/security-guides/encrypted-secrets&gt;`_</span></a>.</p>
-<p>Note: The variable name could be either <cite>GH_TOKEN</cite> or anything else. But the variable names must match
-in the workflow (<cite>${{ secrets.GH_TOKEN }}</cite>)and the repository secret section.</p>
+<ol class="arabic simple">
+<li><p>Change the resource to the <cite>*.obo</cite> file in the ontology’s repository.</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>run: <span class="p">|</span>
+    <span class="nb">echo</span> <span class="s2">&quot;resource=src/ontology/YOUR-RESOURCE-FILENAME.obo&quot;</span> &gt;&gt; <span class="nv">$GITHUB_ENV</span>
+</pre></div>
+</div>
+<p>2. <a class="reference external" href="https://docs.github.com/en/enterprise-server&#64;3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">Create a personal access token</a>
+and enter it in the <cite>Secrets</cite> section of the ontology repository <a href="#id1"><span class="problematic" id="id2">`as explained here&lt;https://docs.github.com/en/actions/security-guides/encrypted-secrets&gt;`_</span></a>.</p>
+<p>Note: The variable name could be either <code class="code docutils literal notranslate"><span class="pre">GH_TOKEN</span></code> or anything else. But the variable names must match
+in the workflow (<code class="code docutils literal notranslate"><span class="pre">${{</span> <span class="pre">secrets.GH_TOKEN</span> <span class="pre">}}</span></code>)and the repository secret section.</p>
 </section>
 
 
