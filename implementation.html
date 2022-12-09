@@ -80,7 +80,7 @@ repository for any ontology. The template for the workflow is provided by
 <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml">this repository</a>.
 Just uncomment the code and change the follwing:</p>
 <ol class="arabic simple">
-<li><p>Change the resource to the <cite>*.obo</cite> file in the ontology’s repository.</p></li>
+<li><p>Change the resource to the <code class="code docutils literal notranslate"><span class="pre">*.obo</span></code> file in the ontology’s repository.</p></li>
 </ol>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>run: <span class="p">|</span>
     <span class="nb">echo</span> <span class="s2">&quot;resource=src/ontology/YOUR-RESOURCE-FILENAME.obo&quot;</span> &gt;&gt; <span class="nv">$GITHUB_ENV</span>
