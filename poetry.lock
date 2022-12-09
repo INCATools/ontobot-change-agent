@@ -841,7 +841,7 @@ viz = ["pygraphviz"]
 
 [[package]]
 name = "oaklib"
-version = "0.1.60"
+version = "0.1.61"
 description = "Ontology Access Kit: Python library for common ontology operations over a variety of backends"
 category = "main"
 optional = false
@@ -2632,8 +2632,8 @@ nxontology = [
     {file = "nxontology-0.4.1.tar.gz", hash = "sha256:8f1e5d6d7787542e9414be4ae34bb09e369dbaf2d6c646bba2d18b122c083d44"},
 ]
 oaklib = [
-    {file = "oaklib-0.1.60-py3-none-any.whl", hash = "sha256:876d0c5dfc8bebe81c188602b6a0d3994378da2846ccbc079cf181fb4565ee2b"},
-    {file = "oaklib-0.1.60.tar.gz", hash = "sha256:6b83f2cba392d03d083bf8bd324a0c413ca74d22c69212388ab2ca2448c23d30"},
+    {file = "oaklib-0.1.61-py3-none-any.whl", hash = "sha256:ab47bf443f956e6dbfff3805dedf9487b4e4765081bd1ae7dc1d01f7a1003a1f"},
+    {file = "oaklib-0.1.61.tar.gz", hash = "sha256:20b169e1623504ce564b69364cfdbaf5553b6322c205d06e1ad11adc333f4bb1"},
 ]
 ols-client = [
     {file = "ols_client-0.1.2-py3-none-any.whl", hash = "sha256:880a41aa99fd1dbcda95f408356e1c4307ad7c34dfa75c959b54973c85d9fa6e"},
