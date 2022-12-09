@@ -1,5 +1,5 @@
-|release| Documentation
-========================
+Documentation
+==============
 
 Table of Contents
 -----------------
