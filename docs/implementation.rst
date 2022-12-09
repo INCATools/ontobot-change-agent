@@ -1,7 +1,7 @@
 Implementation
 ===============
 
-The implementation of `ontobot-change-agent` is generally within a github workflow of a 
+The implementation of :code:`ontobot-change-agent` is generally within a github workflow of a 
 repository for any ontology. The template for the workflow is provided by 
 `this repository <https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml>`_.
 Just uncomment the code and change the follwing:
