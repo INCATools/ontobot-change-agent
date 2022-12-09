@@ -6,7 +6,7 @@ import unittest
 
 from click.testing import CliRunner
 
-from ontobot_change_agent.api import ONTOLOGY_RESOURCE, TESTS, TOKEN
+from ontobot_change_agent.api import ONTOLOGY_RESOURCE, TESTS
 from ontobot_change_agent.cli import get_labels, issues, process_issue
 
 
@@ -19,7 +19,6 @@ class TestVersion(unittest.TestCase):
         self.runner = runner
         self.repo_name = "hrshdhgd/ontobot-change-agent"
         self.resource = str(ONTOLOGY_RESOURCE)
-        self.token = TOKEN
         self.output = TESTS / "resources/tmp/test.obo"
 
     def test_get_issues(self):
