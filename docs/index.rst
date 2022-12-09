@@ -10,6 +10,7 @@ Table of Contents
 
    installation
    first_run
+   implementation
    developers
    usage
    cli
