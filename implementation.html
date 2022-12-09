@@ -80,7 +80,7 @@ repository. The template for the workflow is provided by
 <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml">this YAML file</a>.
 Just uncomment the code and change the following:</p>
 <ol class="arabic simple">
-<li><p>Update the resource (<code class="code docutils literal notranslate"><span class="pre">*.obo</span></code> file) in the ontology’s repository.</p></li>
+<li><p>Update the resource (<code class="code docutils literal notranslate"><span class="pre">*.obo</span></code> file) path in the ontology’s repository.</p></li>
 </ol>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>run: <span class="p">|</span>
     <span class="nb">echo</span> <span class="s2">&quot;resource=src/ontology/YOUR-RESOURCE-FILENAME.obo&quot;</span> &gt;&gt; <span class="nv">$GITHUB_ENV</span>
@@ -89,8 +89,10 @@ Just uncomment the code and change the following:</p>
 </div>
 <p>2. <a class="reference external" href="https://docs.github.com/en/enterprise-server&#64;3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">Create a personal access token</a>
 and enter it in the “Secrets” section of the ontology repository <a class="reference external" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets">as explained here</a>.</p>
-<p>Note: The variable name could be either <code class="code docutils literal notranslate"><span class="pre">GH_TOKEN</span></code> or anything else. But the variable names must match
-in the workflow (<code class="code docutils literal notranslate"><span class="pre">${{</span> <span class="pre">secrets.GH_TOKEN</span> <span class="pre">}}</span></code>) and the repository secret section.</p>
+<blockquote>
+<div><p><strong>Note:</strong> The variable name could be either <code class="code docutils literal notranslate"><span class="pre">GH_TOKEN</span></code> or anything else but it must match
+in the workflow (<code class="code docutils literal notranslate"><span class="pre">${{</span> <span class="pre">secrets.GH_TOKEN</span> <span class="pre">}}</span></code>) and the repository secret section (e.g. <code class="code docutils literal notranslate"><span class="pre">GH_TOKEN</span></code>).</p>
+</div></blockquote>
 </section>
 
 
