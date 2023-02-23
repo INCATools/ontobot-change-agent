@@ -163,7 +163,6 @@ def process_issue(
                 bullet_starters = ["* ", "- "]
                 KGCL_COMMANDS = []
                 for bullet in bullet_starters:
-
                     KGCL_COMMANDS.extend(
                         [
                             str(item).replace(bullet, "")
