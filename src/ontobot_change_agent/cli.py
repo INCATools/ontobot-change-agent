@@ -168,7 +168,7 @@ def process_issue(
                         [
                             str(item).replace(bullet, "")
                             for item in issue[BODY].splitlines()
-                            if item.startswith(bullet)
+                            if item.lstrip().startswith(bullet)
                         ]
                     )
                 if output:
