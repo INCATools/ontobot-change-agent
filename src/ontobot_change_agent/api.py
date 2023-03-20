@@ -96,6 +96,7 @@ def _extract_info_from_issue_object(issue: Issue) -> dict:
     issue_as_dict = issue.__dict__
     important_info = {k: issue_as_dict[RAW_DATA][k] for k in ISSUE_KEYS}
     important_info["body"] = _make_sense_of_body(important_info["body"])
+    important_info["user"] = issue_as_dict["_rawData"]["user"]["login"]
     return important_info
 
 
