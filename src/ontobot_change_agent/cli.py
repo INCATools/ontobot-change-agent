@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 
 BODY = "body"
 TITLE = "title"
+USER = "user"
 
 
 @click.group()
@@ -186,15 +187,18 @@ def process_issue(
                     formatted_body += _list_to_markdown(KGCL_COMMANDS)
                     formatted_body += "</br>Fixes #" + str(issue["number"])
                     # TODO: remove `set-output` when env var setting is confirmed.
+                    import pdb; pdb.set_trace()
                     if os.getenv("GITHUB_ENV"):
                         with open(os.getenv("GITHUB_ENV"), "a") as env:  # type: ignore
                             print(f"PR_BODY={formatted_body}", file=env)
                             print(f"PR_TITLE={issue[TITLE]}", file=env)
+                            print(f"ISSUE_CREATOR={issue[USER]}", file=env)
 
                     click.echo(
                         f"""
                         PR_BODY={formatted_body}
                         PR_TITLE={issue[TITLE]}
+                        ISSUE_CREATOR={issue[USER]}
                         """
                     )
             else:
