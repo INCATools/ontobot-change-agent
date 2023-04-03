@@ -28,7 +28,7 @@ class TestAPI(unittest.TestCase):
         self.assertTrue(type(issues[0]), Issue)
         self.assertTrue(issues[0]["number"], 2)
         self.assertTrue(issues[0]["title"], self.issue_title)
-        self.assertTrue(issues[0]["labels"][0]["name"], self.label)
+        self.assertTrue(issues[0]["labels"][0], self.label)
 
     def test_get_issues_with_title(self):
         """Test if 'get_issues' returns the correct title."""
@@ -36,12 +36,11 @@ class TestAPI(unittest.TestCase):
         for issue in get_issues(repository_name=self.repo_name, title_search=self.issue_title):
             if issue:
                 issues.append(issue)
-
         self.assertEqual(len(issues), 1)
         self.assertTrue(type(issues[0]), Issue)
         self.assertTrue(issues[0]["number"], 2)
         self.assertTrue(issues[0]["title"], self.issue_title)
-        self.assertTrue(issues[0]["labels"][0]["name"], self.label)
+        self.assertTrue(issues[0]["labels"][0], self.label)
 
     def test_get_issues_with_number(self):
         """Test return the correct issue by number."""

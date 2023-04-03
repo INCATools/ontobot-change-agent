@@ -167,6 +167,7 @@ def process_issue(
     ):
         # Make sure ontobot_change_agent needs to be triggered or no.
         if issue:
+            KGCL_COMMANDS = []
             if NEW_TERM_LABEL in issue["labels"]:
                 formatted_body = "The following input was provided: </br> "
                 KGCL_COMMANDS, body_as_dict = process_new_term_template(issue["body"], prefix)
@@ -176,7 +177,6 @@ def process_issue(
             elif re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY]):
                 formatted_body = "The following commands were executed: </br> "
                 bullet_starters = ["* ", "- "]
-                KGCL_COMMANDS = []
                 for bullet in bullet_starters:
                     KGCL_COMMANDS.extend(
                         [
@@ -187,29 +187,7 @@ def process_issue(
                     )
 
                 KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
-                # if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503  # noqa W503
-                #     process_issue_via_oak(
-                #         input=input,
-                #         commands=KGCL_COMMANDS,
-                #         output=new_output,
-                #     )
 
-                #     formatted_body += _convert_to_markdown(KGCL_COMMANDS)
-                #     formatted_body += "</br>Fixes #" + str(issue["number"])
-
-                #     if os.getenv("GITHUB_ENV"):
-                #         with open(os.getenv("GITHUB_ENV"), "a") as env:  # type: ignore
-                #             print(f"PR_BODY={formatted_body}", file=env)
-                #             print(f"PR_TITLE={issue[TITLE]}", file=env)
-                #             print(f"ISSUE_CREATOR={issue[USER]}", file=env)
-
-                #     click.echo(
-                #         f"""
-                #         PR_BODY={formatted_body}
-                #         PR_TITLE={issue[TITLE]}
-                #         ISSUE_CREATOR={issue[USER]}
-                #         """
-                #     )
             else:
                 click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
         else:
