@@ -97,6 +97,7 @@ def _extract_info_from_issue_object(issue: Issue) -> dict:
     important_info = {k: issue_as_dict[RAW_DATA][k] for k in ISSUE_KEYS}
     important_info["body"] = _make_sense_of_body(important_info["body"])
     important_info["user"] = issue_as_dict["_rawData"]["user"]["login"]
+    important_info["labels"] = [label["name"] for label in issue_as_dict["_rawData"]["labels"]]
     return important_info
 
 
@@ -163,3 +164,28 @@ def process_issue_via_oak(input: str, commands: list, output: str = None):
         impl_obj.apply_patch(change)
 
     impl_obj.dump(output, output_format)
+
+
+def process_new_term_template(body, prefix):
+    """Process an issue generated via new term request template."""
+    split_body = body.replace("\r", "").strip("#").split("\n\n###")
+    CURIE = prefix + ":XXXXXX"
+    body_as_dict = {}
+
+    for line in split_body:
+        if line.split("\n\n")[1].strip() not in ["_No response_", "None"]:
+            body_as_dict[line.split("\n\n")[0].strip()] = line.split("\n\n")[1].strip()
+
+    kgcl_command_list = [f"create node {CURIE} '{body_as_dict['Label']}'"]
+
+    if "Synonyms" in body_as_dict:
+        body_as_dict["Synonyms"] = body_as_dict["Synonyms"].split(",")
+        for synonym in body_as_dict["Synonyms"]:
+            if "Synonym type" in body_as_dict:
+                kgcl_command_list.append(
+                    f"create {body_as_dict['Synonym type']} synonym '{synonym.strip()}' for {CURIE}"
+                )
+            else:
+                kgcl_command_list.append(f"create synonym {synonym.strip()} for {CURIE}")
+
+    return (kgcl_command_list, body_as_dict)
