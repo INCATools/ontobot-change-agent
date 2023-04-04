@@ -14,6 +14,8 @@ from oaklib.implementations import ProntoImplementation, SimpleOboImplementation
 from oaklib.interfaces.patcher_interface import PatcherInterface
 from oaklib.selector import get_resource_from_shorthand
 
+from ontobot_change_agent.constants import DEFINITION, SYNONYM_TYPE, SYNONYMS
+
 HOME_DIR = Path(__file__).resolve().parents[2]
 SRC = HOME_DIR / "src/ontobot_change_agent"
 TESTS = HOME_DIR / "tests"
@@ -178,14 +180,17 @@ def process_new_term_template(body, prefix):
 
     kgcl_command_list = [f"create node {CURIE} '{body_as_dict['Label']}'"]
 
-    if "Synonyms" in body_as_dict:
-        body_as_dict["Synonyms"] = body_as_dict["Synonyms"].split(",")
-        for synonym in body_as_dict["Synonyms"]:
-            if "Synonym type" in body_as_dict:
+    if SYNONYMS in body_as_dict:
+        body_as_dict[SYNONYMS] = body_as_dict[SYNONYMS].split(",")
+        for synonym in body_as_dict[SYNONYMS]:
+            if SYNONYM_TYPE in body_as_dict:
                 kgcl_command_list.append(
-                    f"create {body_as_dict['Synonym type']} synonym '{synonym.strip()}' for {CURIE}"
+                    f"create {body_as_dict[SYNONYM_TYPE]} synonym '{synonym.strip()}' for {CURIE}"
                 )
             else:
                 kgcl_command_list.append(f"create synonym {synonym.strip()} for {CURIE}")
+
+    if DEFINITION in body_as_dict:
+        kgcl_command_list.append(f"add definition '{body_as_dict[DEFINITION].strip()}' to {CURIE}")
 
     return (kgcl_command_list, body_as_dict)
