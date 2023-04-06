@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Usage &mdash; ontobot-change-agent 0.0.0 documentation</title>
@@ -29,11 +29,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> ontobot-change-agent
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ontobot-change-agent
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -68,7 +72,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Usage</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
@@ -87,7 +91,7 @@
 <span class="sig-prename descclassname"><span class="pre">ontobot_change_agent.api.</span></span><span class="sig-name descname"><span class="pre">get_issues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_search</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'open'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ontobot_change_agent.api.get_issues" title="Permalink to this definition"></a></dt>
 <dd><p>Get issues of specific states from a Github repository.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>repository_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Name of the repository [org/repo]</p></li>
 <li><p><strong>token</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Github token for authorization, defaults to None</p></li>
@@ -97,10 +101,10 @@
 <li><p><strong>state</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – State of the issue e.g. open, close etc., defaults to “open”</p></li>
 </ul>
 </dd>
-<dt class="field-even">Yield</dt>
+<dt class="field-even">Yield<span class="colon">:</span></dt>
 <dd class="field-even"><p>Issue names that match the regex/label/number.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></p>
 </dd>
 </dl>
@@ -111,16 +115,16 @@
 <span class="sig-prename descclassname"><span class="pre">ontobot_change_agent.api.</span></span><span class="sig-name descname"><span class="pre">get_all_labels_from_repo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ontobot_change_agent.api.get_all_labels_from_repo" title="Permalink to this definition"></a></dt>
 <dd><p>Get all labels available in a repository for tagging issues on creation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>repository_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Name of the repository.</p></li>
 <li><p><strong>token</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Github token for authorization, defaults to None</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A dictionary of {name: description}</p>
 </dd>
 </dl>
@@ -131,7 +135,7 @@
 <span class="sig-prename descclassname"><span class="pre">ontobot_change_agent.api.</span></span><span class="sig-name descname"><span class="pre">process_issue_via_oak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ontobot_change_agent.api.process_issue_via_oak" title="Permalink to this definition"></a></dt>
 <dd><p>Pass KGCL commands in the body to OAK.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>input</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path of resource to be worked on.</p></li>
 <li><p><strong>commands</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – A list of commands.</p></li>
