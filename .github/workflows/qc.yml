@@ -47,7 +47,7 @@ jobs:
     - name: Install dependencies
       run: |
         poetry install --no-interaction
-        poetry run pip install kgcl-schema==0.3.0rc1
+        poetry run pip install kgcl-schema
 
     - name: Run tests
       run: | 
