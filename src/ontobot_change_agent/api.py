@@ -35,6 +35,7 @@ ONTOLOGY_RESOURCE = TESTS / "resources/fbbt.obo"
 SRC = Path(__file__).parent
 TOKEN_FILE = join(SRC, "token.txt")
 ISSUE_TEMPLATE_DIR = ".github/ISSUE_TEMPLATE"
+# TODO: This variable below needs to be standard across the board.
 NEW_TERM_TEMPLATE_YAML = "/add-term.yml"
 # Example for API: https://pygithub.readthedocs.io/en/latest/examples.html
 
