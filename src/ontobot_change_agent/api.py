@@ -35,6 +35,7 @@ ONTOLOGY_RESOURCE = TESTS / "resources/fbbt.obo"
 SRC = Path(__file__).parent
 TOKEN_FILE = join(SRC, "token.txt")
 ISSUE_TEMPLATE_DIR = ".github/ISSUE_TEMPLATE"
+NEW_TERM_TEMPLATE_YAML = "/add-term.yml"
 # Example for API: https://pygithub.readthedocs.io/en/latest/examples.html
 
 RAW_DATA = "_rawData"
@@ -192,7 +193,9 @@ def process_new_term_template(body, prefix):
     for line in split_body:
         if line.split("\n\n")[1].strip() not in ["_No response_", "None"]:
             body_as_dict[line.split("\n\n")[0].strip()] = line.split("\n\n")[1].strip()
-    response_1 = requests.get(ISSUE_TEMPLATE_DIR + "/add-term.yml", allow_redirects=True, timeout=5)
+    response_1 = requests.get(
+        ISSUE_TEMPLATE_DIR + NEW_TERM_TEMPLATE_YAML, allow_redirects=True, timeout=5
+    )
     metadata = json.loads(response_1.content.decode("utf-8"))
     download_url = metadata["download_url"]
     response_2 = requests.get(download_url, allow_redirects=True, timeout=5)
