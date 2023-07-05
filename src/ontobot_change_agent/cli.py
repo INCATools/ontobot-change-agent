@@ -170,9 +170,17 @@ def process_issue(
             KGCL_COMMANDS = []
             if NEW_TERM_LABEL in issue["labels"]:
                 formatted_body = "The following input was provided: </br> "
-                KGCL_COMMANDS, body_as_dict = process_new_term_template(issue["body"], prefix)
-                formatted_body += _convert_to_markdown(body_as_dict)
-                formatted_body += "</br> The following commands were executed: </br> "
+                KGCL_COMMANDS, body_as_dict, reason = process_new_term_template(
+                    issue["body"], prefix
+                )
+                if reason is None:
+                    formatted_body += _convert_to_markdown(body_as_dict)
+                    formatted_body += "</br> The following commands were executed: </br> "
+                else:
+                    click.echo(
+                        f"""{issue[TITLE]} does not need ontobot's attention since {reason}""",  # noqa
+                    )
+                    break
 
             elif re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY]):
                 formatted_body = "The following commands were executed: </br> "
@@ -194,10 +202,7 @@ def process_issue(
             click.echo(f"""Issue number:{number} is either closed or does not exist.""")
             break
 
-        if output:
-            new_output = output
-        else:
-            new_output = input
+        new_output = output if output else input
 
         if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503  # noqa W503
             process_issue_via_oak(

@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 """API section."""
 
+import json
 import re
 from os.path import join, splitext
 from pathlib import Path
 from typing import Generator, Optional
 
 import kgcl_schema.grammar.parser as kgcl_parser
+import requests
+import yaml
 from github import Github
 from github.Issue import Issue
 from oaklib.cli import query_terms_iterator
@@ -31,7 +34,9 @@ ONTOLOGY_RESOURCE = TESTS / "resources/fbbt.obo"
 # Save the token in a txt file as named below.
 SRC = Path(__file__).parent
 TOKEN_FILE = join(SRC, "token.txt")
-
+ISSUE_TEMPLATE_DIR = ".github/ISSUE_TEMPLATE"
+# TODO: This variable below needs to be standard across the board.
+NEW_TERM_TEMPLATE_YAML = "/add-term.yml"
 # Example for API: https://pygithub.readthedocs.io/en/latest/examples.html
 
 RAW_DATA = "_rawData"
@@ -76,6 +81,8 @@ def get_issues(
 
     g = Github(token)
     repo = g.get_repo(repository_name)
+    global ISSUE_TEMPLATE_DIR
+    ISSUE_TEMPLATE_DIR = repo.contents_url.replace("{+path}", ISSUE_TEMPLATE_DIR)
     label_object = None
     if label:
         label_object = repo.get_label(label)
@@ -169,28 +176,57 @@ def process_issue_via_oak(input: str, commands: list, output: str = None):
 
 
 def process_new_term_template(body, prefix):
-    """Process an issue generated via new term request template."""
+    """Process an issue generated via new term request template.
+
+    :param body: Body of the issue.
+    :param prefix: Prefix of the ontology corresponding to the repository.
+    :return: Command list and body as a dict. If Issue does not match template: (None, None)
+    :raises ValueError: If prefix is absent.
+    """
     split_body = body.replace("\r", "").strip("#").split("\n\n###")
-    CURIE = prefix + ":XXXXXX"
+    reason = None
+    if prefix:
+        CURIE = prefix + ":XXXXXX"
+    else:
+        raise (ValueError("Prefix must be provided in the command."))
+
     body_as_dict = {}
 
     for line in split_body:
         if line.split("\n\n")[1].strip() not in ["_No response_", "None"]:
             body_as_dict[line.split("\n\n")[0].strip()] = line.split("\n\n")[1].strip()
+    response_1 = requests.get(
+        ISSUE_TEMPLATE_DIR + NEW_TERM_TEMPLATE_YAML, allow_redirects=True, timeout=5
+    )
+    metadata = json.loads(response_1.content.decode("utf-8"))
+    if "message" in metadata and metadata["message"] == "Not Found":
+        reason = "the 'New Term request' template yml does not exist."
+        return (None, None, reason)
+    else:
+        download_url = metadata["download_url"]
+        response_2 = requests.get(download_url, allow_redirects=True, timeout=5)
+        content = response_2.content.decode("utf8")
+        template = yaml.safe_load(content)
+        list_of_template_keys = [x["attributes"]["label"] for x in template["body"] if "id" in x]
+        if all(key in list_of_template_keys for key in body_as_dict.keys()):
+            kgcl_command_list = [f"create node {CURIE} '{body_as_dict['Label']}'"]
 
-    kgcl_command_list = [f"create node {CURIE} '{body_as_dict['Label']}'"]
+            if SYNONYMS in body_as_dict:
+                body_as_dict[SYNONYMS] = body_as_dict[SYNONYMS].split(",")
+                for synonym in body_as_dict[SYNONYMS]:
+                    if SYNONYM_TYPE in body_as_dict:
+                        kgcl_command_list.append(
+                            f"create {body_as_dict[SYNONYM_TYPE]} synonym '{synonym.strip()}' for {CURIE}"  # noqa
+                        )
+                    else:
+                        kgcl_command_list.append(f"create synonym {synonym.strip()} for {CURIE}")
 
-    if SYNONYMS in body_as_dict:
-        body_as_dict[SYNONYMS] = body_as_dict[SYNONYMS].split(",")
-        for synonym in body_as_dict[SYNONYMS]:
-            if SYNONYM_TYPE in body_as_dict:
+            if DEFINITION in body_as_dict:
                 kgcl_command_list.append(
-                    f"create {body_as_dict[SYNONYM_TYPE]} synonym '{synonym.strip()}' for {CURIE}"
+                    f"add definition '{body_as_dict[DEFINITION].strip()}' to {CURIE}"
                 )
-            else:
-                kgcl_command_list.append(f"create synonym {synonym.strip()} for {CURIE}")
 
-    if DEFINITION in body_as_dict:
-        kgcl_command_list.append(f"add definition '{body_as_dict[DEFINITION].strip()}' to {CURIE}")
-
-    return (kgcl_command_list, body_as_dict)
+            return (kgcl_command_list, body_as_dict, reason)
+        else:
+            reason = "the issue does not match the 'New Term request' template."
+            return (None, None, reason)
