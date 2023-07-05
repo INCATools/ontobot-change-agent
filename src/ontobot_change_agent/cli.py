@@ -170,13 +170,13 @@ def process_issue(
             KGCL_COMMANDS = []
             if NEW_TERM_LABEL in issue["labels"]:
                 formatted_body = "The following input was provided: </br> "
-                KGCL_COMMANDS, body_as_dict = process_new_term_template(issue["body"], prefix)
-                if KGCL_COMMANDS is not None and body_as_dict is not None:
+                KGCL_COMMANDS, body_as_dict, reason = process_new_term_template(issue["body"], prefix)
+                if reason is None:
                     formatted_body += _convert_to_markdown(body_as_dict)
                     formatted_body += "</br> The following commands were executed: </br> "
                 else:
                     click.echo(
-                        f"""{issue[TITLE]} does not need ontobot's attention since the issue does not match the 'New Term request' template.""",  # noqa
+                        f"""{issue[TITLE]} does not need ontobot's attention since {reason}""",  # noqa
                     )
                     break
 

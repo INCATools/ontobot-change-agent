@@ -184,6 +184,7 @@ def process_new_term_template(body, prefix):
     :raises ValueError: If prefix is absent.
     """
     split_body = body.replace("\r", "").strip("#").split("\n\n###")
+    reason = None
     if prefix:
         CURIE = prefix + ":XXXXXX"
     else:
@@ -198,29 +199,34 @@ def process_new_term_template(body, prefix):
         ISSUE_TEMPLATE_DIR + NEW_TERM_TEMPLATE_YAML, allow_redirects=True, timeout=5
     )
     metadata = json.loads(response_1.content.decode("utf-8"))
-    download_url = metadata["download_url"]
-    response_2 = requests.get(download_url, allow_redirects=True, timeout=5)
-    content = response_2.content.decode("utf8")
-    template = yaml.safe_load(content)
-    list_of_template_keys = [x["attributes"]["label"] for x in template["body"] if "id" in x]
-    if all(key in list_of_template_keys for key in body_as_dict.keys()):
-        kgcl_command_list = [f"create node {CURIE} '{body_as_dict['Label']}'"]
-
-        if SYNONYMS in body_as_dict:
-            body_as_dict[SYNONYMS] = body_as_dict[SYNONYMS].split(",")
-            for synonym in body_as_dict[SYNONYMS]:
-                if SYNONYM_TYPE in body_as_dict:
-                    kgcl_command_list.append(
-                        f"create {body_as_dict[SYNONYM_TYPE]} synonym '{synonym.strip()}' for {CURIE}"  # noqa
-                    )
-                else:
-                    kgcl_command_list.append(f"create synonym {synonym.strip()} for {CURIE}")
-
-        if DEFINITION in body_as_dict:
-            kgcl_command_list.append(
-                f"add definition '{body_as_dict[DEFINITION].strip()}' to {CURIE}"
-            )
-
-        return (kgcl_command_list, body_as_dict)
+    if "message" in metadata and metadata["message"] == "Not Found":
+        reason = "the 'New Term request' template yml does not exist."
+        return (None, None, reason)
     else:
-        return (None, None)
+        download_url = metadata["download_url"]
+        response_2 = requests.get(download_url, allow_redirects=True, timeout=5)
+        content = response_2.content.decode("utf8")
+        template = yaml.safe_load(content)
+        list_of_template_keys = [x["attributes"]["label"] for x in template["body"] if "id" in x]
+        if all(key in list_of_template_keys for key in body_as_dict.keys()):
+            kgcl_command_list = [f"create node {CURIE} '{body_as_dict['Label']}'"]
+
+            if SYNONYMS in body_as_dict:
+                body_as_dict[SYNONYMS] = body_as_dict[SYNONYMS].split(",")
+                for synonym in body_as_dict[SYNONYMS]:
+                    if SYNONYM_TYPE in body_as_dict:
+                        kgcl_command_list.append(
+                            f"create {body_as_dict[SYNONYM_TYPE]} synonym '{synonym.strip()}' for {CURIE}"  # noqa
+                        )
+                    else:
+                        kgcl_command_list.append(f"create synonym {synonym.strip()} for {CURIE}")
+
+            if DEFINITION in body_as_dict:
+                kgcl_command_list.append(
+                    f"add definition '{body_as_dict[DEFINITION].strip()}' to {CURIE}"
+                )
+
+            return (kgcl_command_list, body_as_dict, reason)
+        else:
+            reason = "the issue does not match the 'New Term request' template."
+            return (None, None, reason)
