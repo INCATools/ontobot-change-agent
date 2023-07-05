@@ -170,7 +170,9 @@ def process_issue(
             KGCL_COMMANDS = []
             if NEW_TERM_LABEL in issue["labels"]:
                 formatted_body = "The following input was provided: </br> "
-                KGCL_COMMANDS, body_as_dict, reason = process_new_term_template(issue["body"], prefix)
+                KGCL_COMMANDS, body_as_dict, reason = process_new_term_template(
+                    issue["body"], prefix
+                )
                 if reason is None:
                     formatted_body += _convert_to_markdown(body_as_dict)
                     formatted_body += "</br> The following commands were executed: </br> "
