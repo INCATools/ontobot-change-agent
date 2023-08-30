@@ -17,7 +17,7 @@ from ontobot_change_agent.api import (
     process_issue_via_oak,
     process_new_term_template,
 )
-from ontobot_change_agent.constants import NEW_TERM_LABEL
+from ontobot_change_agent.constants import NEW_TERM_LABEL, OWL_EXTENSION
 
 __all__ = [
     "main",
@@ -178,7 +178,7 @@ def process_issue(
     :param label: Label of issues.
     :param state: State of issue ["open", "close" etc.]
     """
-    if input.endswith(".owl") and jar_path is None:
+    if input.endswith(OWL_EXTENSION) and jar_path is None:
         click.UsageError("If the resource is an OWL file, kgcl-java jar filepath must be provided.")
 
     for issue in get_issues(
