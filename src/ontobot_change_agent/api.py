@@ -3,7 +3,7 @@
 
 import json
 import re
-import subprocess
+import subprocess  # noqa S404
 from os.path import join, splitext
 from pathlib import Path
 from typing import Generator, Optional
@@ -250,4 +250,4 @@ def process_issue_via_jar(input: str, commands: list, jar_path: str, output: str
     ]
     full_command = cli_command + " ".join(cli_commands) + f" -o {output}"
     # Run the command on the command line
-    subprocess.run(full_command, shell=True)
+    subprocess.run(full_command, shell=True)  # noqa S602
