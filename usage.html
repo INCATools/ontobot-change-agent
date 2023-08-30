@@ -54,6 +54,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#ontobot_change_agent.api.get_all_labels_from_repo"><code class="docutils literal notranslate"><span class="pre">get_all_labels_from_repo()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ontobot_change_agent.api.process_issue_via_oak"><code class="docutils literal notranslate"><span class="pre">process_issue_via_oak()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ontobot_change_agent.api.process_new_term_template"><code class="docutils literal notranslate"><span class="pre">process_new_term_template()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ontobot_change_agent.api.process_issue_via_jar"><code class="docutils literal notranslate"><span class="pre">process_issue_via_jar()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Interface</a></li>
@@ -161,6 +162,21 @@
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ValueError</strong> – If prefix is absent.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ontobot_change_agent.api.process_issue_via_jar">
+<span class="sig-prename descclassname"><span class="pre">ontobot_change_agent.api.</span></span><span class="sig-name descname"><span class="pre">process_issue_via_jar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jar_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ontobot_change_agent.api.process_issue_via_jar" title="Permalink to this definition"></a></dt>
+<dd><p>Pass KGCL commands in the body to kgcl-java.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path of resource to be worked on.</p></li>
+<li><p><strong>commands</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – A list of commands.</p></li>
+<li><p><strong>output</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Path to where the output is written, defaults to None</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
