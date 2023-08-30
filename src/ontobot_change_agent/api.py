@@ -3,9 +3,9 @@
 
 import json
 import re
+import subprocess
 from os.path import join, splitext
 from pathlib import Path
-import subprocess
 from typing import Generator, Optional
 
 import kgcl_schema.grammar.parser as kgcl_parser
@@ -240,8 +240,14 @@ def process_issue_via_jar(input: str, commands: list, jar_path: str, output: str
     :param commands: A list of commands.
     :param output: Path to where the output is written, defaults to None
     """
-    cli_command = "java -jar {} apply -i {} -k \"{}\"".format(jar_path, input, commands[0].replace("\"", "'"))
-    cli_commands = [' apply -k "{}"'.format(command.replace("\"", "'")) for command in commands[1:] if len(commands) > 1]
-    full_command = cli_command + ' '.join(cli_commands) + f" -o {output}"
+    cli_command = 'java -jar {} apply -i {} -k "{}"'.format(
+        jar_path, input, commands[0].replace('"', "'")
+    )
+    cli_commands = [
+        ' apply -k "{}"'.format(command.replace('"', "'"))
+        for command in commands[1:]
+        if len(commands) > 1
+    ]
+    full_command = cli_command + " ".join(cli_commands) + f" -o {output}"
     # Run the command on the command line
     subprocess.run(full_command, shell=True)

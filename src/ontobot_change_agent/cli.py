@@ -99,6 +99,7 @@ jar_path_option = click.option(
     help="Path to jar file.",
 )
 
+
 @main.command()
 @repo_option
 @state_option
@@ -161,7 +162,15 @@ def get_labels(repo: str, token: str):
 @jar_path_option
 @output_option
 def process_issue(
-    input: str, repo: str, prefix: str, token: str, label: str, number: int, state: str, jar_path: str, output: str
+    input: str,
+    repo: str,
+    prefix: str,
+    token: str,
+    label: str,
+    number: int,
+    state: str,
+    jar_path: str,
+    output: str,
 ):
     """Run processes based on issue label.
 
