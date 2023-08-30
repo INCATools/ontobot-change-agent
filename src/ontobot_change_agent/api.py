@@ -233,7 +233,7 @@ def process_new_term_template(body, prefix):
             return (None, None, reason)
 
 
-def process_issue_via_jar(input: str, commands: list, jar_path:str, output: str = None):
+def process_issue_via_jar(input: str, commands: list, jar_path: str, output: str = None):
     """Pass KGCL commands in the body to kgcl-java.
 
     :param input: Path of resource to be worked on.
