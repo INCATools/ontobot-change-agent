@@ -92,13 +92,6 @@ output_option = click.option(
     "--output",
     help="Output could be a file or sys.stdout.",
 )
-use_jar_option = click.option(
-    "--use-jar/--no-use-jar",
-    default=False,
-    is_flag=True,
-    show_default=True,
-    help="If True, use kgcl-java to process issue.",
-)
 jar_path_option = click.option(
     "-j",
     "--jar-path",
@@ -165,11 +158,10 @@ def get_labels(repo: str, token: str):
 @label_option
 @issue_number_option
 @state_option
-@use_jar_option
 @jar_path_option
 @output_option
 def process_issue(
-    input: str, repo: str, prefix: str, token: str, label: str, number: int, state: str, use_jar: bool, jar_path: str, output: str
+    input: str, repo: str, prefix: str, token: str, label: str, number: int, state: str, jar_path: str, output: str
 ):
     """Run processes based on issue label.
 
@@ -220,16 +212,13 @@ def process_issue(
         new_output = output if output else input
 
         if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503
-            if use_jar:
-                if jar_path is None:
-                    raise click.UsageError("Path for kgcl-java jar file must be provided.")
-                else:
-                    process_issue_via_jar(
-                        input=input,
-                        commands=KGCL_COMMANDS,
-                        jar_path=jar_path,
-                        output=new_output,
-                    )
+            if jar_path is not None:
+                process_issue_via_jar(
+                    input=input,
+                    commands=KGCL_COMMANDS,
+                    jar_path=jar_path,
+                    output=new_output,
+                )
             else:
                 process_issue_via_oak(
                     input=input,
