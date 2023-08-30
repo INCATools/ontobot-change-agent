@@ -178,6 +178,9 @@ def process_issue(
     :param label: Label of issues.
     :param state: State of issue ["open", "close" etc.]
     """
+    if input.endswith(".owl") and jar_path is None:
+        click.UsageError("If the resource is an OWL file, kgcl-java jar filepath must be provided.")
+
     for issue in get_issues(
         repository_name=repo, token=token, label=label, number=number, state=state
     ):
