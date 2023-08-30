@@ -13,10 +13,11 @@ from ontobot_change_agent import __version__
 from ontobot_change_agent.api import (
     get_all_labels_from_repo,
     get_issues,
+    process_issue_via_jar,
     process_issue_via_oak,
     process_new_term_template,
 )
-from ontobot_change_agent.constants import NEW_TERM_LABEL
+from ontobot_change_agent.constants import NEW_TERM_LABEL, OWL_EXTENSION
 
 __all__ = [
     "main",
@@ -91,6 +92,12 @@ output_option = click.option(
     "--output",
     help="Output could be a file or sys.stdout.",
 )
+jar_path_option = click.option(
+    "-j",
+    "--jar-path",
+    type=click.Path(exists=True),
+    help="Path to jar file.",
+)
 
 
 @main.command()
@@ -152,9 +159,18 @@ def get_labels(repo: str, token: str):
 @label_option
 @issue_number_option
 @state_option
+@jar_path_option
 @output_option
 def process_issue(
-    input: str, repo: str, prefix: str, token: str, label: str, number: int, state: str, output: str
+    input: str,
+    repo: str,
+    prefix: str,
+    token: str,
+    label: str,
+    number: int,
+    state: str,
+    jar_path: str,
+    output: str,
 ):
     """Run processes based on issue label.
 
@@ -162,6 +178,9 @@ def process_issue(
     :param label: Label of issues.
     :param state: State of issue ["open", "close" etc.]
     """
+    if input.endswith(OWL_EXTENSION) and jar_path is None:
+        click.UsageError("If the resource is an OWL file, kgcl-java jar filepath must be provided.")
+
     for issue in get_issues(
         repository_name=repo, token=token, label=label, number=number, state=state
     ):
@@ -204,12 +223,20 @@ def process_issue(
 
         new_output = output if output else input
 
-        if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503  # noqa W503
-            process_issue_via_oak(
-                input=input,
-                commands=KGCL_COMMANDS,
-                output=new_output,
-            )
+        if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503
+            if jar_path is not None:
+                process_issue_via_jar(
+                    input=input,
+                    commands=KGCL_COMMANDS,
+                    jar_path=jar_path,
+                    output=new_output,
+                )
+            else:
+                process_issue_via_oak(
+                    input=input,
+                    commands=KGCL_COMMANDS,
+                    output=new_output,
+                )
 
             formatted_body += _convert_to_markdown(KGCL_COMMANDS)
             formatted_body += "</br>Fixes #" + str(issue["number"])

@@ -3,6 +3,7 @@
 
 import json
 import re
+import subprocess  # noqa S404
 from os.path import join, splitext
 from pathlib import Path
 from typing import Generator, Optional
@@ -230,3 +231,23 @@ def process_new_term_template(body, prefix):
         else:
             reason = "the issue does not match the 'New Term request' template."
             return (None, None, reason)
+
+
+def process_issue_via_jar(input: str, commands: list, jar_path: str, output: str = None):
+    """Pass KGCL commands in the body to kgcl-java.
+
+    :param input: Path of resource to be worked on.
+    :param commands: A list of commands.
+    :param output: Path to where the output is written, defaults to None
+    """
+    cli_command = 'java -jar {} apply -i {} -k "{}"'.format(
+        jar_path, input, commands[0].replace('"', "'")
+    )
+    cli_commands = [
+        ' apply -k "{}"'.format(command.replace('"', "'"))
+        for command in commands[1:]
+        if len(commands) > 1
+    ]
+    full_command = cli_command + " ".join(cli_commands) + f" -o {output}"
+    # Run the command on the command line
+    subprocess.run(full_command, shell=True)  # noqa S602
