@@ -30,3 +30,13 @@ Update the resource (:code:`*.owl` file) path in the ontology's repository.
 and enter it in the "Secrets" section of the ontology repository `as explained here <https://docs.github.com/en/actions/security-guides/encrypted-secrets>`_.
     **Note:** The variable name could be either :code:`GH_TOKEN` or anything else but it must match
     in the workflow (:code:`${{ secrets.GH_TOKEN }}`) and the repository secret section (e.g. :code:`GH_TOKEN`).
+
+3. The title for the pull request generated corresponds to the issue that triggered its generation. If the issue is edited, the same pull request is updated.
+
+4. An example of a issue to trigger a pull request:
+    .. admonition:: GitHub Issue
+        Hey ontobot!, apply:
+        - create exact synonym 'ABCD1' for PREFIX:12345
+        - create broad synonym 'ABCD2' for PREFIX:12345
+
+    There is no limits on the number of bullets one can pass.
