@@ -242,7 +242,7 @@ def process_issue_via_jar(input: str, commands: list, jar_path: str, output: str
     """
     cli_command = "java -jar {} apply -i {}".format(jar_path, input)
     cli_commands = [
-        ' -k "{}"'.format(command.replace('"', "'")) for command in commands if len(commands) > 1
+        ' -k "{}"'.format(command.replace('"', "'")) for command in commands if len(commands) > 0
     ]
     conversion = f" convert --format ofn -o {output}"
     full_command = cli_command + " ".join(cli_commands) + conversion
