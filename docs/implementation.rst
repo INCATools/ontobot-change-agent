@@ -4,8 +4,8 @@ Implementation
 The implementation of :code:`ontobot-change-agent` is generally within a github workflow of an ontology 
 repository.
 
-1. 
-    a. **OBO Resource**: The template for the workflow is provided (based on resource format) by `this YAML file <https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml>`_.
+1.
+a. **OBO Resource**: The template for the workflow is provided (based on resource format) by `this YAML file <https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml>`_.
 Just uncomment the code and change the following:
 
 Update the resource (:code:`*.obo` file) path in the ontology's repository.
