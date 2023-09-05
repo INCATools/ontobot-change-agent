@@ -244,6 +244,7 @@ def process_issue_via_jar(input: str, commands: list, jar_path: str, output: str
     cli_commands = [
         ' -k "{}"'.format(command.replace('"', "'")) for command in commands if len(commands) > 1
     ]
-    full_command = cli_command + " ".join(cli_commands) + f" -o {output}"
+    conversion = f" convert --format ofn -o {output}"
+    full_command = cli_command + " ".join(cli_commands) + conversion
     # Run the command on the command line
     subprocess.run(full_command, shell=True)  # noqa S602
