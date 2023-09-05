@@ -1,0 +1,396 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://purl.obolibrary.org/obo/envo.owl#"
+     xml:base="http://purl.obolibrary.org/obo/envo.owl"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:obo="http://purl.obolibrary.org/obo/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:oboInOwl="http://www.geneontology.org/formats/oboInOwl#">
+    <owl:Ontology rdf:about="http://purl.obolibrary.org/obo/envo.owl">
+        <owl:versionIRI rdf:resource="http://purl.obolibrary.org/obo/envo/releases/2023-02-13/envo.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/IAO_0000115 -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000115">
+        <rdfs:label>definition</rdfs:label>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/IAO_0000119 -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000119"/>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/IAO_0010000 -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0010000"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/creator -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/creator"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/date -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/date"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#created_by -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#created_by"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#creation_date -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#creation_date"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#hasBroadSynonym -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#hasBroadSynonym">
+        <rdfs:label>has_broad_synonym</rdfs:label>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#hasDbXref -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#hasDbXref"/>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym">
+        <rdfs:label>has_related_synonym</rdfs:label>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://www.geneontology.org/formats/oboInOwl#inSubset -->
+
+    <owl:AnnotationProperty rdf:about="http://www.geneontology.org/formats/oboInOwl#inSubset">
+        <rdfs:label>in_subset</rdfs:label>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#comment -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#label -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#label"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BFO_0000001 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000001">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:label xml:lang="en">entity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BFO_0000002 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000002">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000001"/>
+        <obo:IAO_0000115 xml:lang="en">An entity that exists in full at any time in which it exists at all, persists through time while maintaining its identity and has no temporal parts.</obo:IAO_0000115>
+        <rdfs:label xml:lang="en">continuant</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BFO_0000004 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000004">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000002"/>
+        <obo:IAO_0000115 xml:lang="en">A continuant that is a bearer of quality and realizable entity entities, in which other entities inhere and which itself cannot inhere in anything.</obo:IAO_0000115>
+        <obo:IAO_0000115 xml:lang="en">b is an independent continuant = Def. b is a continuant which is such that there is no c and no t such that b s-depends_on c at t. (axiom label in BFO2 Reference: [017-002])</obo:IAO_0000115>
+        <rdfs:label xml:lang="en">independent continuant</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/BFO_0000004"/>
+        <owl:annotatedProperty rdf:resource="http://purl.obolibrary.org/obo/IAO_0000115"/>
+        <owl:annotatedTarget xml:lang="en">b is an independent continuant = Def. b is a continuant which is such that there is no c and no t such that b s-depends_on c at t. (axiom label in BFO2 Reference: [017-002])</owl:annotatedTarget>
+        <obo:IAO_0010000 rdf:resource="http://purl.obolibrary.org/obo/bfo/axiom/017-002"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BFO_0000040 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000040">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000004"/>
+        <obo:IAO_0000115 xml:lang="en">An independent continuant that is spatially extended whose identity is independent of that of other entities and can be maintained through time.</obo:IAO_0000115>
+        <rdfs:label>material entity</rdfs:label>
+        <rdfs:label xml:lang="en">material entity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ENVO_00000098 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_00000098">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_01000635"/>
+        <obo:IAO_0000115>Area of dry or relatively dry land surrounded by water or low wetland.</obo:IAO_0000115>
+        <oboInOwl:hasDbXref>EcoLexicon:island</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>FTT:147</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>FTT:450</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>FTT:886</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>FTT:887</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>FTT:888</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>FTT:889</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>Geonames:T.ISL</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>Geonames:T.ISLS</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>SWEETRealm:Island</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>TGN:21468</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>TGN:21469</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>TGN:21471</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>TGN:21475</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>https://en.wikipedia.org/wiki/Island</oboInOwl:hasDbXref>
+        <oboInOwl:hasRelatedSynonym>eyot</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>holm</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>hummock</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>isle</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:hasRelatedSynonym>islet</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:inSubset>envoPolar</oboInOwl:inSubset>
+        <rdfs:label>island</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/ENVO_00000098"/>
+        <owl:annotatedProperty rdf:resource="http://purl.obolibrary.org/obo/IAO_0000115"/>
+        <owl:annotatedTarget>Area of dry or relatively dry land surrounded by water or low wetland.</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>USGS:SDTS</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/ENVO_00000098"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>hummock</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>USGS:SDTS</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/ENVO_00000098"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>isle</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ADL:FTT</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/ENVO_00000098"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>islet</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>ADL:FTT</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/ENVO_00000098"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>islet</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>Getty:TGN</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/ENVO_00000098"/>
+        <owl:annotatedProperty rdf:resource="http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"/>
+        <owl:annotatedTarget>islet</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>USGS:SDTS</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ENVO_00010504 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_00010504">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_01001684"/>
+        <obo:IAO_0000115>A layer of some material entity which is adjacent to one or more of its external boundaries and directly interacts with its immediate surroundings.</obo:IAO_0000115>
+        <oboInOwl:hasDbXref>EcoLexicon:surface</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>http://sweetontology.net/reprSpaceGeometry/Surface</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref>https://en.wikipedia.org/wiki/Surface</oboInOwl:hasDbXref>
+        <rdfs:comment>This class is distinct from a geometric surface, which is two-dimensional. The idea of &quot;uppermost&quot; may be problematic. Further, the definition of layer (the superclass of surface in rev 133) references surface. This may be another issue. Perhaps this can be made into an inferred class using &apos;bounding layer of&apos; some material entity, note that &apos;bounding layer&apos; implies containment, which may not be valid here.</rdfs:comment>
+        <rdfs:label>surface layer</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/ENVO_00010504"/>
+        <owl:annotatedProperty rdf:resource="http://purl.obolibrary.org/obo/IAO_0000115"/>
+        <owl:annotatedTarget>A layer of some material entity which is adjacent to one or more of its external boundaries and directly interacts with its immediate surroundings.</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>URL:http://www.merriam-webster.com/dictionary/surface</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ENVO_01000281 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_01000281">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000040"/>
+        <obo:IAO_0000115>A layer is a quantity of some material which is spatially continuous, has comparable thickness, and usually covers some surface.</obo:IAO_0000115>
+        <oboInOwl:created_by>ORCID:0000-0002-4366-3088</oboInOwl:created_by>
+        <oboInOwl:creation_date>2013-10-15T16:42:02Z</oboInOwl:creation_date>
+        <oboInOwl:inSubset>envoPolar</oboInOwl:inSubset>
+        <rdfs:comment>Preliminary definition.</rdfs:comment>
+        <rdfs:label>layer</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/ENVO_01000281"/>
+        <owl:annotatedProperty rdf:resource="http://purl.obolibrary.org/obo/IAO_0000115"/>
+        <owl:annotatedTarget>A layer is a quantity of some material which is spatially continuous, has comparable thickness, and usually covers some surface.</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>Wiktionary:layer</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ENVO_01000324 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_01000324">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_01001483"/>
+        <obo:IAO_0000115>A planetary surface is a surface layer where the solid or liquid material of a planet comes into contact with an atmosphere or outer space.</obo:IAO_0000115>
+        <rdfs:comment>a useful class: this can be used to define sub-terrestrial and sub-marine entities</rdfs:comment>
+        <rdfs:label>planetary surface</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ENVO_01000635 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_01000635">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_01000324"/>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_01001782"/>
+        <obo:IAO_0000115>A landmass which is part of a planet.</obo:IAO_0000115>
+        <oboInOwl:hasBroadSynonym>land</oboInOwl:hasBroadSynonym>
+        <oboInOwl:hasRelatedSynonym>ground</oboInOwl:hasRelatedSynonym>
+        <rdfs:label xml:lang="en">planetary landmass</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/ENVO_01000635"/>
+        <owl:annotatedProperty rdf:resource="http://purl.obolibrary.org/obo/IAO_0000115"/>
+        <owl:annotatedTarget>A landmass which is part of a planet.</owl:annotatedTarget>
+        <oboInOwl:hasDbXref>Adpated from https://en.wikipedia.org/wiki/Planetary_surface</oboInOwl:hasDbXref>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ENVO_01001275 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_01001275">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_01000281"/>
+        <obo:IAO_0000115>A layer which is primarily composed of some solid material, allowing for non-solid parts such as interstitial pockets of gas or liquid.</obo:IAO_0000115>
+        <rdfs:label xml:lang="en">solid layer</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ENVO_01001311 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_01001311">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_00010504"/>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_01001275"/>
+        <obo:IAO_0000115>A surface layer which is composed primarily of solid environmental material.</obo:IAO_0000115>
+        <rdfs:label xml:lang="en">solid surface layer</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ENVO_01001483 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_01001483">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_00010504"/>
+        <obo:IAO_0000115>A surface layer where the solid or liquid material of an astronomical body comes into contact with an atmosphere or outer space.</obo:IAO_0000115>
+        <oboInOwl:created_by rdf:resource="https://orcid.org/0000-0002-4366-3088"/>
+        <oboInOwl:creation_date rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-10-04T16:55:57Z</oboInOwl:creation_date>
+        <oboInOwl:hasRelatedSynonym xml:lang="en">land surface</oboInOwl:hasRelatedSynonym>
+        <rdfs:comment>a useful class: this can be used to define sub-terrestrial and sub-marine entities</rdfs:comment>
+        <rdfs:label xml:lang="en">surface of an astronomical body</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ENVO_01001684 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_01001684">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_01000281"/>
+        <obo:IAO_0000115 xml:lang="en">A layer which separates two portions of environmental material which possess 1) differing compositions, 2) a discontinuity of some property, or 3) some derivative of some property in a direction normal to the interface.</obo:IAO_0000115>
+        <dc:creator rdf:resource="https://orcid.org/0000-0002-4366-3088"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-08-20T09:28:10Z</dc:date>
+        <rdfs:label xml:lang="en">interface layer</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ENVO_01001782 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_01001782">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_01001785"/>
+        <obo:IAO_0000115>A large continuous area of land, either surrounded by sea or contiguous with another landmass.</obo:IAO_0000115>
+        <dc:creator rdf:resource="https://orcid.org/0000-0002-4366-3088"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-10-17T08:31:26Z</dc:date>
+        <rdfs:label xml:lang="en">landmass</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/ENVO_01001782"/>
+        <owl:annotatedProperty rdf:resource="http://purl.obolibrary.org/obo/IAO_0000115"/>
+        <owl:annotatedTarget>A large continuous area of land, either surrounded by sea or contiguous with another landmass.</owl:annotatedTarget>
+        <obo:IAO_0000119 rdf:resource="https://en.wiktionary.org/wiki/landmass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ENVO_01001785 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ENVO_01001785">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_01001311"/>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ENVO_01001483"/>
+        <obo:IAO_0000115>A surface layer of an astronomical body which is primarily composed of solid material and is not covered by oceans or other bodies of water.</obo:IAO_0000115>
+        <dc:creator rdf:resource="https://orcid.org/0000-0002-4366-3088"/>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-10-21T10:42:26Z</dc:date>
+        <rdfs:label xml:lang="en">land</rdfs:label>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://purl.obolibrary.org/obo/ENVO_01001785"/>
+        <owl:annotatedProperty rdf:resource="http://purl.obolibrary.org/obo/IAO_0000115"/>
+        <owl:annotatedTarget>A surface layer of an astronomical body which is primarily composed of solid material and is not covered by oceans or other bodies of water.</owl:annotatedTarget>
+        <oboInOwl:hasDbXref rdf:resource="https://en.wiktionary.org/wiki/land"/>
+    </owl:Axiom>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.25) https://github.com/owlcs/owlapi -->
+
