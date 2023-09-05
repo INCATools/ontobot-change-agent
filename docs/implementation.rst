@@ -34,9 +34,10 @@ and enter it in the "Secrets" section of the ontology repository `as explained h
 3. The title for the pull request generated corresponds to the issue that triggered its generation. If the issue is edited, the same pull request is updated.
 
 4. An example of a issue to trigger a pull request:
-    .. admonition:: GitHub Issue
+.. ..
         Hey ontobot!, apply:
         - create exact synonym 'ABCD1' for PREFIX:12345
         - create broad synonym 'ABCD2' for PREFIX:12345
+.. --->
 
-    There is no limits on the number of bullets one can pass.
+    There are no limits on the number of bullets one can pass.
