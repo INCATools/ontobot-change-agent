@@ -16,7 +16,7 @@ Update the resource (:code:`*.obo` file) path in the ontology's repository.
         echo "resource=src/ontology/YOUR-RESOURCE-FILENAME.obo" >> $GITHUB_ENV
         ..
 
-b. **OWL Resource**: The template for the workflow is provided (based on resource format) by `this YAML file <https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr-java.yml>`_.
+b. **OWL Resource**: OBO Resource: The template for the workflow is provided (based on resource format) by `this YAML file <https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr-java.yml>`_.
 Just uncomment the code and change the following:
 
 Update the resource (:code:`*.owl` file) path in the ontology's repository.
