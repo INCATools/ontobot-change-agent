@@ -38,9 +38,9 @@ and enter it in the "Secrets" section of the ontology repository `as explained h
 .. code-block:: html
 
     Hey ontobot!, apply:
-
-    <ul>create exact synonym 'ABCD1' for PREFIX:12345</ul>
-    <ul>create broad synonym 'ABCD2' for PREFIX:12345</ul>
+    
+    - create exact synonym 'ABCD1' for PREFIX:12345
+    - create broad synonym 'ABCD2' for PREFIX:12345
 
     
-    There are no limits on the number of bullets one can pass.
+There are no limits on the number of bullets one can pass.
