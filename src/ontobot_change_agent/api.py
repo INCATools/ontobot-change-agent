@@ -240,11 +240,16 @@ def process_issue_via_jar(input: str, commands: list, jar_path: str, output: str
     :param commands: A list of commands.
     :param output: Path to where the output is written, defaults to None
     """
-    cli_command = "java -jar {} apply -i {}".format(jar_path, input)
-    cli_commands = [
+    if jar_path:
+        cli_command = "java -jar {} apply -i {}".format(jar_path, input)
+        conversion = f" convert --format ofn -o {output}"
+    else:
+        cli_command = "robot kgcl:apply -i {}".format(input)
+        conversion = f" -o {output}"
+
+    kgcl_commands = [
         ' -k "{}"'.format(command.replace('"', "'")) for command in commands if len(commands) > 0
     ]
-    conversion = f" convert --format ofn -o {output}"
-    full_command = cli_command + " ".join(cli_commands) + conversion
+    full_command = cli_command + " ".join(kgcl_commands) + conversion
     # Run the command on the command line
     subprocess.run(full_command, shell=True)  # noqa S602
