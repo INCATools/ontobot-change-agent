@@ -19,7 +19,7 @@ from oaklib.implementations import ProntoImplementation, SimpleOboImplementation
 from oaklib.interfaces.patcher_interface import PatcherInterface
 from oaklib.selector import get_resource_from_shorthand
 
-from ontobot_change_agent.constants import DEFINITION, SYNONYM_TYPE, SYNONYMS
+from ontobot_change_agent.constants import DEFINITION, GITHUB_ACTIONS, ROBOT_PLUGINS_DIRECTORY, SYNONYM_TYPE, SYNONYMS
 
 HOME_DIR = Path(__file__).resolve().parents[2]
 SRC = HOME_DIR / "src/ontobot_change_agent"
@@ -241,8 +241,6 @@ def process_issue_via_jar(input: str, commands: list, jar_path: str, output: str
     :param commands: A list of commands.
     :param output: Path to where the output is written, defaults to None
     """
-    if getenv("GITHUB_ACTIONS") == 'true':
-        environ["ROBOT_PLUGINS_DIRECTORY"] = str(Path.cwd())
     if jar_path:
         cli_command = "java -jar {} apply -i {}".format(jar_path, input)
         conversion = f" convert --format ofn -o {output}"
