@@ -4,6 +4,7 @@
 import json
 import re
 import subprocess  # noqa S404
+from os import getenv, environ, cwd
 from os.path import join, splitext
 from pathlib import Path
 from typing import Generator, Optional
@@ -240,6 +241,8 @@ def process_issue_via_jar(input: str, commands: list, jar_path: str, output: str
     :param commands: A list of commands.
     :param output: Path to where the output is written, defaults to None
     """
+    if getenv("GITHUB_ACTIONS") == 'true':
+        environ["ROBOT_PLUGINS_DIRECTORY"] = cwd()
     if jar_path:
         cli_command = "java -jar {} apply -i {}".format(jar_path, input)
         conversion = f" convert --format ofn -o {output}"
