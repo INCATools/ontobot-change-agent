@@ -224,19 +224,22 @@ def process_issue(
         new_output = output if output else input
 
         if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503
-            if jar_path is not None:
+            if input.endswith("owl"):
                 process_issue_via_jar(
                     input=input,
                     commands=KGCL_COMMANDS,
                     jar_path=jar_path,
                     output=new_output,
                 )
-            else:
+            elif input.endswith("obo"):
                 process_issue_via_oak(
                     input=input,
                     commands=KGCL_COMMANDS,
                     output=new_output,
                 )
+            else:
+                logger.error(f"{[input]}=> resource can only be OWL or OBO extension files.")
+                break
 
             formatted_body += _convert_to_markdown(KGCL_COMMANDS)
             formatted_body += "</br>Fixes #" + str(issue["number"])
