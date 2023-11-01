@@ -4,7 +4,6 @@
 import json
 import re
 import subprocess  # noqa S404
-from os import getenv, environ
 from os.path import join, splitext
 from pathlib import Path
 from typing import Generator, Optional
@@ -19,7 +18,7 @@ from oaklib.implementations import ProntoImplementation, SimpleOboImplementation
 from oaklib.interfaces.patcher_interface import PatcherInterface
 from oaklib.selector import get_resource_from_shorthand
 
-from ontobot_change_agent.constants import DEFINITION, GITHUB_ACTIONS, ROBOT_PLUGINS_DIRECTORY, SYNONYM_TYPE, SYNONYMS
+from ontobot_change_agent.constants import DEFINITION, SYNONYM_TYPE, SYNONYMS
 
 HOME_DIR = Path(__file__).resolve().parents[2]
 SRC = HOME_DIR / "src/ontobot_change_agent"
