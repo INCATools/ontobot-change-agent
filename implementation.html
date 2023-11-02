@@ -92,7 +92,7 @@
 <p>The implementation of <code class="code docutils literal notranslate"><span class="pre">ontobot-change-agent</span></code> is generally within a github workflow of an ontology
 repository.</p>
 <ol class="arabic">
-<li><p>a. <strong>OBO Resource</strong>: The template for the workflow is provided by <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml">this YAML file</a>.
+<li><p>#. <strong>OBO Resource</strong>: The template for the workflow is provided by <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml">this YAML file</a>.
 Just uncomment the code and change the following:</p>
 <p>Update the resource (<code class="code docutils literal notranslate"><span class="pre">*.obo</span></code> file) path in the ontology’s repository.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>run:<span class="w"> </span><span class="p">|</span>
@@ -100,7 +100,7 @@ Just uncomment the code and change the following:</p>
 <span class="w">    </span>..
 </pre></div>
 </div>
-<p>b. <strong>OWL Resource</strong>: The template for the workflow is provided by <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr-java.yml">this YAML file</a>.
+<p>#. <strong>OWL Resource</strong>: The template for the workflow is provided by <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr-java.yml">this YAML file</a>.
 Just uncomment the code and change the following:</p>
 <p>Update the resource (<code class="code docutils literal notranslate"><span class="pre">*.owl</span></code> file) path in the ontology’s repository.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>run:<span class="w"> </span><span class="p">|</span>
@@ -112,8 +112,8 @@ Just uncomment the code and change the following:</p>
 <p class="admonition-title">Note</p>
 <p>For OWL resources we use <a class="reference external" href="https://github.com/gouttegd/kgcl-java/tree/master">kgcl-java</a> as the underlying package to carry out the change.
 There are 2 options for implementation here:
-#. Use existing an instance of ROBOT (via ODK) with <cite>kgcl-java</cite> as a plugin. OR
-#. Use a standalone JAR file which combines both ROBOT and <cite>kgcl-java</cite>.</p>
+- Use existing an instance of ROBOT (via ODK) with <cite>kgcl-java</cite> as a plugin. OR
+- Use a standalone JAR file which combines both ROBOT and <cite>kgcl-java</cite>.</p>
 <p>We highly recommend using the standard option (#1). For this you should just uncomment <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L56-L62">this code block</a>
 and delete <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L63-L68">this code block</a></p>
 </div>
