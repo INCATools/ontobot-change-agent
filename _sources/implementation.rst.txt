@@ -40,8 +40,9 @@ repository.
 
 #. Create a `personal access token <https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token>`_ 
 and enter it in the "Secrets" section of the ontology repository `as explained here <https://docs.github.com/en/actions/security-guides/encrypted-secrets>`_.
-    **Note:** The variable name could be either :code:`GH_TOKEN` or anything else but it must match
-    in the workflow (:code:`${{ secrets.GH_TOKEN }}`) and the repository secret section (e.g. :code:`GH_TOKEN`).
+    .. note::
+        The variable name could be either :code:`GH_TOKEN` or anything else but it must match
+        in the workflow (:code:`${{ secrets.GH_TOKEN }}`) and the repository secret section (e.g. :code:`GH_TOKEN`).
 
 #. The title for the pull request generated corresponds to the issue that triggered its generation. If the issue is edited, the same pull request is updated.
 
