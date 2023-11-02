@@ -131,9 +131,18 @@ and enter it in the “Secrets” section of the ontology repository <a class="r
 in the workflow (<code class="code docutils literal notranslate"><span class="pre">${{</span> <span class="pre">secrets.GH_TOKEN</span> <span class="pre">}}</span></code>) and the repository secret section (e.g. <code class="code docutils literal notranslate"><span class="pre">GH_TOKEN</span></code>).</p>
 </div>
 </div></blockquote>
-<ol class="arabic simple">
-<li><p>The title for the pull request generated corresponds to the issue that triggered its generation. If the issue is edited, the same pull request is updated.</p></li>
-<li><p>An example of a issue to trigger a pull request:</p></li>
+</section>
+<section id="step-2-take-it-for-a-spin">
+<h2>Step 2: Take it for a spin!<a class="headerlink" href="#step-2-take-it-for-a-spin" title="Permalink to this heading"></a></h2>
+<section id="create-a-new-issue">
+<h3>Create a new issue<a class="headerlink" href="#create-a-new-issue" title="Permalink to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Create a new issue in the repository as one would usually do and give it a clear subject.</p></li>
+<li><p>In the body, <cite>ontobot-change-agent</cite> will be looking for the phrase - “Hey ontobot!, apply:” (the “!” is optional).</p></li>
+<li><dl>
+<dt>In the next line start writing change language commands as bullets (using “-” or “*”).</dt><dd><ol class="loweralpha simple">
+<li><p>The list of commands can be found <a class="reference external" href="https://incatools.github.io/kgcl/examples/">here</a> (“Command” section).</p></li>
+<li><p>An example of an issue to trigger a pull request:</p></li>
 </ol>
 <div class="highlight-html notranslate"><div class="highlight"><pre><span></span>Hey ontobot!, apply:
 
@@ -142,18 +151,6 @@ in the workflow (<code class="code docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 <p>There are no limits on the number of bullets one can pass.</p>
-</section>
-<section id="step-2-take-it-for-a-spin">
-<h2>Step 2: Take it for a spin!<a class="headerlink" href="#step-2-take-it-for-a-spin" title="Permalink to this heading"></a></h2>
-<section id="create-a-new-issue">
-<h3>Create a new issue<a class="headerlink" href="#create-a-new-issue" title="Permalink to this heading"></a></h3>
-<ol class="arabic simple">
-<li><p>Create a new issue in the repository as one would usually do and give it a clear subject.</p></li>
-<li><p>In the body, <cite>ontobot-change-agent</cite> will be looking for the phrase - “Hey ontobot!, apply:” (the “!” is optional).</p></li>
-<li><dl class="simple">
-<dt>In the next line start writing change language commands as bullets (using “-” or “*”).</dt><dd><ol class="loweralpha simple">
-<li><p>The list of commands can be found <a class="reference external" href="https://incatools.github.io/kgcl/examples/">here</a> (“Command” section).</p></li>
-</ol>
 </dd>
 </dl>
 </li>
@@ -162,7 +159,9 @@ in the workflow (<code class="code docutils literal notranslate"><span class="pr
 <section id="pull-request">
 <h3>Pull request<a class="headerlink" href="#pull-request" title="Permalink to this heading"></a></h3>
 <p>Once the issue is created, it triggers the GitHub workflow mentioned above and creates a corresponding pull request
-which should reflect the expected change in the ontology resource based on the commands listed in the issue.</p>
+which should reflect the expected change in the ontology resource based on the commands listed in the issue.
+The title for the pull request generated corresponds to the issue that triggered its generation. If the issue is edited,
+the same pull request is updated.</p>
 </section>
 </section>
 </section>
