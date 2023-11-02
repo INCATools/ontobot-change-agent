@@ -92,8 +92,9 @@
 <p>The implementation of <code class="code docutils literal notranslate"><span class="pre">ontobot-change-agent</span></code> is generally within a github workflow of an ontology
 repository.</p>
 <ol class="arabic">
-<li><dl>
-<dt>Choosing of a GitHub workflow depends on the type of resource one is trying to edit:</dt><dd><ul class="simple">
+<li><p>Choosing of a GitHub workflow depends on the type of resource one is trying to edit:</p>
+<blockquote>
+<div><ul class="simple">
 <li><p><strong>OBO Resource</strong>: The template for the workflow is provided by <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml">this YAML file</a>.</p></li>
 </ul>
 <p>Just uncomment the code and change the following:</p>
@@ -122,11 +123,10 @@ There are 2 options for implementation here:</p>
 <p>We highly recommend using the standard option (#1). For this you should just uncomment <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L56-L62">this code block</a>
 and delete <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L63-L68">this code block</a></p>
 </div>
-</dd>
-</dl>
+</div></blockquote>
 </li>
 </ol>
-<p>#. Create a <a class="reference external" href="https://docs.github.com/en/enterprise-server&#64;3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">personal access token</a>
+<p>2. Create a <a class="reference external" href="https://docs.github.com/en/enterprise-server&#64;3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">personal access token</a>
 and enter it in the “Secrets” section of the ontology repository <a class="reference external" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets">as explained here</a>.</p>
 <blockquote>
 <div><div class="admonition note">
