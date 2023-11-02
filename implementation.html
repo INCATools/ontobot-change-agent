@@ -92,16 +92,20 @@
 <p>The implementation of <code class="code docutils literal notranslate"><span class="pre">ontobot-change-agent</span></code> is generally within a github workflow of an ontology
 repository.</p>
 <ol class="arabic">
-<li><p>#. <strong>OBO Resource</strong>: The template for the workflow is provided by <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml">this YAML file</a>.
-Just uncomment the code and change the following:</p>
+<li><ul class="simple">
+<li><p><strong>OBO Resource</strong>: The template for the workflow is provided by <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml">this YAML file</a>.</p></li>
+</ul>
+<p>Just uncomment the code and change the following:</p>
 <p>Update the resource (<code class="code docutils literal notranslate"><span class="pre">*.obo</span></code> file) path in the ontology’s repository.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>run:<span class="w"> </span><span class="p">|</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;resource=src/ontology/YOUR-RESOURCE-FILENAME.obo&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$GITHUB_ENV</span>
 <span class="w">    </span>..
 </pre></div>
 </div>
-<p>#. <strong>OWL Resource</strong>: The template for the workflow is provided by <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr-java.yml">this YAML file</a>.
-Just uncomment the code and change the following:</p>
+<ul class="simple">
+<li><p><strong>OWL Resource</strong>: The template for the workflow is provided by <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr-java.yml">this YAML file</a>.</p></li>
+</ul>
+<p>Just uncomment the code and change the following:</p>
 <p>Update the resource (<code class="code docutils literal notranslate"><span class="pre">*.owl</span></code> file) path in the ontology’s repository.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>run:<span class="w"> </span><span class="p">|</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;resource=src/ontology/YOUR-RESOURCE-FILENAME.owl&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$GITHUB_ENV</span>
