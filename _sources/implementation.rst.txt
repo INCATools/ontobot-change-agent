@@ -7,7 +7,7 @@ Step 1: GitHub Workflow
 The implementation of :code:`ontobot-change-agent` is generally within a github workflow of an ontology 
 repository.
 
-#. \ 
+#. \\ 
     - **OBO Resource**: The template for the workflow is provided by `this YAML file <https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml>`_.
     Just uncomment the code and change the following:
 
