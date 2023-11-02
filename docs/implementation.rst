@@ -17,7 +17,7 @@ repository.
 
         run: |
             echo "resource=src/ontology/YOUR-RESOURCE-FILENAME.obo" >> $GITHUB_ENV
-            ..
+            
 
     - **OWL Resource**: The template for the workflow is provided by `this YAML file <https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr-java.yml>`_.
     Just uncomment the code and change the following:
@@ -28,7 +28,7 @@ repository.
 
         run: |
             echo "resource=src/ontology/YOUR-RESOURCE-FILENAME.owl" >> $GITHUB_ENV
-            ..
+            
     .. note::
         For OWL resources we use `kgcl-java <https://github.com/gouttegd/kgcl-java/tree/master>`_ as the underlying package to carry out the change.
         There are 2 options for implementation here:\
