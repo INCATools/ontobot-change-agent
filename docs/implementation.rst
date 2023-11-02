@@ -33,9 +33,9 @@ repository.
         For OWL resources we use `kgcl-java <https://github.com/gouttegd/kgcl-java/tree/master>`_ as the underlying package to carry out the change.
         There are 2 options for implementation here:
 
-        - Use existing an instance of ROBOT (via ODK) with `kgcl-java` as a plugin.
+        - Use existing an instance of :code:`ROBOT`` (via :code:`ODK`) with :code:`kgcl-java` as a plugin.
 
-        - Use a standalone JAR file which combines both ROBOT and `kgcl-java`.
+        - Use a standalone JAR file which combines both ROBOT and :code:`kgcl-java`.
 
         We highly recommend using the standard option (#1). For this you should just uncomment `this code block <https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L56-L62>`_
         and delete `this code block <https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L63-L68>`_
