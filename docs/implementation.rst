@@ -7,7 +7,7 @@ Step 1: GitHub Workflow
 The implementation of :code:`ontobot-change-agent` is generally within a github workflow of an ontology 
 repository.
 
-#. \ 
+#. \  
     - **OBO Resource**: The template for the workflow is provided by `this YAML file <https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml>`_.
     Just uncomment the code and change the following:
 
@@ -31,8 +31,8 @@ repository.
             
     .. note::
         For OWL resources we use `kgcl-java <https://github.com/gouttegd/kgcl-java/tree/master>`_ as the underlying package to carry out the change.
-        There are 2 options for implementation here:\
-        - Use existing an instance of ROBOT (via ODK) with `kgcl-java` as a plugin. OR\
+        There are 2 options for implementation here:\ 
+        - Use existing an instance of ROBOT (via ODK) with `kgcl-java` as a plugin. OR\ 
         - Use a standalone JAR file which combines both ROBOT and `kgcl-java`.
 
         We highly recommend using the standard option (#1). For this you should just uncomment `this code block <https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L56-L62>`_
