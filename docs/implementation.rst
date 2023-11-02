@@ -64,7 +64,7 @@ Create a new issue
 """"""""""""""""""
 1. Create a new issue in the repository as one would usually do and give it a clear subject.
 2. In the body, `ontobot-change-agent` will be looking for the phrase - "Hey ontobot!, apply:" (the "!" is optional)
-3. In the next line start writing change language commands as bullets (using `-` or `*`).
+3. In the next line start writing change language commands as bullets (using "-"" or "*").
     a. The list of commands can be found `here <https://incatools.github.io/kgcl/examples/>`_ ("Commmand" section).
 
 Pull request
