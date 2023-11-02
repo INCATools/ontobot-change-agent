@@ -7,7 +7,8 @@ Step 1: GitHub Workflow Setup
 The implementation of :code:`ontobot-change-agent` is generally within a github workflow of an ontology 
 repository.
 
-#. Choosing of a GitHub workflow depends on the type of resource one is trying to edit: 
+1. Choosing of a GitHub workflow depends on the type of resource one is trying to edit:
+
     - **OBO Resource**: The template for the workflow is provided by `this YAML file <https://github.com/hrshdhgd/ontobot-change-agent/blob/main/.github/workflows/new-pr.yml>`_.
     Just uncomment the code and change the following:
 
@@ -40,7 +41,7 @@ repository.
         We highly recommend using the standard option (#1). For this you should just uncomment `this code block <https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L56-L62>`_
         and delete `this code block <https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L63-L68>`_
 
-#. Create a `personal access token <https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token>`_ 
+2. Create a `personal access token <https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token>`_ 
 and enter it in the "Secrets" section of the ontology repository `as explained here <https://docs.github.com/en/actions/security-guides/encrypted-secrets>`_.
     .. note::
         The variable name could be either :code:`GH_TOKEN` or anything else but it must match
