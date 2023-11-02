@@ -1,8 +1,8 @@
 Implementation
 ===============
 
-Step 1: GitHub Workflow
------------------------
+Step 1: GitHub Workflow Setup
+-----------------------------
 
 The implementation of :code:`ontobot-change-agent` is generally within a github workflow of an ontology 
 repository.
