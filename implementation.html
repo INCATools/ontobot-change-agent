@@ -47,7 +47,15 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="first_run.html">First Run</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Implementation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Implementation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-github-workflow">Step 1: GitHub Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-take-it-for-a-spin">Step 2: Take it for a spin!</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-new-issue">Create a new issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pull-request">Pull request</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Interface</a></li>
@@ -79,6 +87,8 @@
              
   <section id="implementation">
 <h1>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading"></a></h1>
+<section id="step-1-github-workflow">
+<h2>Step 1: GitHub Workflow<a class="headerlink" href="#step-1-github-workflow" title="Permalink to this heading"></a></h2>
 <p>The implementation of <code class="code docutils literal notranslate"><span class="pre">ontobot-change-agent</span></code> is generally within a github workflow of an ontology
 repository.</p>
 <p>1.
@@ -98,6 +108,15 @@ Just uncomment the code and change the following:</p>
 <span class="w">    </span>..
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For OWL resources we use <a class="reference external" href="https://github.com/gouttegd/kgcl-java/tree/master">kgcl-java</a> as the underlying package to carry out the change.
+There are 2 options for implementation here:
+1. Use existing an instance of ROBOT (via ODK) with <cite>kgcl-java</cite> as a plugin. OR
+2. Use a standalone JAR file which combines both ROBOT and <cite>kgcl-java</cite>.</p>
+<p>We highly recommend using the standard option (#1). For this you should just uncomment <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L56-L62">this code block</a>
+and delete <a class="reference external" href="https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L63-L68">this code block</a></p>
+</div>
 <p>2. <a class="reference external" href="https://docs.github.com/en/enterprise-server&#64;3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">Create a personal access token</a>
 and enter it in the “Secrets” section of the ontology repository <a class="reference external" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets">as explained here</a>.</p>
 <blockquote>
@@ -115,6 +134,29 @@ in the workflow (<code class="code docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 <p>There are no limits on the number of bullets one can pass.</p>
+</section>
+<section id="step-2-take-it-for-a-spin">
+<h2>Step 2: Take it for a spin!<a class="headerlink" href="#step-2-take-it-for-a-spin" title="Permalink to this heading"></a></h2>
+<section id="create-a-new-issue">
+<h3>Create a new issue<a class="headerlink" href="#create-a-new-issue" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Create a new issue in the repository as one would usually do and give it a clear subject.</p></li>
+<li><p>In the body, <cite>ontobot-change-agent</cite> will be looking for the phrase - “Hey ontobot!, apply:” (the “!” is optional)</p></li>
+<li><dl class="simple">
+<dt>In the next line start writing change language commands as bullets (using <cite>-</cite> or <cite>*</cite>).</dt><dd><ol class="loweralpha simple">
+<li><p>The list of commands can be found <a class="reference external" href="https://incatools.github.io/kgcl/examples/">here</a> (“Commmand” section).</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="pull-request">
+<h3>Pull request<a class="headerlink" href="#pull-request" title="Permalink to this heading"></a></h3>
+<p>Once the issue is created, it triggers the GitHub workflow mentioned above and creates a corresponding pull request
+which should reflect the expected change in the ontology resource based on the commands listed in the issue.</p>
+</section>
+</section>
 </section>
 
 

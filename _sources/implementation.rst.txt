@@ -1,6 +1,9 @@
 Implementation
 ===============
 
+Step 1: GitHub Workflow
+-----------------------
+
 The implementation of :code:`ontobot-change-agent` is generally within a github workflow of an ontology 
 repository.
 
@@ -26,6 +29,15 @@ Update the resource (:code:`*.owl` file) path in the ontology's repository.
     run: |
         echo "resource=src/ontology/YOUR-RESOURCE-FILENAME.owl" >> $GITHUB_ENV
         ..
+.. note::
+    For OWL resources we use `kgcl-java <https://github.com/gouttegd/kgcl-java/tree/master>`_ as the underlying package to carry out the change.
+    There are 2 options for implementation here:
+    1. Use existing an instance of ROBOT (via ODK) with `kgcl-java` as a plugin. OR
+    2. Use a standalone JAR file which combines both ROBOT and `kgcl-java`.
+
+    We highly recommend using the standard option (#1). For this you should just uncomment `this code block <https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L56-L62>`_
+    and delete `this code block <https://github.com/hrshdhgd/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L63-L68>`_
+
 2. `Create a personal access token <https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token>`_ 
 and enter it in the "Secrets" section of the ontology repository `as explained here <https://docs.github.com/en/actions/security-guides/encrypted-secrets>`_.
     **Note:** The variable name could be either :code:`GH_TOKEN` or anything else but it must match
@@ -44,3 +56,18 @@ and enter it in the "Secrets" section of the ontology repository `as explained h
 
     
 There are no limits on the number of bullets one can pass.
+
+Step 2: Take it for a spin!
+---------------------------
+
+Create a new issue
+""""""""""""""""""
+1. Create a new issue in the repository as one would usually do and give it a clear subject.
+2. In the body, `ontobot-change-agent` will be looking for the phrase - "Hey ontobot!, apply:" (the "!" is optional)
+3. In the next line start writing change language commands as bullets (using `-` or `*`).
+    a. The list of commands can be found `here <https://incatools.github.io/kgcl/examples/>`_ ("Commmand" section).
+
+Pull request
+""""""""""""
+Once the issue is created, it triggers the GitHub workflow mentioned above and creates a corresponding pull request
+which should reflect the expected change in the ontology resource based on the commands listed in the issue.
