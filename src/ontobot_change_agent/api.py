@@ -242,11 +242,12 @@ def process_issue_via_jar(input: str, commands: list, jar_path: str, output: str
     """
     if jar_path:
         cli_command = "java -jar {} apply -i {}".format(jar_path, input)
-        conversion = f" convert --format ofn -o {output}"
+        # conversion = f" convert --format ofn -o {output}"
     else:
         cli_command = "robot kgcl:apply -i {}".format(input)
-        conversion = f" -o {output}"
+        # conversion = f" -o {output}"
 
+    conversion = f" convert --format ofn -o {output}"
     kgcl_commands = [
         ' -k "{}"'.format(command.replace('"', "'")) for command in commands if len(commands) > 0
     ]
