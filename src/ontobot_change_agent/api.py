@@ -122,7 +122,7 @@ def _make_sense_of_body(body: str) -> str:
     # return (
     #     body.lstrip(bullet).replace("<", "").replace(">", "").split(splitter)
     # )
-    return body.replace("<", "").replace(">", "")
+    return body.replace("<", "").replace(">", "") if body else body
 
 
 def get_all_labels_from_repo(repository_name: str, token: str = None) -> dict:
