@@ -185,7 +185,7 @@ def process_issue(
         repository_name=repo, token=token, label=label, number=number, state=state
     ):
         # Make sure ontobot_change_agent needs to be triggered or no.
-        if issue:
+        if issue and issue[BODY]:
             KGCL_COMMANDS = []
             if NEW_TERM_LABEL in issue["labels"]:
                 formatted_body = "The following input was provided: </br> "
@@ -218,7 +218,9 @@ def process_issue(
             else:
                 click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
         else:
-            click.echo(f"""Issue number:{number} is either closed or does not exist.""")
+            click.echo(
+                f"""Issue number:{number} is either closed, does not exist or has no body."""
+            )
             break
 
         new_output = output if output else input

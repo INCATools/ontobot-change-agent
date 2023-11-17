@@ -28,6 +28,8 @@
 #             return issue.data.body.includes('Hey ontobot');
 
 #   build:
+#     needs: check
+#     if: needs.check.outputs.phraseExists == 'true'
 #     runs-on: ${{ matrix.os }}
 #     strategy:
 #       matrix:
@@ -36,36 +38,46 @@
 
 #     steps:
 #       - uses: actions/checkout@v3
-      
-#       - name: Set up Python
+#       - name: Set up Python ${{ matrix.python-version }}
 #         uses: actions/setup-python@v3
 #         with:
 #           python-version: ${{ matrix.python-version }}
 
-#       - name: Get issue number and repository name
-#         id: gh-script
+#       - name: Return issue number
+#         id: gh-script-issue
 #         uses: actions/github-script@v6
 #         with:
+#           # github-token: ${{ secrets.GH_TOKEN }}
 #           script: |
-#             const issue_number = context.issue.number;
-#             const repo = context.repo.owner+"/"+context.repo.repo;
-#             return {issue_number, repo};
+#             const issue_number = context.issue.number
+#             const repo = context.repo.owner+"/"+context.repo.repo
+#             return issue_number
+      
+#       - name: Return repository name
+#         id: gh-script-repo
+#         uses: actions/github-script@v6
+#         with:
+#           # github-token: ${{ secrets.GH_TOKEN }}
+#           script: |
+#             const repo = context.repo.owner+"/"+context.repo.repo
+#             return repo
 
-#       - name: Set environment variables
+#       - name: Set branch name
 #         id: vars
 #         run: |
 #           echo "resource=src/ontology/mondo-edit.obo" >> $GITHUB_ENV
-#           echo "branch-name=ochange_automation_"${{ steps.gh-script.outputs.result.issue_number }} >> $GITHUB_ENV
+#           echo "branch-name=ochange_automation_"${{ steps.gh-script-issue.outputs.result }} >> $GITHUB_ENV
 
 #       - name: Install dependencies
-#         run: pip install ontobot-change-agent
+#         run: |
+#           pip install ontobot-change-agent
 
 #       - name: Run ochange
 #         id: ochange
 #         run: |
 #           ochange process-issue ${{ env.resource }} \
-#           -r ${{ steps.gh-script.outputs.result.repo }} \
-#           -n ${{ steps.gh-script.outputs.result.issue_number }} \
+#           -r ${{ steps.gh-script-repo.outputs.result }} \
+#           -n ${{ steps.gh-script-issue.outputs.result }} \
 #           -g ${{ secrets.GH_TOKEN }}
 #           -p XXXX
 
@@ -79,3 +91,4 @@
 #           title: ${{ env.PR_TITLE }}
 #           base: ${{ github.head_ref }}
 #           branch: ${{ env.branch-name }}
+#        #   token: ${{ secrets.GH_TOKEN }}
