@@ -6,6 +6,27 @@
 #     types: [ opened, edited ]
 
 # jobs:
+#   check:
+#     runs-on: ubuntu-latest
+#     outputs:
+#       phraseExists: ${{ steps.check-body.outputs.result }}
+#     steps:
+#       - name: Check if issue body contains 'Hey ontobot'
+#         id: check-body
+#         uses: actions/github-script@v6
+#         with:
+#           script: |
+#             const issue = await github.rest.issues.get({
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#               issue_number: context.issue.number
+#             });
+#             if (!issue.data.body) {
+#               console.log('Issue body is empty or null');
+#               return false;
+#             }
+#             return issue.data.body.includes('Hey ontobot');
+
 #   build:
 #     runs-on: ${{ matrix.os }}
 #     strategy:
@@ -15,46 +36,36 @@
 
 #     steps:
 #       - uses: actions/checkout@v3
-#       - name: Set up Python ${{ matrix.python-version }}
+      
+#       - name: Set up Python
 #         uses: actions/setup-python@v3
 #         with:
 #           python-version: ${{ matrix.python-version }}
 
-#       - name: Return issue number
-#         id: gh-script-issue
+#       - name: Get issue number and repository name
+#         id: gh-script
 #         uses: actions/github-script@v6
 #         with:
-#           # github-token: ${{ secrets.GH_TOKEN }}
 #           script: |
-#             const issue_number = context.issue.number
-#             const repo = context.repo.owner+"/"+context.repo.repo
-#             return issue_number
-      
-#       - name: Return repository name
-#         id: gh-script-repo
-#         uses: actions/github-script@v6
-#         with:
-#           # github-token: ${{ secrets.GH_TOKEN }}
-#           script: |
-#             const repo = context.repo.owner+"/"+context.repo.repo
-#             return repo
+#             const issue_number = context.issue.number;
+#             const repo = context.repo.owner+"/"+context.repo.repo;
+#             return {issue_number, repo};
 
-#       - name: Set branch name
+#       - name: Set environment variables
 #         id: vars
 #         run: |
 #           echo "resource=src/ontology/mondo-edit.obo" >> $GITHUB_ENV
-#           echo "branch-name=ochange_automation_"${{ steps.gh-script-issue.outputs.result }} >> $GITHUB_ENV
+#           echo "branch-name=ochange_automation_"${{ steps.gh-script.outputs.result.issue_number }} >> $GITHUB_ENV
 
 #       - name: Install dependencies
-#         run: |
-#           pip install ontobot-change-agent
+#         run: pip install ontobot-change-agent
 
 #       - name: Run ochange
 #         id: ochange
 #         run: |
 #           ochange process-issue ${{ env.resource }} \
-#           -r ${{ steps.gh-script-repo.outputs.result }} \
-#           -n ${{ steps.gh-script-issue.outputs.result }} \
+#           -r ${{ steps.gh-script.outputs.result.repo }} \
+#           -n ${{ steps.gh-script.outputs.result.issue_number }} \
 #           -g ${{ secrets.GH_TOKEN }}
 #           -p XXXX
 
@@ -68,4 +79,3 @@
 #           title: ${{ env.PR_TITLE }}
 #           base: ${{ github.head_ref }}
 #           branch: ${{ env.branch-name }}
-#        #   token: ${{ secrets.GH_TOKEN }}
