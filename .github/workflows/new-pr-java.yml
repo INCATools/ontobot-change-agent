@@ -26,6 +26,7 @@
 #               return false;
 #             }
 #             return issue.data.body.includes('Hey ontobot');
+
 #   build:
 #     needs: check
 #     if: needs.check.outputs.phraseExists == 'true'
