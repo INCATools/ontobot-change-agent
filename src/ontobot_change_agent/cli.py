@@ -218,7 +218,9 @@ def process_issue(
             else:
                 click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
         else:
-            click.echo(f"""Issue number:{number} is either closed, does not exist or has no body.""")
+            click.echo(
+                f"""Issue number:{number} is either closed, does not exist or has no body."""
+            )
             break
 
         new_output = output if output else input
