@@ -26,10 +26,7 @@
 #               return false;
 #             }
 #             return issue.data.body.includes('Hey ontobot');
-  
 #   build:
-#     needs: check
-#     if: needs.check.outputs.phraseExists == 'true'
 #     runs-on: ${{ matrix.os }}
 #     container: obolibrary/odkfull:v1.4.3
 #     strategy:
@@ -41,32 +38,37 @@
 #       - name: Checkout main branch
 #         uses: actions/checkout@v3
 
-#       - name: Set up Python ${{ matrix.python-version }}
-#         uses: actions/setup-python@v3
-#         with:
-#           python-version: ${{ matrix.python-version }}
-
-#       - name: Return issue number and repository name
-#         id: gh-script
+#       - name: Return issue number
+#         id: gh-script-issue
 #         uses: actions/github-script@v6
 #         with:
+#           # github-token: ${{ secrets.GH_TOKEN }}
 #           script: |
-#             const issue_number = context.issue.number;
-#             const repo = context.repo.owner + "/" + context.repo.repo;
-#             return { issue_number, repo };
+#             const issue_number = context.issue.number
+#             const repo = context.repo.owner+"/"+context.repo.repo
+#             return issue_number
+      
+#       - name: Return repository name
+#         id: gh-script-repo
+#         uses: actions/github-script@v6
+#         with:
+#           # github-token: ${{ secrets.GH_TOKEN }}
+#           script: |
+#             const repo = context.repo.owner+"/"+context.repo.repo
+#             return repo
 
 #       - name: Set branch name
 #         id: vars
 #         run: |
-#           echo "resource=src/ontology/cl-edit.owl" >> $GITHUB_ENV
-#           echo "branch-name=kgcl_automation_"${{ steps.gh-script.outputs.issue_number }} >> $GITHUB_ENV
+#           echo "resource=src/envo/envo-edit.owl" >> $GITHUB_ENV
+#           echo "branch-name=kgcl_automation_"${{ steps.gh-script-issue.outputs.result }} >> $GITHUB_ENV
       
 #       - name: Get jar & enable plugin.
 #         run: |
 #           mkdir -p robot-plugins
 #           wget https://github.com/gouttegd/kgcl-java/releases/download/kgcl-0.2.0/kgcl-robot-plugin-0.2.0.jar -O robot-plugins/kgcl.jar
 #           echo "ROBOT_PLUGINS_DIRECTORY=$(pwd)/robot-plugins/" >> "$GITHUB_ENV"
-
+      
 #       - name: Install dependencies
 #         run: |
 #           pip install ontobot-change-agent
@@ -75,15 +77,16 @@
 #         id: ochange
 #         run: |
 #           ochange process-issue ${{ env.resource }} \
-#           -r ${{ steps.gh-script.outputs.repo }} \
-#           -n ${{ steps.gh-script.outputs.issue_number }} \
+#           -r ${{ steps.gh-script-repo.outputs.result }} \
+#           -n ${{ steps.gh-script-issue.outputs.result }} \
 #           -g ${{ secrets.GH_TOKEN }}
-## ! OR using standalone JAR file.
-## !          ochange process-issue ${{ env.resource }} \
-## !          -r ${{ steps.gh-script.outputs.repo }} \
-## !          -n ${{ steps.gh-script.outputs.issue_number }} \
-## !          -g ${{ secrets.GH_TOKEN }} \
-## !          -j kgcl-robot.jar
+# # ! OR using standalone JAR file.
+# # !          ochange process-issue ${{ env.resource }} \
+# # !          -r ${{ steps.gh-script-repo.outputs.result }} \
+# # !          -n ${{ steps.gh-script-issue.outputs.result }} \
+# # !          -g ${{ secrets.GH_TOKEN }} \
+# # !          -j kgcl-robot.jar
+
 #       - name: Clean-up
 #         run: rm -rf robot-plugins
 
@@ -91,6 +94,7 @@
 #         uses: peter-evans/create-pull-request@v5
 #         if: ${{ env.PR_TITLE}}
 #         with:
+#           token: ${{ secrets.GH_TOKEN }}
 #           branch-suffix: short-commit-hash
 #           labels: Automated
 #           author: ${{ env.ISSUE_CREATOR }} <${{ env.ISSUE_CREATOR }}@users.noreply.github.com>
