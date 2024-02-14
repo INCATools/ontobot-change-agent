@@ -207,12 +207,11 @@ def process_issue(
                 for bullet in bullet_starters:
                     KGCL_COMMANDS.extend(
                         [
-                            str(item).replace(bullet, "")
+                            str(item).replace(bullet, "").replace('"', "'")
                             for item in issue[BODY].splitlines()
                             if item.lstrip().startswith(bullet)
                         ]
                     )
-
                 KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
 
             else:
