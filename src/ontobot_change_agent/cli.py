@@ -201,18 +201,17 @@ def process_issue(
                     )
                     break
 
-            elif re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY]):
+            elif re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY], re.DOTALL):
                 formatted_body = "The following commands were executed: </br> "
                 bullet_starters = ["* ", "- "]
                 for bullet in bullet_starters:
                     KGCL_COMMANDS.extend(
                         [
-                            str(item).replace(bullet, "")
+                            str(item).replace(bullet, "").replace('"', "'")
                             for item in issue[BODY].splitlines()
                             if item.lstrip().startswith(bullet)
                         ]
                     )
-
                 KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
 
             else:
