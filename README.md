@@ -18,7 +18,7 @@ Ontology resources that are powered by `ontobot-change-agent`:
    - [PATO](https://github.com/pato-ontology/pato/blob/master/.github/workflows/onotobot.yml)
  - Via [`kgcl-java`](https://github.com/gouttegd/kgcl-java)
    - [ENVO](https://github.com/hrshdhgd/envo/blob/master/.github/workflows/ontobot.yml)
-   - [CL (cell ontology)](https://github.com/obophenotype/cell-ontology/blob/master/.github/workflows/ontobot.yml)
+   - [CL](https://github.com/obophenotype/cell-ontology/blob/master/.github/workflows/ontobot.yml)
 <!-- ## Installation -->
 
 <!-- Uncomment this section after first release
