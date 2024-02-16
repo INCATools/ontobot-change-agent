@@ -1,27 +1,27 @@
-name: Copy Issue Description to Comment with Header
+# name: Copy Issue Description to Comment with Header
 
-on:
-  issues:
-    types: [opened]
+# on:
+#   issues:
+#     types: [opened]
 
-jobs:
-  copy_description_to_comment:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Copy issue description to comment with header
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const issue = context.issue;
-            const issueBody = context.payload.issue.body;
+# jobs:
+#   copy_description_to_comment:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Copy issue description to comment with header
+#         uses: actions/github-script@v6
+#         with:
+#           github-token: ${{secrets.GITHUB_TOKEN}}
+#           script: |
+#             const issue = context.issue;
+#             const issueBody = context.payload.issue.body;
 
-            // Create a comment with a header and the issue description
-            const commentBody = `### Original Request\n-------\n\n${issueBody}`;
+#             // Create a comment with a header and the issue description
+#             const commentBody = `### Original Request\n-------\n\n${issueBody}`;
 
-            await github.rest.issues.createComment({
-              owner: issue.owner,
-              repo: issue.repo,
-              issue_number: issue.number,
-              body: commentBody
-            });
+#             await github.rest.issues.createComment({
+#               owner: issue.owner,
+#               repo: issue.repo,
+#               issue_number: issue.number,
+#               body: commentBody
+#             });
