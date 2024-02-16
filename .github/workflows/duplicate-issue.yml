@@ -1,49 +1,27 @@
-name: Update Comment with Original Request on Edit
+name: Copy Issue Description to Comment with Header
 
 on:
   issues:
-    types: [opened, edited]
+    types: [opened]
 
 jobs:
-  update_comment:
+  copy_description_to_comment:
     runs-on: ubuntu-latest
     steps:
-      - name: Update comment with header and horizontal rule on issue edit
+      - name: Copy issue description to comment with header
         uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const issue = context.issue;
             const issueBody = context.payload.issue.body;
-            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 
-            // Create or update a comment with a header, horizontal rule, and the issue description
-            const commentBody = `### Original Request\n\n-----\n\n${issueBody}`;
+            // Create a comment with a header and the issue description
+            const commentBody = `### Original Request\n-------\n\n${issueBody}`;
 
-            // Fetch all comments for the issue
-            const { data: comments } = await octokit.rest.issues.listComments({
+            await github.rest.issues.createComment({
               owner: issue.owner,
               repo: issue.repo,
               issue_number: issue.number,
+              body: commentBody
             });
-
-            // Find a specific comment by its unique header (if it exists)
-            const originalRequestComment = comments.find(comment => comment.body.startsWith('### Original Request'));
-
-            if (originalRequestComment) {
-              // If the comment exists, update it
-              await octokit.rest.issues.updateComment({
-                owner: issue.owner,
-                repo: issue.repo,
-                comment_id: originalRequestComment.id,
-                body: commentBody,
-              });
-            } else {
-              // If the comment does not exist, create it
-              await octokit.rest.issues.createComment({
-                owner: issue.owner,
-                repo: issue.repo,
-                issue_number: issue.number,
-                body: commentBody,
-              });
-            }
