@@ -1,0 +1,25 @@
+name: Copy Issue Description to Comment
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  copy_description_to_comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copy issue description to comment
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issue = context.issue;
+            const issueBody = context.payload.issue.body;
+
+            // Post a comment with the issue description
+            await github.rest.issues.createComment({
+              owner: issue.owner,
+              repo: issue.repo,
+              issue_number: issue.number,
+              body: issueBody
+            });
