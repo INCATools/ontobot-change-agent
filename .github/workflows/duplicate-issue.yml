@@ -1,4 +1,4 @@
-name: Copy Issue Description to Comment
+name: Copy Issue Description to Comment with Header
 
 on:
   issues:
@@ -8,7 +8,7 @@ jobs:
   copy_description_to_comment:
     runs-on: ubuntu-latest
     steps:
-      - name: Copy issue description to comment
+      - name: Copy issue description to comment with header
         uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -16,10 +16,12 @@ jobs:
             const issue = context.issue;
             const issueBody = context.payload.issue.body;
 
-            // Post a comment with the issue description
+            // Create a comment with a header and the issue description
+            const commentBody = `### Original Request\n\n${issueBody}`;
+
             await github.rest.issues.createComment({
               owner: issue.owner,
               repo: issue.repo,
               issue_number: issue.number,
-              body: issueBody
+              body: commentBody
             });
