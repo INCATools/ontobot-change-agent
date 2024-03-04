@@ -1,6 +1,7 @@
 # name: Post Markdown Comment on Pull Request
 
 # on:
+#   workflow_dispatch: 
 #   pull_request:
 #     types: [opened, synchronize]
 
