@@ -7,6 +7,7 @@ import subprocess  # noqa S404
 from os.path import join, splitext
 from pathlib import Path
 from typing import Generator, Optional
+from urllib.parse import quote
 
 import kgcl_schema.grammar.parser as kgcl_parser
 import requests
@@ -254,3 +255,79 @@ def process_issue_via_jar(input: str, commands: list, jar_path: str, output: str
     full_command = cli_command + " ".join(kgcl_commands) + conversion
     # Run the command on the command line
     subprocess.run(full_command, shell=True)  # noqa S602
+
+
+def _update_readme_with_new_content(readme_content, new_content):
+    # Define the start and end markers
+    start_marker = "<!-- IMPLEMENTERS_START -->"
+    end_marker = "<!-- IMPLEMENTERS_END -->"
+
+    # Find the start and end indices of the old content
+    start_index = readme_content.find(start_marker) + len(start_marker)
+    end_index = readme_content.find(end_marker)
+
+    # Check if both markers are present
+    if start_index == -1 or end_index == -1:
+        raise ValueError("The start or end marker is missing in the README.md content.")
+
+    # Replace the old content with the new content
+    updated_readme = (
+        readme_content[:start_index] + "\n" + new_content + "\n" + readme_content[end_index:]
+    )
+
+    return updated_readme
+
+
+def get_ontobot_implementers(token: str = None):
+    """Get the implementers of ontobot-change-agent and update the README.md.
+
+    :param token: GitHub token for authorization, defaults to None.
+    """
+    # Define the search term, filter type, and repository details
+    search_term = "Check if issue body contains 'Hey ontobot'"
+    source = "INCATools/ontobot-change-agent"  # Replace with your GitHub organization/user
+    repo = "repository"  # Replace with your GitHub repository name
+
+    # Construct the search URL
+    url = f"https://api.github.com/search/code?q={quote(search_term)}+in:file"
+
+    # Headers for authorization and accepting the response in v3 format
+    headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
+
+    # Make a GET request to the GitHub API to search for the term
+    response = requests.get(url, headers=headers, timeout=30)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Parse the JSON response
+        search_results = response.json()
+
+        # Start constructing the new content to append to the README
+        new_content = "\nOntology resources that are powered by `ontobot-change-agent`:\n"
+
+        # Iterate over the items in the search results and build the list
+        for item in search_results["items"]:
+            # Extract the repository details
+            repo = item["repository"]
+            full_name = repo["full_name"]  # type: ignore
+            html_url = item["html_url"]
+
+            # Append the result to the new content
+            if full_name != source:
+                new_content += f" - [{full_name}]({html_url})\n"
+
+        # Get current README.md file
+        readme_path = Path(__file__).parents[2] / "README.md"
+        with open(readme_path, "r") as file:
+            current_readme_content = file.read()
+
+        try:
+            updated_readme_content = _update_readme_with_new_content(
+                current_readme_content, new_content
+            )
+            with open(readme_path, "w") as file:
+                file.write(updated_readme_content)
+        except ValueError as e:
+            print(e)
+    else:
+        print(f"Search failed. Status code: {response.status_code}")
