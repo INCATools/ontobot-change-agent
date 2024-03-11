@@ -1,0 +1,46 @@
+name: Update README
+
+on:
+  # Trigger the workflow on push to specific branches, or manually or on a schedule
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    # Schedule the workflow to run every day at midnight (optional)
+    - cron: '0 0 * * *'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x' # Install the latest version of Python 3.x
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install .
+
+    - name: Update README
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: ochange update-readme $GH_TOKEN
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v4
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        commit-message: "Update README with ontobot-change-agent resources"
+        title: "Automated README update by ontobot-change-agent"
+        body: "This is an automated update of the README file with the latest ontology resources."
+        branch: "ontobot-readme-update-${{ github.run_number }}"
+        labels: "automated pr"

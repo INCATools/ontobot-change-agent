@@ -13,6 +13,7 @@ from ontobot_change_agent import __version__
 from ontobot_change_agent.api import (
     get_all_labels_from_repo,
     get_issues,
+    get_ontobot_implementers,
     process_issue_via_jar,
     process_issue_via_oak,
     process_new_term_template,
@@ -270,6 +271,13 @@ def _convert_to_markdown(item: Union[list, dict]) -> str:
         for k, v in item.items():
             md += bullet + k + ":" + str(v) + "</br>"
     return md
+
+
+@main.command("update-readme")
+@input_argument
+def get_implementers(input: str):
+    """Get implementers of ontobot_change_agent."""
+    get_ontobot_implementers(token=input)
 
 
 if __name__ == "__main__":
