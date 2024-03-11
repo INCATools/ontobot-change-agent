@@ -10,6 +10,7 @@ Update ontologies using change language.
 
 [Read the docs](https://hrshdhgd.github.io/ontobot-change-agent/index.html)
 
+<!-- IMPLEMENTERS_START -->
 Ontology resources that are powered by `ontobot-change-agent`:
  - Via [`oaklib`](https://github.com/INCATools/ontology-access-kit)
    - [MONDO](https://github.com/monarch-initiative/mondo/blob/master/.github/workflows/ontobot.yaml)
@@ -19,6 +20,8 @@ Ontology resources that are powered by `ontobot-change-agent`:
  - Via [`kgcl-java`](https://github.com/gouttegd/kgcl-java)
    - [ENVO](https://github.com/hrshdhgd/envo/blob/master/.github/workflows/ontobot.yml)
    - [CL](https://github.com/obophenotype/cell-ontology/blob/master/.github/workflows/ontobot.yml)
+<!-- IMPLEMENTERS_END -->
+
 <!-- ## Installation -->
 
 <!-- Uncomment this section after first release
