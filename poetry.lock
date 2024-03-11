@@ -109,17 +109,6 @@ html5lib = ["html5lib"]
 lxml = ["lxml"]
 
 [[package]]
-name = "cachetools"
-version = "5.3.2"
-description = "Extensible memoizing collections and decorators"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "cachetools-5.3.2-py3-none-any.whl", hash = "sha256:861f35a13a451f94e301ce2bec7cac63e881232ccce7ed67fab9b5df4d3beaa1"},
-    {file = "cachetools-5.3.2.tar.gz", hash = "sha256:086ee420196f7b2ab9ca2db2520aca326318b68fe5ba8bc4d49cca91add450f2"},
-]
-
-[[package]]
 name = "cattrs"
 version = "23.1.2"
 description = "Composable complex class support for attrs and dataclasses."
@@ -427,13 +416,13 @@ test-randomorder = ["pytest-randomly"]
 
 [[package]]
 name = "curies"
-version = "0.6.7"
+version = "0.7.7"
 description = "Idiomatic conversion between URIs and compact URIs (CURIEs)."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "curies-0.6.7-py3-none-any.whl", hash = "sha256:53ade109e4b397006e2c1253680ae33e4fc533504398dacea9149c3ffcb9a4cb"},
-    {file = "curies-0.6.7.tar.gz", hash = "sha256:8e441999d6abcda6530f897167f10ad1530da11f51bba58ae04ad8445bb735b5"},
+    {file = "curies-0.7.7-py3-none-any.whl", hash = "sha256:609de3e8cdf39f410e8f4d9f06eb7df379465860f4fb441bf0e79672430f8e2a"},
+    {file = "curies-0.7.7.tar.gz", hash = "sha256:a8d674029f906fb9c3564eafa0862ce96725932bd801fa751e076265b111cb34"},
 ]
 
 [package.dependencies]
@@ -479,17 +468,6 @@ files = [
 
 [package.dependencies]
 packaging = "*"
-
-[[package]]
-name = "distlib"
-version = "0.3.7"
-description = "Distribution utilities"
-optional = false
-python-versions = "*"
-files = [
-    {file = "distlib-0.3.7-py2.py3-none-any.whl", hash = "sha256:2e24928bc811348f0feb63014e97aaae3037f2cf48712d51ae61df7fd6075057"},
-    {file = "distlib-0.3.7.tar.gz", hash = "sha256:9dafe54b34a028eafd95039d5e5d4851a13734540f1331060d31c9916e7147a8"},
-]
 
 [[package]]
 name = "docutils"
@@ -591,22 +569,6 @@ files = [
     {file = "fastobo-0.12.2-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:e32b5daac09dc28d7383dbbed64a0c33e2ad6704c37dc068dbd07abdb4c4d621"},
     {file = "fastobo-0.12.2.tar.gz", hash = "sha256:2f2779f70ac54874329dddc74cabd86fea88abe56c544c2238076c1d27fe045e"},
 ]
-
-[[package]]
-name = "filelock"
-version = "3.13.1"
-description = "A platform independent file lock."
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "filelock-3.13.1-py3-none-any.whl", hash = "sha256:57dbda9b35157b05fb3e58ee91448612eb674172fab98ee235ccb0b5bee19a1c"},
-    {file = "filelock-3.13.1.tar.gz", hash = "sha256:521f5f56c50f8426f5e03ad3b281b490a87ef15bc6c526f168290f0c7148d44e"},
-]
-
-[package.extras]
-docs = ["furo (>=2023.9.10)", "sphinx (>=7.2.6)", "sphinx-autodoc-typehints (>=1.24)"]
-testing = ["covdefaults (>=2.3)", "coverage (>=7.3.2)", "diff-cover (>=8)", "pytest (>=7.4.3)", "pytest-cov (>=4.1)", "pytest-mock (>=3.12)", "pytest-timeout (>=2.2)"]
-typing = ["typing-extensions (>=4.8)"]
 
 [[package]]
 name = "funowl"
@@ -865,6 +827,24 @@ perf = ["ipython"]
 testing = ["flufl.flake8", "importlib-resources (>=1.3)", "packaging", "pyfakefs", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-mypy (>=0.9.1)", "pytest-perf (>=0.9.2)", "pytest-ruff"]
 
 [[package]]
+name = "importlib-resources"
+version = "6.1.3"
+description = "Read resources from Python packages"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "importlib_resources-6.1.3-py3-none-any.whl", hash = "sha256:4c0269e3580fe2634d364b39b38b961540a7738c02cb984e98add8b4221d793d"},
+    {file = "importlib_resources-6.1.3.tar.gz", hash = "sha256:56fb4525197b78544a3354ea27793952ab93f935bb4bf746b846bb1015020f2b"},
+]
+
+[package.dependencies]
+zipp = {version = ">=3.1.0", markers = "python_version < \"3.10\""}
+
+[package.extras]
+docs = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "sphinx (<7.2.5)", "sphinx (>=3.5)", "sphinx-lint"]
+testing = ["jaraco.collections", "pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-mypy", "pytest-ruff (>=0.2.1)", "zipp (>=3.17)"]
+
+[[package]]
 name = "iniconfig"
 version = "2.0.0"
 description = "brain-dead simple config-ini parsing"
@@ -961,6 +941,20 @@ files = [
 hbreader = "*"
 
 [[package]]
+name = "jsonlines"
+version = "4.0.0"
+description = "Library with helpers for the jsonlines file format"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "jsonlines-4.0.0-py3-none-any.whl", hash = "sha256:185b334ff2ca5a91362993f42e83588a360cf95ce4b71a73548502bda52a7c55"},
+    {file = "jsonlines-4.0.0.tar.gz", hash = "sha256:0c6d2c09117550c089995247f605ae4cf77dd1533041d366351f6f298822ea74"},
+]
+
+[package.dependencies]
+attrs = ">=19.2.0"
+
+[[package]]
 name = "jsonschema"
 version = "4.20.0"
 description = "An implementation of JSON Schema validation for Python"
@@ -1012,20 +1006,20 @@ linkml-runtime = ">=1.1.24"
 
 [[package]]
 name = "kgcl-schema"
-version = "0.6.0"
+version = "0.6.5"
 description = "Schema for the KGCL project."
 optional = false
-python-versions = ">=3.8,<4.0"
+python-versions = ">=3.9,<4.0"
 files = [
-    {file = "kgcl_schema-0.6.0-py3-none-any.whl", hash = "sha256:c212d459cf98f977c537f025331713c5ecfc9e9065e5cc189b3494beb836036f"},
-    {file = "kgcl_schema-0.6.0.tar.gz", hash = "sha256:382c6cf7d4f6136374f1cc53fbd301af64e872c0ef1f775efb2ae4a789e120fb"},
+    {file = "kgcl_schema-0.6.5-py3-none-any.whl", hash = "sha256:5f8cbe938c1d5a203adbade94cb44729abd5f8f7d387d7bcdcb6c17adb906aab"},
+    {file = "kgcl_schema-0.6.5.tar.gz", hash = "sha256:e9d8a87036db0ed694ce8b2047f1deb919086e50581248000ffe351234233e99"},
 ]
 
 [package.dependencies]
-curies = ">=0.6.0,<0.7.0"
+curies = ">=0.6.0"
 lark = ">=1.1.2"
 linkml-runtime = ">=1.1.24"
-prefixmaps = ">=0.1.5,<0.2.0"
+prefixmaps = ">=0.2.0,<0.3.0"
 
 [[package]]
 name = "lark"
@@ -1487,13 +1481,13 @@ files = [
 
 [[package]]
 name = "oaklib"
-version = "0.5.21"
+version = "0.5.26"
 description = "Ontology Access Kit: Python library for common ontology operations over a variety of backends"
 optional = false
 python-versions = ">=3.9,<4.0.0"
 files = [
-    {file = "oaklib-0.5.21-py3-none-any.whl", hash = "sha256:1cf3cea1879bfa5c009d47a10dc6a5798546b84f762dd42fe8ee626f1a042960"},
-    {file = "oaklib-0.5.21.tar.gz", hash = "sha256:6afa4d747005e4077b185fa10e3510a04aab81fae47013ba39731005a07d6d4b"},
+    {file = "oaklib-0.5.26-py3-none-any.whl", hash = "sha256:bd132d7eacaf017420ddcb1d271d2e0f855852f1b10ebf4cafe73c09d70c6790"},
+    {file = "oaklib-0.5.26.tar.gz", hash = "sha256:b20673223368a41a12fb712d94a4768a633e17f544e9233e973fcb0a36f09c75"},
 ]
 
 [package.dependencies]
@@ -1504,9 +1498,9 @@ click = "*"
 curies = ">=0.6.6"
 eutils = ">=0.6.0"
 funowl = ">=0.2.0"
+jsonlines = ">=4.0.0,<5.0.0"
 kgcl-rdflib = "0.5.0"
-kgcl-schema = "0.6.0"
-lark = ">=1.1.2"
+kgcl-schema = ">=0.6.5,<0.7.0"
 linkml-renderer = ">=0.3.0"
 linkml-runtime = ">=1.5.3"
 ndex2 = ">=3.5.0,<4.0.0"
@@ -1520,16 +1514,15 @@ pysolr = ">=3.9.0,<4.0.0"
 pystow = ">=0.5.0"
 ratelimit = ">=2.2.1"
 requests-cache = ">=1.0.1,<2.0.0"
-semsimian = "0.2.1"
+semsimian = ">=0.2.1,<0.3.0"
 semsql = ">=0.3.1"
 SPARQLWrapper = "*"
 SQLAlchemy = ">=1.4.32"
-sssom = ">=0.3.38"
-sssom-schema = ">=0.11.0"
+sssom = ">=0.4.0,<0.5.0"
 
 [package.extras]
 gilda = ["gilda (>=1.0.0)", "urllib3 (<2)"]
-llm = ["llm"]
+llm = ["aiohttp", "llm"]
 
 [[package]]
 name = "ols-client"
@@ -1736,25 +1729,18 @@ requests = ">=2.28.1,<3.0.0"
 
 [[package]]
 name = "prefixmaps"
-version = "0.1.7"
+version = "0.2.2"
 description = "A python library for retrieving semantic prefix maps"
 optional = false
-python-versions = ">=3.8.0,<4.0.0"
+python-versions = ">=3.8,<4.0"
 files = [
-    {file = "prefixmaps-0.1.7-py3-none-any.whl", hash = "sha256:872f5066f5c3b49f71950726e8bc31a246e1e6b020134c373c625852e3e445f3"},
-    {file = "prefixmaps-0.1.7.tar.gz", hash = "sha256:d4388a3af89ba0fb924cfe0e82ba1fc734c7936d2c1dc9feb258d7246a5e54be"},
+    {file = "prefixmaps-0.2.2-py3-none-any.whl", hash = "sha256:4ac2bf3ddb9b27c40c978cf937e9bedb160050d24e8c679b94c9c885e1d73c72"},
+    {file = "prefixmaps-0.2.2.tar.gz", hash = "sha256:a36b1554154ef465271bde82dc91cd671e2d31dc1f50c2fd08ccb0d7d5791c33"},
 ]
 
 [package.dependencies]
-click = ">=8.1.3"
 curies = ">=0.5.3"
-pydantic = ">=1.8.2,<2.0.0"
 pyyaml = ">=5.3.1"
-tox = ">=4.11.3,<5.0.0"
-
-[package.extras]
-docs = ["Sphinx[docs] (>=5.3.0,<6.0.0)", "myst-parser[docs] (>=0.18.1,<0.19.0)", "sphinx-autodoc-typehints[docs] (>=1.19.4,<2.0.0)", "sphinx-click[docs] (>=4.3.0,<5.0.0)", "sphinx-rtd-theme[docs] (>=1.0.0,<2.0.0)"]
-refresh = ["bioregistry[refresh] (>=0.10.0,<0.11.0)", "rdflib[refresh] (>=6.2.0,<7.0.0)", "requests[refresh] (>=2.28.1,<3.0.0)"]
 
 [[package]]
 name = "pronto"
@@ -1961,25 +1947,6 @@ files = [
 diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
-name = "pyproject-api"
-version = "1.6.1"
-description = "API to interact with the python pyproject.toml based projects"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "pyproject_api-1.6.1-py3-none-any.whl", hash = "sha256:4c0116d60476b0786c88692cf4e325a9814965e2469c5998b830bba16b183675"},
-    {file = "pyproject_api-1.6.1.tar.gz", hash = "sha256:1817dc018adc0d1ff9ca1ed8c60e1623d5aaca40814b953af14a9cf9a5cae538"},
-]
-
-[package.dependencies]
-packaging = ">=23.1"
-tomli = {version = ">=2.0.1", markers = "python_version < \"3.11\""}
-
-[package.extras]
-docs = ["furo (>=2023.8.19)", "sphinx (<7.2)", "sphinx-autodoc-typehints (>=1.24)"]
-testing = ["covdefaults (>=2.3)", "pytest (>=7.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)", "setuptools (>=68.1.2)", "wheel (>=0.41.2)"]
-
-[[package]]
 name = "pysolr"
 version = "3.9.0"
 description = "Lightweight Python client for Apache Solr"
@@ -2117,6 +2084,7 @@ files = [
     {file = "PyYAML-6.0.1-cp311-cp311-win_amd64.whl", hash = "sha256:bf07ee2fef7014951eeb99f56f39c9bb4af143d8aa3c21b1677805985307da34"},
     {file = "PyYAML-6.0.1-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:855fb52b0dc35af121542a76b9a84f8d1cd886ea97c84703eaa6d88e37a2ad28"},
     {file = "PyYAML-6.0.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:40df9b996c2b73138957fe23a16a4f0ba614f4c0efce1e9406a184b6d07fa3a9"},
+    {file = "PyYAML-6.0.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a08c6f0fe150303c1c6b71ebcd7213c2858041a7e01975da3a99aed1e7a378ef"},
     {file = "PyYAML-6.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6c22bec3fbe2524cde73d7ada88f6566758a8f7227bfbf93a408a9d86bcc12a0"},
     {file = "PyYAML-6.0.1-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:8d4e9c88387b0f5c7d5f281e55304de64cf7f9c0021a3525bd3b1c542da3b0e4"},
     {file = "PyYAML-6.0.1-cp312-cp312-win32.whl", hash = "sha256:d483d2cdf104e7c9fa60c544d92981f12ad66a457afae824d146093b8c294c54"},
@@ -3027,24 +2995,24 @@ url = ["furl (>=0.4.1)"]
 
 [[package]]
 name = "sssom"
-version = "0.3.41"
+version = "0.4.4"
 description = "Operations on SSSOM mapping tables"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "sssom-0.3.41-py3-none-any.whl", hash = "sha256:04ce1935b3492019b16b7b748c49af366f84bbd3c059982af992d049f46098e7"},
-    {file = "sssom-0.3.41.tar.gz", hash = "sha256:1d09fa9f88153963372811af829ebc1e5aefff935a4e6e12bcb65c94181aa730"},
+    {file = "sssom-0.4.4-py3-none-any.whl", hash = "sha256:bc2a01865ea2cf1805420d82a1cbd7d0e180fc86af77f4e3eedd4fed5a569fc7"},
+    {file = "sssom-0.4.4.tar.gz", hash = "sha256:9395c5614f2d1ff321450100d5448388642dccca6060dd8c03a5664d227da7b0"},
 ]
 
 [package.dependencies]
 click = ">=8.1.6"
-curies = ">=0.5.7"
+curies = ">=0.7.3"
 deprecation = ">=2.1.0,<3.0.0"
-importlib-metadata = ">=6.8.0"
+importlib-resources = ">=6.1.1,<7.0.0"
 linkml-runtime = ">=1.5.5"
-networkx = ">=3.1"
-pandas = ">=2.0.3"
-pansql = ">=0.0.1"
+networkx = {version = ">=3.1", extras = ["networkx"]}
+pandas = ">1.0.3"
+pansql = {version = ">=0.0.1", extras = ["pansql"]}
 pyyaml = ">=6.0.1,<7.0.0"
 rdflib = ">=6.0.0"
 scipy = {version = "*", extras = ["scipy"]}
@@ -3077,33 +3045,6 @@ files = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
     {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
 ]
-
-[[package]]
-name = "tox"
-version = "4.11.3"
-description = "tox is a generic virtualenv management and test command line tool"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "tox-4.11.3-py3-none-any.whl", hash = "sha256:599af5e5bb0cad0148ac1558a0b66f8fff219ef88363483b8d92a81e4246f28f"},
-    {file = "tox-4.11.3.tar.gz", hash = "sha256:5039f68276461fae6a9452a3b2c7295798f00a0e92edcd9a3b78ba1a73577951"},
-]
-
-[package.dependencies]
-cachetools = ">=5.3.1"
-chardet = ">=5.2"
-colorama = ">=0.4.6"
-filelock = ">=3.12.3"
-packaging = ">=23.1"
-platformdirs = ">=3.10"
-pluggy = ">=1.3"
-pyproject-api = ">=1.6.1"
-tomli = {version = ">=2.0.1", markers = "python_version < \"3.11\""}
-virtualenv = ">=20.24.3"
-
-[package.extras]
-docs = ["furo (>=2023.8.19)", "sphinx (>=7.2.4)", "sphinx-argparse-cli (>=1.11.1)", "sphinx-autodoc-typehints (>=1.24)", "sphinx-copybutton (>=0.5.2)", "sphinx-inline-tabs (>=2023.4.21)", "sphinxcontrib-towncrier (>=0.2.1a0)", "towncrier (>=23.6)"]
-testing = ["build[virtualenv] (>=0.10)", "covdefaults (>=2.3)", "detect-test-pollution (>=1.1.1)", "devpi-process (>=1)", "diff-cover (>=7.7)", "distlib (>=0.3.7)", "flaky (>=3.7)", "hatch-vcs (>=0.3)", "hatchling (>=1.18)", "psutil (>=5.9.5)", "pytest (>=7.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)", "pytest-xdist (>=3.3.1)", "re-assert (>=1.1)", "time-machine (>=2.12)", "wheel (>=0.41.2)"]
 
 [[package]]
 name = "tqdm"
@@ -3198,26 +3139,6 @@ sast = ["bandit[toml] (>=1.7.5)"]
 testing = ["pytest (>=7.4.0)"]
 tooling = ["black (>=23.7.0)", "pyright (>=1.1.325)", "ruff (>=0.0.287)"]
 tooling-extras = ["pyaml (>=23.7.0)", "pypandoc-binary (>=1.11)", "pytest (>=7.4.0)"]
-
-[[package]]
-name = "virtualenv"
-version = "20.24.6"
-description = "Virtual Python Environment builder"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "virtualenv-20.24.6-py3-none-any.whl", hash = "sha256:520d056652454c5098a00c0f073611ccbea4c79089331f60bf9d7ba247bb7381"},
-    {file = "virtualenv-20.24.6.tar.gz", hash = "sha256:02ece4f56fbf939dbbc33c0715159951d6bf14aaf5457b092e4548e1382455af"},
-]
-
-[package.dependencies]
-distlib = ">=0.3.7,<1"
-filelock = ">=3.12.2,<4"
-platformdirs = ">=3.9.1,<4"
-
-[package.extras]
-docs = ["furo (>=2023.7.26)", "proselint (>=0.13)", "sphinx (>=7.1.2)", "sphinx-argparse (>=0.4)", "sphinxcontrib-towncrier (>=0.2.1a0)", "towncrier (>=23.6)"]
-test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7)", "packaging (>=23.1)", "pytest (>=7.4)", "pytest-env (>=0.8.2)", "pytest-freezer (>=0.4.8)", "pytest-mock (>=3.11.1)", "pytest-randomly (>=3.12)", "pytest-timeout (>=2.1)", "setuptools (>=68)", "time-machine (>=2.10)"]
 
 [[package]]
 name = "watchdog"
