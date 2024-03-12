@@ -323,7 +323,7 @@ def get_ontobot_implementers(token: str = None):
         if os.getenv('GITHUB_ACTIONS') == 'true':
             # Use GITHUB_WORKSPACE environment variable to get the working directory
             github_workspace = Path(os.getenv('GITHUB_WORKSPACE'))
-            readme_path = github_workspace / "ontobot-change-agent/README.md"
+            readme_path = github_workspace / "README.md"
         else:
             # Fallback to a local path (e.g., relative to the script) if not on GitHub Actions
             readme_path = Path(__file__).parents[2] / "README.md"
