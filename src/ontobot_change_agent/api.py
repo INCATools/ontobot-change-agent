@@ -318,11 +318,11 @@ def get_ontobot_implementers(token: str = None):
                 new_content += f" - [{full_name}]({html_url})\n"
 
         # Get current README.md file
-        
+
         # Check if the script is running in a GitHub Actions environment
-        if os.getenv('GITHUB_ACTIONS') == 'true':
+        if os.getenv("GITHUB_ACTIONS") == "true":
             # Use GITHUB_WORKSPACE environment variable to get the working directory
-            github_workspace = Path(os.getenv('GITHUB_WORKSPACE'))
+            github_workspace = Path(os.getenv("GITHUB_WORKSPACE"))
             readme_path = github_workspace / "README.md"
         else:
             # Fallback to a local path (e.g., relative to the script) if not on GitHub Actions

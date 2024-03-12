@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
   schedule:
     # Schedule the workflow to run every day at midnight (optional)
-    - cron: '0 0 * * *'
+    - cron: '0 0 1 * *'
 
 jobs:
   update-readme:
