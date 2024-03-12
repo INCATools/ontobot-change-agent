@@ -2,9 +2,9 @@ name: Update README
 
 on:
   # Trigger the workflow on push to specific branches, or manually or on a schedule
-  push:
-    branches:
-      - main
+#   push:
+#     branches:
+#       - main
   workflow_dispatch:
   schedule:
     # Schedule the workflow to run every day at midnight (optional)
@@ -41,7 +41,7 @@ jobs:
         token: ${{ secrets.GH_TOKEN }}
         commit-message: "Update README with ontobot-change-agent resources"
         title: "Automated README update by ontobot-change-agent"
-        body: "Updated list ontology resources powered by `ontobot-change-agent`."
+        body: "Updated list of ontology resources powered by `ontobot-change-agent`."
         branch: "ontobot-readme-update-${{ github.run_number }}"
         labels: "automated pr"
         reviewers: "hrshdhgd"
