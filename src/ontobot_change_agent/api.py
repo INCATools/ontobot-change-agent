@@ -306,16 +306,28 @@ def get_ontobot_implementers(token: str = None):
         # Start constructing the new content to append to the README
         new_content = "\nOntology resources that are powered by `ontobot-change-agent`:\n"
 
-        # Iterate over the items in the search results and build the list
+        # Initialize an empty list to hold the repository details
+        repo_details = []
+
         for item in search_results["items"]:
             # Extract the repository details
             repo = item["repository"]
             full_name = repo["full_name"]  # type: ignore
-            html_url = item["html_url"]
+            html_url = repo["html_url"]
 
-            # Append the result to the new content
+            # Add the details to the list if the repository is not the source
             if full_name != source:
-                new_content += f" - [{full_name}]({html_url})\n"
+                repo_details.append((full_name, html_url))
+
+        # Sort the list of tuples by the repository full name
+        sorted_repo_details = sorted(repo_details, key=lambda x: x[0])
+
+        # Initialize new_content as an empty string
+        new_content = ""
+
+        # Iterate over the sorted list and append each item to new_content
+        for full_name, html_url in sorted_repo_details:
+            new_content += f" - [{full_name}]({html_url})\n"
 
         # Get current README.md file
 
