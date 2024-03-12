@@ -313,7 +313,7 @@ def get_ontobot_implementers(token: str = None):
             # Extract the repository details
             repo = item["repository"]
             full_name = repo["full_name"]  # type: ignore
-            html_url = repo["html_url"]
+            html_url = repo["html_url"]  # type: ignore
 
             # Add the details to the list if the repository is not the source
             if full_name != source:
@@ -321,7 +321,7 @@ def get_ontobot_implementers(token: str = None):
 
         # Sort the list of tuples by the repository full name
         sorted_repo_details = sorted(repo_details, key=lambda x: x[0])
-        
+
         # Iterate over the sorted list and append each item to new_content
         for full_name, html_url in sorted_repo_details:
             new_content += f" - [{full_name}]({html_url})\n"
@@ -331,7 +331,7 @@ def get_ontobot_implementers(token: str = None):
         # Check if the script is running in a GitHub Actions environment
         if os.getenv("GITHUB_ACTIONS") == "true":
             # Use GITHUB_WORKSPACE environment variable to get the working directory
-            github_workspace = Path(os.getenv("GITHUB_WORKSPACE"))
+            github_workspace = Path(os.getenv("GITHUB_WORKSPACE"))  # type: ignore
             readme_path = github_workspace / "README.md"
         else:
             # Fallback to a local path (e.g., relative to the script) if not on GitHub Actions
