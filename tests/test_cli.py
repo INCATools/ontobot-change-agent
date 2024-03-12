@@ -17,7 +17,7 @@ class TestVersion(unittest.TestCase):
         """Set up variables."""
         runner = CliRunner(mix_stderr=False)
         self.runner = runner
-        self.repo_name = "hrshdhgd/ontobot-change-agent"
+        self.repo_name = "INCATools/ontobot-change-agent"
         self.resource = str(ONTOLOGY_RESOURCE)
         self.output = TESTS / "resources/tmp/test.obo"
 

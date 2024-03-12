@@ -28,7 +28,7 @@ TESTS = HOME_DIR / "tests"
 ONTOLOGY_RESOURCE = TESTS / "resources/fbbt.obo"
 # RESOURCE_DICT = {
 #     "hrshdhgd/mondo": "src/ontology/mondo-edit.obo",
-#     "hrshdhgd/ontobot-change-agent": ONTOLOGY_RESOURCE,
+#     "INCATools/ontobot-change-agent": ONTOLOGY_RESOURCE,
 # }
 
 # Token.txt unique to every user.

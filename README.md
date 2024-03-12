@@ -1,6 +1,6 @@
 <!--
 <p align="center">
-  <img src="https://github.com/hrshdhgd/ontobot-change-agent/raw/main/docs/source/logo.png" height="150">
+  <img src="https://github.com/INCATools/ontobot-change-agent/raw/main/docs/source/logo.png" height="150">
 </p>
 -->
 
@@ -8,7 +8,7 @@ Update ontologies using change language.
 
 ## Getting Started
 
-[Read the docs](https://hrshdhgd.github.io/ontobot-change-agent/index.html)
+[Read the docs](https://INCATools.github.io/ontobot-change-agent/index.html)
 
 <!-- IMPLEMENTERS_START -->
 

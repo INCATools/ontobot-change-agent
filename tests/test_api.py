@@ -14,7 +14,7 @@ class TestAPI(unittest.TestCase):
 
     def setUp(self) -> None:
         """Set up variables."""
-        self.repo_name = "hrshdhgd/ontobot-change-agent"
+        self.repo_name = "INCATools/ontobot-change-agent"
         self.label = "test"
         self.issue_title = "Test issue"
 
@@ -56,4 +56,4 @@ class TestAPI(unittest.TestCase):
         label_dict = {}
         label_dict = get_all_labels_from_repo(self.repo_name)
 
-        self.assertEqual(len(label_dict), 12)
+        self.assertEqual(len(label_dict), 13)
