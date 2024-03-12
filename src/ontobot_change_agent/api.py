@@ -2,6 +2,7 @@
 """API section."""
 
 import json
+import os
 import re
 import subprocess  # noqa S404
 from os.path import join, splitext
@@ -317,7 +318,15 @@ def get_ontobot_implementers(token: str = None):
                 new_content += f" - [{full_name}]({html_url})\n"
 
         # Get current README.md file
-        readme_path = Path(__file__).parents[2] / "README.md"
+        
+        # Check if the script is running in a GitHub Actions environment
+        if os.getenv('GITHUB_ACTIONS') == 'true':
+            # Use GITHUB_WORKSPACE environment variable to get the working directory
+            github_workspace = Path(os.getenv('GITHUB_WORKSPACE'))
+            readme_path = github_workspace / "ontobot-change-agent/README.md"
+        else:
+            # Fallback to a local path (e.g., relative to the script) if not on GitHub Actions
+            readme_path = Path(__file__).parents[2] / "README.md"
         with open(readme_path, "r") as file:
             current_readme_content = file.read()
 
