@@ -321,10 +321,7 @@ def get_ontobot_implementers(token: str = None):
 
         # Sort the list of tuples by the repository full name
         sorted_repo_details = sorted(repo_details, key=lambda x: x[0])
-
-        # Initialize new_content as an empty string
-        new_content = ""
-
+        
         # Iterate over the sorted list and append each item to new_content
         for full_name, html_url in sorted_repo_details:
             new_content += f" - [{full_name}]({html_url})\n"
