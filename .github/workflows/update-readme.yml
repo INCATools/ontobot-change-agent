@@ -41,6 +41,7 @@ jobs:
         token: ${{ secrets.GH_TOKEN }}
         commit-message: "Update README with ontobot-change-agent resources"
         title: "Automated README update by ontobot-change-agent"
-        body: "This is an automated update of the README file with the latest ontology resources."
+        body: "Updated list ontology resources powered by `ontobot-change-agent`."
         branch: "ontobot-readme-update-${{ github.run_number }}"
         labels: "automated pr"
+        reviewers: "hrshdhgd"
