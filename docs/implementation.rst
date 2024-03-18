@@ -81,9 +81,18 @@ the same pull request is updated.
 Trigger QC Checks
 """""""""""""""""
 
-If the pull request should trigger the GitHub workflow for the ontology repository to run QC checks, follow the following steps:
+To ensure that a pull request triggers the GitHub workflow for running Quality Control (QC) checks on the ontology repository, you must follow these steps:
 
-1. Go to the `Settings` tab => `Secrets and variables` => `Actions` and add a new repository secret with the name `GH_TOKEN` and the value of the personal access token.
-   For more information on personal access tokens, see `here <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#personal-access-tokens-classic>`_.
+1. Navigate to the **Settings** tab of your repository.
+2. Under the **Secrets and variables** section, select **Actions**.
+3. Click on **New repository secret**.
+4. Name the new secret `GH_TOKEN`.
+5. Set the value to your personal access token.
 
-2. The ``token: ${{ secrets.GH_TOKEN }}`` in the workflow file should be uncommented.
+   .. note::
+      Personal access tokens are used to grant limited access to your GitHub account 
+      with an expiry time. For detailed instructions on creating a personal access token, 
+      visit the GitHub documentation `here <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#personal-access-tokens-classic>`_.
+
+6. In your GitHub Actions workflow file, locate the line containing `token: ${{ secrets.GH_TOKEN }}`.
+7. Ensure this line is active (not commented out) to use the token during the workflow execution.
