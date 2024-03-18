@@ -78,11 +78,12 @@ which should reflect the expected change in the ontology resource based on the c
 The title for the pull request generated corresponds to the issue that triggered its generation. If the issue is edited, 
 the same pull request is updated.
 
-Trigger QC checks
+Trigger QC Checks
 """""""""""""""""
-If the pull request should trigger the GitHub workflow for the ontology repository to run QC checks,
-follow the following steps:
-1. Go to the `Settings` tab => `Secrets and variables` => `Actions` and
-add a new repository secret with the name `GH_TOKEN` and the value of the personal access token.
-For more information on personal access tokens, see `here <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#personal-access-tokens-classic>`_.
-2. The `token: ${{ secrets.GH_TOKEN }}` in the workflow file should be uncommented.
+
+If the pull request should trigger the GitHub workflow for the ontology repository to run QC checks, follow the following steps:
+
+1. Go to the `Settings` tab => `Secrets and variables` => `Actions` and add a new repository secret with the name `GH_TOKEN` and the value of the personal access token.
+   For more information on personal access tokens, see `here <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#personal-access-tokens-classic>`_.
+
+2. The ``token: ${{ secrets.GH_TOKEN }}`` in the workflow file should be uncommented.
