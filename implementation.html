@@ -168,11 +168,22 @@ the same pull request is updated.</p>
 </section>
 <section id="trigger-qc-checks">
 <h3>Trigger QC Checks<a class="headerlink" href="#trigger-qc-checks" title="Permalink to this heading"></a></h3>
-<p>If the pull request should trigger the GitHub workflow for the ontology repository to run QC checks, follow the following steps:</p>
-<ol class="arabic simple">
-<li><p>Go to the <cite>Settings</cite> tab =&gt; <cite>Secrets and variables</cite> =&gt; <cite>Actions</cite> and add a new repository secret with the name <cite>GH_TOKEN</cite> and the value of the personal access token.
-For more information on personal access tokens, see <a class="reference external" href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#personal-access-tokens-classic">here</a>.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">token:</span> <span class="pre">${{</span> <span class="pre">secrets.GH_TOKEN</span> <span class="pre">}}</span></code> in the workflow file should be uncommented.</p></li>
+<p>To ensure that a pull request triggers the GitHub workflow for running Quality Control (QC) checks on the ontology repository, you must follow these steps:</p>
+<ol class="arabic">
+<li><p>Navigate to the <strong>Settings</strong> tab of your repository.</p></li>
+<li><p>Under the <strong>Secrets and variables</strong> section, select <strong>Actions</strong>.</p></li>
+<li><p>Click on <strong>New repository secret</strong>.</p></li>
+<li><p>Name the new secret <cite>GH_TOKEN</cite>.</p></li>
+<li><p>Set the value to your personal access token.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Personal access tokens are used to grant limited access to your GitHub account
+with an expiry time. For detailed instructions on creating a personal access token,
+visit the GitHub documentation <a class="reference external" href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#personal-access-tokens-classic">here</a>.</p>
+</div>
+</li>
+<li><p>In your GitHub Actions workflow file, locate the line containing <cite>token: ${{ secrets.GH_TOKEN }}</cite>.</p></li>
+<li><p>Ensure this line is active (not commented out) to use the token during the workflow execution.</p></li>
 </ol>
 </section>
 </section>
