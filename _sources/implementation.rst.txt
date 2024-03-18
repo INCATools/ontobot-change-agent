@@ -81,7 +81,8 @@ the same pull request is updated.
 Trigger QC Checks
 """""""""""""""""
 
-To ensure that a pull request triggers the GitHub workflow for running Quality Control (QC) checks on the ontology repository, you must follow these steps:
+To ensure that an ontobot generated pull request triggers the GitHub workflow 
+for running Quality Control (QC) checks on the ontology repository, you must follow these steps:
 
 1. Navigate to the **Settings** tab of your repository.
 2. Under the **Secrets and variables** section, select **Actions**.
