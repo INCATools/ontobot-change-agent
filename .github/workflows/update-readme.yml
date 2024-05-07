@@ -23,13 +23,13 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10' # Install the latest version of Python 3.x
+        python-version: '3.x' # Install the latest version of Python 3.x
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pkg_resources 
         pip install .
+        pip uninstall -y pysolr
 
     - name: Update README
       env:
