@@ -29,7 +29,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install .
-        pip uninstall -y pysolr
 
     - name: Update README
       env:
