@@ -4,7 +4,7 @@
 
 import sys
 
-# from .api import *  # noqa
+from .api import *  # noqa
 
 if sys.version_info >= (3, 8):
     import importlib.metadata
