@@ -8,6 +8,7 @@ Table of Contents
    :caption: Getting Started
    :name: start
 
+   intro
    installation
    first_run
    implementation
