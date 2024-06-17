@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; ontobot-change-agent 0.0.0 documentation</title>
+  <title>Introduction &mdash; ontobot-change-agent 0.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -44,7 +44,8 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
-<ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="first_run.html">First Run</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementation.html">Implementation</a></li>
@@ -67,7 +68,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="breadcrumb-item active">Introduction</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/intro.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -77,7 +78,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p>Ontobot is a GitHub-based bot for making ontology change requests in KGCL, the Knowledge Graph Change Language.
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h1>
+<p>Ontobot is a GitHub-based bot for making ontology change requests in KGCL, the Knowledge Graph Change Language.
 It can be installed in a GitHub ontology repository, where it then watches for issues that include a specific text string: “Hey ontobot!, apply:”
 When it sees that string, Ontobot scans the issue for a bulleted list of ontology change requests, written in the KGCL syntax.
 Ontobot reads the list of one or more KGCL commands, and automatically generates a GitHub Pull Request that will make the requested change(s) in the ontology source file.</p>
@@ -88,6 +91,7 @@ The Ontobot manual provides YAML templates, which can be downloaded, customized,
 using a syntax as close as possible to natural English language.
 As an example, the KGCL command to change the name of the ontology term with the ID ENVO:01000575 from ‘wax’ to ‘oil’ is “rename ENVO:01000575 from ‘wax’ to ‘oil’”.</p>
 <p>The grammar defining KGCL can be found at <a class="reference external" href="https://github.com/INCATools/kgcl/blob/main/src/kgcl_schema/grammar/kgcl.lark">https://github.com/INCATools/kgcl/blob/main/src/kgcl_schema/grammar/kgcl.lark</a>.</p>
+</section>
 
 
            </div>
