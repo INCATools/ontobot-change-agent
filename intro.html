@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; ontobot-change-agent 0.0.0 documentation</title>
+  <title>&lt;no title&gt; &mdash; ontobot-change-agent 0.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="First Run" href="first_run.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="intro.html" /> 
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Documentation" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,8 +44,8 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="first_run.html">First Run</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementation.html">Implementation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a></li>
@@ -67,9 +67,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Installation</li>
+      <li class="breadcrumb-item active">&lt;no title&gt;</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/intro.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -77,31 +77,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
-<p>The most recent release can be installed from
-<a class="reference external" href="https://pypi.org/project/ontobot_change_agent">PyPI</a> with:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>ontobot_change_agent
-</pre></div>
-</div>
-<p>The most recent code and data can be installed directly from GitHub with:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/INCATools/ontobot-change-agent.git
-</pre></div>
-</div>
-<p>To install in development mode, use the following:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>git+https://github.com/INCATools/ontobot-change-agent.git
-$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>ontobot-change-agent
-$<span class="w"> </span>poetry<span class="w"> </span>install
-</pre></div>
-</div>
-</section>
+  <p>Ontobot is a GitHub-based bot for making ontology change requests in KGCL, the Knowledge Graph Change Language.
+It can be installed in a GitHub ontology repository, where it then watches for issues that include a specific text string: “Hey ontobot!, apply:”
+When it sees that string, Ontobot scans the issue for a bulleted list of ontology change requests, written in the KGCL syntax.
+Ontobot reads the list of one or more KGCL commands, and automatically generates a GitHub Pull Request that will make the requested change(s) in the ontology source file.</p>
+<p>Ontobo workflows are defined using YAML files, and placed in a directory called ‘.github/workflows’ within the repository.
+The Ontobot manual provides YAML templates, which can be downloaded, customized, and added to the GitHub repository where your ontology source file is maintained:
+.github/workflows/ontobot.yaml.</p>
+<p>KGCL can express common ontology editing operations (such as modifying a label or a definition, obsoleting a term, moving a term under another parent term, etc.)
+using a syntax as close as possible to natural English language.
+As an example, the KGCL command to change the name of the ontology term with the ID ENVO:01000575 from ‘wax’ to ‘oil’ is “rename ENVO:01000575 from ‘wax’ to ‘oil’”.</p>
+<p>The grammar defining KGCL can be found at <a class="reference external" href="https://github.com/INCATools/kgcl/blob/main/src/kgcl_schema/grammar/kgcl.lark">https://github.com/INCATools/kgcl/blob/main/src/kgcl_schema/grammar/kgcl.lark</a>.</p>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="intro.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="first_run.html" class="btn btn-neutral float-right" title="First Run" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
