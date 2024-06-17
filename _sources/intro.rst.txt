@@ -14,4 +14,4 @@ KGCL can express common ontology editing operations (such as modifying a label o
 using a syntax as close as possible to natural English language.
 As an example, the KGCL command to change the name of the ontology term with the ID ENVO:01000575 from ‘wax’ to ‘oil’ is “rename ENVO:01000575 from ‘wax’ to ‘oil’”.
 
-The grammar defining KGCL can be found at https://github.com/INCATools/kgcl/blob/main/src/kgcl_schema/grammar/kgcl.lark.
+The grammar defining KGCL can be found `here <https://github.com/INCATools/kgcl/blob/main/src/kgcl_schema/grammar/kgcl.lark>`_.`
