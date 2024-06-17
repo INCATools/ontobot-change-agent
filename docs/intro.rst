@@ -1,3 +1,6 @@
+Introduction
+============
+
 Ontobot is a GitHub-based bot for making ontology change requests in KGCL, the Knowledge Graph Change Language. 
 It can be installed in a GitHub ontology repository, where it then watches for issues that include a specific text string: “Hey ontobot!, apply:”
 When it sees that string, Ontobot scans the issue for a bulleted list of ontology change requests, written in the KGCL syntax.
