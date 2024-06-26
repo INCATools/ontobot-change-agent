@@ -1796,20 +1796,22 @@ typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 
 [[package]]
 name = "pygithub"
-version = "1.59.1"
+version = "2.3.0"
 description = "Use the full Github API v3"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "PyGithub-1.59.1-py3-none-any.whl", hash = "sha256:3d87a822e6c868142f0c2c4bf16cce4696b5a7a4d142a7bd160e1bdf75bc54a9"},
-    {file = "PyGithub-1.59.1.tar.gz", hash = "sha256:c44e3a121c15bf9d3a5cc98d94c9a047a5132a9b01d22264627f58ade9ddc217"},
+    {file = "PyGithub-2.3.0-py3-none-any.whl", hash = "sha256:65b499728be3ce7b0cd2cd760da3b32f0f4d7bc55e5e0677617f90f6564e793e"},
+    {file = "PyGithub-2.3.0.tar.gz", hash = "sha256:0148d7347a1cdeed99af905077010aef81a4dad988b0ba51d4108bf66b443f7e"},
 ]
 
 [package.dependencies]
-deprecated = "*"
+Deprecated = "*"
 pyjwt = {version = ">=2.4.0", extras = ["crypto"]}
 pynacl = ">=1.4.0"
 requests = ">=2.14.0"
+typing-extensions = ">=4.0.0"
+urllib3 = ">=1.26.0"
 
 [[package]]
 name = "pygments"
@@ -2773,13 +2775,13 @@ url = ["furl (>=0.4.1)"]
 
 [[package]]
 name = "sssom"
-version = "0.4.10"
+version = "0.4.11"
 description = "Operations on SSSOM mapping tables"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "sssom-0.4.10-py3-none-any.whl", hash = "sha256:018768edf500fe626af868b5df874e823063002e5faa5881bc5e8d681943989f"},
-    {file = "sssom-0.4.10.tar.gz", hash = "sha256:e3df5c825c24f3a211198fa427bf0f1d919428c2e43b94f4dd025901695cb17b"},
+    {file = "sssom-0.4.11-py3-none-any.whl", hash = "sha256:4642f126a6ec8a4201bef77107a5ac76ed69b8f624014b5b77e56745969c0f76"},
+    {file = "sssom-0.4.11.tar.gz", hash = "sha256:5043390657a396f9e5d064e5788990a52ec19c395c6380514abfe01b85a5eebc"},
 ]
 
 [package.dependencies]
@@ -3022,4 +3024,4 @@ docs = []
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<4.0.0"
-content-hash = "7a515423468fadce39430ef34ca5f533eaa5a0b4e1012c7066eb2553b61ddf60"
+content-hash = "73f0ab9c8407c27058af06b6f9bedbb90bd00a230485c13aad90bebb017aee49"
