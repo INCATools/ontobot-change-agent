@@ -12,6 +12,7 @@ readme = "README.md"
 python = ">=3.9,<4.0.0"
 oaklib = ">=0.5.0"
 PyGithub = "^1.55"
+setuptools = "^70.1.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.1.3"
