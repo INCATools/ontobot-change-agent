@@ -12,6 +12,7 @@ import click
 from ontobot_change_agent import __version__
 from ontobot_change_agent.api import (
     get_all_labels_from_repo,
+    get_comment_from_repo,
     get_issues,
     get_ontobot_implementers,
     process_issue_via_jar,
@@ -71,6 +72,13 @@ issue_number_option = click.option(
     "--number",
     type=int,
     help="Filter based on issue number.",
+)
+
+comment_id_option = click.option(
+    "-c",
+    "--comment-id",
+    type=int,
+    help="Comment id of KGCL command presence.",
 )
 
 label_option = click.option(
@@ -159,6 +167,7 @@ def get_labels(repo: str, token: str):
 @prefix_option
 @label_option
 @issue_number_option
+@comment_id_option
 @state_option
 @jar_path_option
 @output_option
@@ -169,6 +178,7 @@ def process_issue(
     token: str,
     label: str,
     number: int,
+    comment_id: int,
     state: str,
     jar_path: str,
     output: str,
@@ -182,84 +192,83 @@ def process_issue(
     if input.endswith(OWL_EXTENSION) and jar_path is None:
         click.UsageError("If the resource is an OWL file, kgcl-java jar filepath must be provided.")
 
-    for issue in get_issues(
-        repository_name=repo, token=token, label=label, number=number, state=state
-    ):
-        # Make sure ontobot_change_agent needs to be triggered or no.
-        if issue and issue[BODY]:
-            KGCL_COMMANDS = []
-            if NEW_TERM_LABEL in issue["labels"]:
-                formatted_body = "The following input was provided: </br> "
-                KGCL_COMMANDS, body_as_dict, reason = process_new_term_template(
-                    issue["body"], prefix
-                )
-                if reason is None:
-                    formatted_body += _convert_to_markdown(body_as_dict)
-                    formatted_body += "</br> The following commands were executed: </br> "
+    if comment_id:
+        formatted_body = "The following commands were executed: </br> "
+        comment_body = get_comment_from_repo(repository_name=repo, token=token, comment_id=comment_id)
+        KGCL_COMMANDS = _get_kgcl_commands(comment_body)
+        issue = next(get_issues(repository_name=repo, token=token, label=label, number=number, state=state))
+    
+    else:
+        for issue in get_issues(
+            repository_name=repo, token=token, label=label, number=number, state=state
+        ):
+            # Make sure ontobot_change_agent needs to be triggered or no.
+            if issue and issue[BODY]:
+
+                KGCL_COMMANDS = []
+                if NEW_TERM_LABEL in issue["labels"]:
+                    formatted_body = "The following input was provided: </br> "
+                    KGCL_COMMANDS, body_as_dict, reason = process_new_term_template(
+                        issue["body"], prefix
+                    )
+                    if reason is None:
+                        formatted_body += _convert_to_markdown(body_as_dict)
+                        formatted_body += "</br> The following commands were executed: </br> "
+                    else:
+                        click.echo(
+                            f"""{issue[TITLE]} does not need ontobot's attention since {reason}""",  # noqa
+                        )
+                        break
+
+                elif re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY].lower(), re.DOTALL):
+                    formatted_body = "The following commands were executed: </br> "
+                    KGCL_COMMANDS = _get_kgcl_commands(issue[BODY])
                 else:
-                    click.echo(
-                        f"""{issue[TITLE]} does not need ontobot's attention since {reason}""",  # noqa
-                    )
-                    break
-
-            elif re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY].lower(), re.DOTALL):
-                formatted_body = "The following commands were executed: </br> "
-                bullet_starters = ["* ", "- "]
-                for bullet in bullet_starters:
-                    KGCL_COMMANDS.extend(
-                        [
-                            str(item).replace(bullet, "").replace('"', "'")
-                            for item in issue[BODY].splitlines()
-                            if item.lstrip().startswith(bullet)
-                        ]
-                    )
-                KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
-
+                    click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
             else:
-                click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
-        else:
-            click.echo(
-                f"""Issue number:{number} is either closed, does not exist or has no body."""
-            )
-            break
-
-        new_output = output if output else input
-
-        if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503
-            if input.endswith("owl"):
-                process_issue_via_jar(
-                    input=input,
-                    commands=KGCL_COMMANDS,
-                    jar_path=jar_path,
-                    output=new_output,
+                click.echo(
+                    f"""Issue number:{number} is either closed, does not exist or has no body."""
                 )
-            elif input.endswith("obo"):
-                process_issue_via_oak(
-                    input=input,
-                    commands=KGCL_COMMANDS,
-                    output=new_output,
-                )
-            else:
-                logger.error(f"{[input]}=> resource can only be OWL or OBO extension files.")
                 break
 
-            formatted_body += _convert_to_markdown(KGCL_COMMANDS)
-            formatted_body += "</br>Fixes #" + str(issue["number"])
-            pr_title = f"Applying changes for: {issue['title']}"
+    new_output = output if output else input
 
-            if os.getenv("GITHUB_ENV"):
-                with open(os.getenv("GITHUB_ENV"), "a") as env:  # type: ignore
-                    print(f"PR_BODY={formatted_body}", file=env)
-                    print(f"PR_TITLE={pr_title}", file=env)
-                    print(f"ISSUE_CREATOR={issue[USER]}", file=env)
-
-            click.echo(
-                f"""
-                PR_BODY={formatted_body}
-                PR_TITLE={pr_title}
-                ISSUE_CREATOR={issue[USER]}
-                """
+    # if issue["number"] == number and len(KGCL_COMMANDS) > 0:  # noqa W503
+    if len(KGCL_COMMANDS) > 0:  # noqa W503
+        if input.endswith("owl"):
+            process_issue_via_jar(
+                input=input,
+                commands=KGCL_COMMANDS,
+                jar_path=jar_path,
+                output=new_output,
             )
+        elif input.endswith("obo"):
+            process_issue_via_oak(
+                input=input,
+                commands=KGCL_COMMANDS,
+                output=new_output,
+            )
+        else:
+            logger.error(f"{[input]}=> resource can only be OWL or OBO extension files.")
+            # break
+
+        formatted_body += _convert_to_markdown(KGCL_COMMANDS)
+        formatted_body += "</br>Fixes #" + str(issue["number"])
+        pr_title = f"Applying changes for: {issue['title']}"
+
+        if os.getenv("GITHUB_ENV"):
+            with open(os.getenv("GITHUB_ENV"), "a") as env:  # type: ignore
+                print(f"PR_BODY={formatted_body}", file=env)
+                print(f"PR_TITLE={pr_title}", file=env)
+                print(f"ISSUE_CREATOR={issue[USER]}", file=env)
+
+        click.echo(
+            f"""
+            PR_BODY={formatted_body}
+            PR_TITLE={pr_title}
+            ISSUE_CREATOR={issue[USER]}
+            """
+        )
 
 
 def _convert_to_markdown(item: Union[list, dict]) -> str:
@@ -273,6 +282,19 @@ def _convert_to_markdown(item: Union[list, dict]) -> str:
             md += bullet + k + ":" + str(v) + "</br>"
     return md
 
+def _get_kgcl_commands(issue_body: str) -> list:
+    KGCL_COMMANDS = []
+    bullet_starters = ["* ", "- "]
+    for bullet in bullet_starters:
+        KGCL_COMMANDS.extend(
+            [
+                str(item).replace(bullet, "").replace('"', "'")
+                for item in issue_body.splitlines()
+                if item.lstrip().startswith(bullet)
+            ]
+        )
+    KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
+    return KGCL_COMMANDS
 
 @main.command("update-readme")
 @input_argument

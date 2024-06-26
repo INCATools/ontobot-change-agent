@@ -3,15 +3,18 @@
 # on:
 #   workflow_dispatch:
 #   issues:
-#     types: [ opened, edited ]
+#     types: [opened, edited]
+#   issue_comment:
+#     types: [created, edited]
 
 # jobs:
 #   check:
 #     runs-on: ubuntu-latest
 #     outputs:
 #       phraseExists: ${{ steps.check-body.outputs.result }}
+#       commentId: ${{ steps.check-body.outputs.commentId }}
 #     steps:
-#       - name: Check if issue body contains 'Hey ontobot'
+#       - name: Check if issue body or any comment contains 'Hey ontobot'
 #         id: check-body
 #         uses: actions/github-script@v6
 #         with:
@@ -21,11 +24,27 @@
 #               repo: context.repo.repo,
 #               issue_number: context.issue.number
 #             });
-#             if (!issue.data.body) {
-#               console.log('Issue body is empty or null');
-#               return false;
+
+#             let bodyText = issue.data.body ? issue.data.body.toLowerCase() : '';
+#             let commentId = null;
+
+#             const comments = await github.rest.issues.listComments({
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#               issue_number: context.issue.number
+#             });
+
+#             for (const comment of comments.data) {
+#               if (comment.body.toLowerCase().includes('hey ontobot')) {
+#                 bodyText += ' ' + comment.body.toLowerCase();
+#                 commentId = comment.id;
+#               }
 #             }
-#             return issue.data.body.includes('Hey ontobot');
+
+#             return {
+#               result: bodyText.includes('hey ontobot'),
+#               commentId: commentId
+#             };
 
 #   build:
 #     needs: check
@@ -35,7 +54,7 @@
 #     strategy:
 #       matrix:
 #         python-version: ["3.9"]
-#         os: [ ubuntu-latest ]
+#         os: [ubuntu-latest]
 
 #     steps:
 #       - name: Checkout main branch
@@ -45,33 +64,31 @@
 #         id: gh-script-issue
 #         uses: actions/github-script@v6
 #         with:
-#           # github-token: ${{ secrets.GH_TOKEN }}
 #           script: |
-#             const issue_number = context.issue.number
-#             const repo = context.repo.owner+"/"+context.repo.repo
-#             return issue_number
-      
+#             const issue_number = context.issue.number;
+#             return issue_number;
+
 #       - name: Return repository name
 #         id: gh-script-repo
 #         uses: actions/github-script@v6
 #         with:
-#           # github-token: ${{ secrets.GH_TOKEN }}
 #           script: |
-#             const repo = context.repo.owner+"/"+context.repo.repo
-#             return repo
+#             const repo = context.repo.owner + "/" + context.repo.repo;
+#             return repo;
 
 #       - name: Set branch name
 #         id: vars
 #         run: |
 #           echo "resource=src/envo/envo-edit.owl" >> $GITHUB_ENV
-#           echo "branch-name=kgcl_automation_"${{ steps.gh-script-issue.outputs.result }} >> $GITHUB_ENV
-      
+#           echo "branch-name=kgcl_automation_${{ steps.gh-script-issue.outputs.result }}" >> $GITHUB_ENV
+#           echo "comment-id=${{ needs.check.outputs.commentId }}" >> $GITHUB_ENV
+
 #       - name: Get jar & enable plugin.
 #         run: |
 #           mkdir -p robot-plugins
 #           wget https://github.com/gouttegd/kgcl-java/releases/download/kgcl-java-0.3.2/kgcl-robot-plugin-0.3.2.jar -O robot-plugins/kgcl.jar
 #           echo "ROBOT_PLUGINS_DIRECTORY=$(pwd)/robot-plugins/" >> "$GITHUB_ENV"
-      
+
 #       - name: Install dependencies
 #         run: |
 #           pip install ontobot-change-agent
@@ -82,12 +99,14 @@
 #           ochange process-issue ${{ env.resource }} \
 #           -r ${{ steps.gh-script-repo.outputs.result }} \
 #           -n ${{ steps.gh-script-issue.outputs.result }} \
-#           -g ${{ secrets.GH_TOKEN }}
+#           -g ${{ secrets.GH_TOKEN }} \
+#           -c ${{ env.comment-id }}
 # # ! OR using standalone JAR file.
 # # !          ochange process-issue ${{ env.resource }} \
 # # !          -r ${{ steps.gh-script-repo.outputs.result }} \
 # # !          -n ${{ steps.gh-script-issue.outputs.result }} \
 # # !          -g ${{ secrets.GH_TOKEN }} \
+# # !          -p ${{ env.comment-id }} \
 # # !          -j kgcl-robot.jar
 
 #       - name: Clean-up
@@ -95,7 +114,7 @@
 
 #       - name: Create Pull Request
 #         uses: peter-evans/create-pull-request@v5
-#         if: ${{ env.PR_TITLE}}
+#         if: ${{ env.PR_TITLE }}
 #         with:
 #           token: ${{ secrets.GH_TOKEN }}
 #           branch-suffix: short-commit-hash

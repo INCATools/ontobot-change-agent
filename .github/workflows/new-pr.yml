@@ -1,17 +1,20 @@
-# name: Create new pull request
+# # name: Create new pull request
 
 # on:
 #   workflow_dispatch:
 #   issues:
-#     types: [ opened, edited ]
+#     types: [opened, edited]
+#   issue_comment:
+#     types: [created, edited]
 
 # jobs:
 #   check:
 #     runs-on: ubuntu-latest
 #     outputs:
 #       phraseExists: ${{ steps.check-body.outputs.result }}
+#       commentId: ${{ steps.check-body.outputs.commentId }}
 #     steps:
-#       - name: Check if issue body contains 'Hey ontobot'
+#       - name: Check if issue body or any comment contains 'Hey ontobot'
 #         id: check-body
 #         uses: actions/github-script@v6
 #         with:
@@ -21,11 +24,29 @@
 #               repo: context.repo.repo,
 #               issue_number: context.issue.number
 #             });
-#             if (!issue.data.body) {
-#               console.log('Issue body is empty or null');
-#               return false;
+
+#             let bodyText = issue.data.body ? issue.data.body.toLowerCase() : '';
+#             let commentId = null;
+
+#             // Fetch all comments for the issue
+#             const comments = await github.rest.issues.listComments({
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#               issue_number: context.issue.number
+#             });
+
+#             // Check each comment for the phrase
+#             for (const comment of comments.data) {
+#               if (comment.body.toLowerCase().includes('hey ontobot')) {
+#                 bodyText += ' ' + comment.body.toLowerCase();
+#                 commentId = comment.id;
+#               }
 #             }
-#             return issue.data.body.toLowerCase().includes('hey ontobot');
+
+#             return {
+#               result: bodyText.includes('hey ontobot'),
+#               commentId: commentId
+#             };
 
 #   build:
 #     needs: check
@@ -34,7 +55,7 @@
 #     strategy:
 #       matrix:
 #         python-version: ["3.9"]
-#         os: [ ubuntu-latest ]
+#         os: [ubuntu-latest]
 
 #     steps:
 #       - uses: actions/checkout@v3
@@ -47,26 +68,23 @@
 #         id: gh-script-issue
 #         uses: actions/github-script@v6
 #         with:
-#           # github-token: ${{ secrets.GH_TOKEN }}
 #           script: |
-#             const issue_number = context.issue.number
-#             const repo = context.repo.owner+"/"+context.repo.repo
-#             return issue_number
-      
+#             const issue_number = context.issue.number;
+#             return issue_number;
+
 #       - name: Return repository name
 #         id: gh-script-repo
 #         uses: actions/github-script@v6
 #         with:
-#           # github-token: ${{ secrets.GH_TOKEN }}
 #           script: |
-#             const repo = context.repo.owner+"/"+context.repo.repo
-#             return repo
+#             const repo = context.repo.owner + "/" + context.repo.repo;
+#             return repo;
 
 #       - name: Set branch name
 #         id: vars
 #         run: |
 #           echo "resource=src/ontology/mondo-edit.obo" >> $GITHUB_ENV
-#           echo "branch-name=ochange_automation_"${{ steps.gh-script-issue.outputs.result }} >> $GITHUB_ENV
+#           echo "branch-name=ochange_automation_${{ steps.gh-script-issue.outputs.result }}" >> $GITHUB_ENV
 
 #       - name: Install dependencies
 #         run: |
@@ -79,11 +97,12 @@
 #           -r ${{ steps.gh-script-repo.outputs.result }} \
 #           -n ${{ steps.gh-script-issue.outputs.result }} \
 #           -g ${{ secrets.GH_TOKEN }} \
-#           -p XXXX
+#           -p PREFIX_OF_RESOURCE \
+#           -c ${{ needs.check.outputs.commentId }}
 
 #       - name: Create Pull Request
 #         uses: peter-evans/create-pull-request@v4
-#         if: ${{ env.PR_TITLE}}
+#         if: ${{ env.PR_TITLE }}
 #         with:
 #           branch-suffix: short-commit-hash
 #           labels: Automated
@@ -91,4 +110,3 @@
 #           title: ${{ env.PR_TITLE }}
 #           base: ${{ github.head_ref }}
 #           branch: ${{ env.branch-name }}
-#        #   token: ${{ secrets.GH_TOKEN }}
