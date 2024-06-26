@@ -194,10 +194,14 @@ def process_issue(
 
     if comment_id:
         formatted_body = "The following commands were executed: </br> "
-        comment_body = get_comment_from_repo(repository_name=repo, token=token, comment_id=comment_id)
+        comment_body = get_comment_from_repo(
+            repository_name=repo, token=token, comment_id=comment_id
+        )
         KGCL_COMMANDS = _get_kgcl_commands(comment_body)
-        issue = next(get_issues(repository_name=repo, token=token, label=label, number=number, state=state))
-    
+        issue = next(
+            get_issues(repository_name=repo, token=token, label=label, number=number, state=state)
+        )
+
     else:
         for issue in get_issues(
             repository_name=repo, token=token, label=label, number=number, state=state
@@ -282,6 +286,7 @@ def _convert_to_markdown(item: Union[list, dict]) -> str:
             md += bullet + k + ":" + str(v) + "</br>"
     return md
 
+
 def _get_kgcl_commands(issue_body: str) -> list:
     KGCL_COMMANDS = []
     bullet_starters = ["* ", "- "]
@@ -295,6 +300,7 @@ def _get_kgcl_commands(issue_body: str) -> list:
         )
     KGCL_COMMANDS = [x.strip() for x in KGCL_COMMANDS]
     return KGCL_COMMANDS
+
 
 @main.command("update-readme")
 @input_argument

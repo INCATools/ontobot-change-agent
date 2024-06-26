@@ -97,7 +97,8 @@ def get_issues(
             else:
                 yield None
 
-def get_comment_from_repo(repository_name: str, token: str = None, comment_id:int = 0):
+
+def get_comment_from_repo(repository_name: str, token: str = None, comment_id: int = 0):
     """Get a comment from a Github repository."""
     repo = _get_repo_object(repository_name, token)
 
@@ -105,6 +106,7 @@ def get_comment_from_repo(repository_name: str, token: str = None, comment_id:in
         if comment.id == comment_id:
             return comment.body
     return None
+
 
 def _get_repo_object(repository_name: str, token: str = None):
     if token is None:
@@ -114,6 +116,7 @@ def _get_repo_object(repository_name: str, token: str = None):
 
     g = Github(token)
     return g.get_repo(repository_name)
+
 
 def _extract_info_from_issue_object(issue: Issue) -> dict:
     issue_as_dict = issue.__dict__
