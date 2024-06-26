@@ -80,7 +80,7 @@
 #         id: vars
 #         run: |
 #           echo "resource=src/envo/envo-edit.owl" >> $GITHUB_ENV
-#           echo "branch-name=kgcl_automation_${{ steps.gh-script-issue.outputs.result }}" >> $GITHUB_ENV
+#           echo "branch-name=kgcl_automation_"${{ steps.gh-script-issue.outputs.result }} >> $GITHUB_ENV
 #           echo "comment-id=${{ needs.check.outputs.commentId }}" >> $GITHUB_ENV
 
 #       - name: Get jar & enable plugin.

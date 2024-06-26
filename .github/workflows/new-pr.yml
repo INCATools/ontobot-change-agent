@@ -11,10 +11,10 @@
 #   check:
 #     runs-on: ubuntu-latest
 #     outputs:
-#       phraseExists: ${{ steps.check-body.outputs.result }}
+#       phraseExists: ${{ steps.check-body.outputs.phraseExists }}
 #       commentId: ${{ steps.check-body.outputs.commentId }}
 #     steps:
-#       - name: Check if issue body or any comment contains 'Hey ontobot'
+#       - name: Check if issue body contains 'Hey ontobot'
 #         id: check-body
 #         uses: actions/github-script@v6
 #         with:
@@ -24,7 +24,6 @@
 #               repo: context.repo.repo,
 #               issue_number: context.issue.number
 #             });
-
 #             let bodyText = issue.data.body ? issue.data.body.toLowerCase() : '';
 #             let commentId = null;
 
@@ -35,18 +34,48 @@
 #               issue_number: context.issue.number
 #             });
 
-#             // Check each comment for the phrase
-#             for (const comment of comments.data) {
-#               if (comment.body.toLowerCase().includes('hey ontobot')) {
-#                 bodyText += ' ' + comment.body.toLowerCase();
-#                 commentId = comment.id;
+#             // Function to check for the phrase in bodyText and comments
+#             function checkForPhrase(bodyText, comments) {
+#               const phrase = 'hey ontobot';
+              
+#               // Check if bodyText includes the phrase
+#               let result = bodyText.includes(phrase);
+              
+#               // If not found in bodyText, check each comment
+#               if (!result) {
+#                 for (let comment of comments) {
+#                   if (comment.body.toLowerCase().includes(phrase)) {
+#                     result = true;
+#                     commentId = comment.id;
+#                     break;
+#                   }
+#                 }
 #               }
+
+#               return {
+#                 result: result,
+#                 commentId: result ? commentId : null
+#               };
 #             }
 
-#             return {
-#               result: bodyText.includes('hey ontobot'),
-#               commentId: commentId
-#             };
+#             const checkResult = checkForPhrase(bodyText, comments.data);
+
+#             console.log(`Result: ${checkResult.result}`);
+#             console.log(`Comment ID: ${checkResult.commentId}`);
+#             console.log(`Check Result: ${JSON.stringify(checkResult)}`);
+
+#             core.setOutput('phraseExists', checkResult.result);
+#             core.setOutput('commentId', checkResult.commentId);
+
+#       - name: Log phraseExists output
+#         run: |
+#           echo "phraseExists: ${{ steps.check-body.outputs.phraseExists }}"
+#           echo "commentId: ${{ steps.check-body.outputs.commentId }}"
+#           echo "Outputs: $(echo '${{ toJSON(steps.check-body.outputs) }}')"
+    
+#       - name: Conditional step based on result
+#         if: ${{ steps.check-body.outputs.phraseExists == 'true' }}
+#         run: echo "The phrase 'Hey ontobot' was found."
 
 #   build:
 #     needs: check
@@ -84,7 +113,7 @@
 #         id: vars
 #         run: |
 #           echo "resource=src/ontology/mondo-edit.obo" >> $GITHUB_ENV
-#           echo "branch-name=ochange_automation_${{ steps.gh-script-issue.outputs.result }}" >> $GITHUB_ENV
+#           echo "branch-name=ochange_automation_"${{ steps.gh-script-issue.outputs.result }} >> $GITHUB_ENV
 
 #       - name: Install dependencies
 #         run: |
