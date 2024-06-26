@@ -245,17 +245,18 @@ def process_issue(
 
             formatted_body += _convert_to_markdown(KGCL_COMMANDS)
             formatted_body += "</br>Fixes #" + str(issue["number"])
+            pr_title = f"Applying changes for: {issue['title']}"
 
             if os.getenv("GITHUB_ENV"):
                 with open(os.getenv("GITHUB_ENV"), "a") as env:  # type: ignore
                     print(f"PR_BODY={formatted_body}", file=env)
-                    print(f"PR_TITLE={issue[TITLE]}", file=env)
+                    print(f"PR_TITLE={pr_title}", file=env)
                     print(f"ISSUE_CREATOR={issue[USER]}", file=env)
 
             click.echo(
                 f"""
                 PR_BODY={formatted_body}
-                PR_TITLE={issue[TITLE]}
+                PR_TITLE={pr_title}
                 ISSUE_CREATOR={issue[USER]}
                 """
             )
