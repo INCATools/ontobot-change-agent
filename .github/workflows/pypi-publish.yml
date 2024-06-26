@@ -28,9 +28,6 @@ jobs:
           poetry build
 
       - name: Publish distribution 📦 to PyPI
-        uses: pypa/gh-action-pypi-publish@v1.5.0
-        with:
-          user: __token__
-          password: ${{ secrets.ONTOBOT_CHANGE_AGENT_TOKEN }}
+        uses: pypa/gh-action-pypi-publish@release/v1
 
     
