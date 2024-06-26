@@ -202,7 +202,7 @@ def process_issue(
                     )
                     break
 
-            elif re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY], re.DOTALL):
+            elif re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY].lower(), re.DOTALL):
                 formatted_body = "The following commands were executed: </br> "
                 bullet_starters = ["* ", "- "]
                 for bullet in bullet_starters:
