@@ -77,13 +77,7 @@ def get_issues(
     :param state: State of the issue e.g. open, close etc., defaults to "open"
     :yield: Issue names that match the regex/label/number.
     """
-    if token is None:
-        token_file = TOKEN_FILE
-        with open(token_file, "r") as t:
-            token = t.read().rstrip()
-
-    g = Github(token)
-    repo = g.get_repo(repository_name)
+    repo = _get_repo_object(repository_name, token)
     global ISSUE_TEMPLATE_DIR
     ISSUE_TEMPLATE_DIR = repo.contents_url.replace("{+path}", ISSUE_TEMPLATE_DIR)
     label_object = None
@@ -102,6 +96,26 @@ def get_issues(
                 yield _extract_info_from_issue_object(issue)
             else:
                 yield None
+
+
+def get_comment_from_repo(repository_name: str, token: str = None, comment_id: int = 0):
+    """Get a comment from a Github repository."""
+    repo = _get_repo_object(repository_name, token)
+
+    for comment in repo.get_issues_comments():
+        if comment.id == comment_id:
+            return comment.body
+    return None
+
+
+def _get_repo_object(repository_name: str, token: str = None):
+    if token is None:
+        token_file = TOKEN_FILE
+        with open(token_file, "r") as t:
+            token = t.read().rstrip()
+
+    g = Github(token)
+    return g.get_repo(repository_name)
 
 
 def _extract_info_from_issue_object(issue: Issue) -> dict:
