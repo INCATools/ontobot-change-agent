@@ -122,12 +122,18 @@
 #       - name: Run ochange
 #         id: ochange
 #         run: |
-#           ochange process-issue ${{ env.resource }} \
+#           cmd="ochange process-issue ${{ env.resource }} \
 #           -r ${{ steps.gh-script-repo.outputs.result }} \
 #           -n ${{ steps.gh-script-issue.outputs.result }} \
 #           -g ${{ secrets.GH_TOKEN }} \
-#           -p PREFIX_OF_RESOURCE \
-#           -c ${{ needs.check.outputs.commentId }}
+#           -p MONDO"
+
+#           if [ "${{ needs.check.outputs.commentId }}" != "null" ]; then
+#             cmd="$cmd -c ${{ needs.check.outputs.commentId }}"
+#           fi
+
+#           echo "Running command: $cmd"
+#           eval $cmd
 
 #       - name: Create Pull Request
 #         uses: peter-evans/create-pull-request@v4
