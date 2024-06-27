@@ -41,7 +41,7 @@
 #               // Check if bodyText includes the phrase
 #               let result = bodyText.includes(phrase);
               
-#               // If not found in bodyText, check each comment
+#               // Check each comment
 
 #             for (let comment of comments.reverse()) { // Reverse to give precedence to the latest comment
 #                 if (comment.body.toLowerCase().includes(phrase)) {
