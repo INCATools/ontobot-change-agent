@@ -41,7 +41,7 @@ repository.
         We highly recommend using the standard option (#1). For this you should just uncomment `this code block <https://github.com/INCATools/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L56-L62>`_
         and delete `this code block <https://github.com/INCATools/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L63-L68>`_
 
-2. ..warning::
+    .. warning::
         This should be done once only. `ontobot-change-agent` already exists as an app on GitHub. This step is solely for the purpose of documentation.
 
         Create a GitHub App at the Organization level such that it has access to specific repositories of concern.
@@ -71,7 +71,7 @@ repository.
             - Select the organization and repository.
             - Click on **Install**.
 
-3. Follow instructions in `actions/create-github-app-token@v1<https://github.com/actions/create-github-app-token>_` to create a GitHub App token.
+2. Follow instructions in `actions/create-github-app-token@v1<https://github.com/actions/create-github-app-token>_` to create a GitHub App token.
     - Add the following code block to the workflow file:
 
     .. code-block:: shell
@@ -84,8 +84,8 @@ repository.
 
 
     - Add the following to the repository:
-        - **APP_ID**: The App ID generated in step 2. This will an environment variable.
-        - **PRIVATE_KEY**: The private key generated in step 2. This will be a secret. This is the whole content of the .pem file.
+        - **APP_ID**: This will an environment variable.
+        - **PRIVATE_KEY**: This will be a secret. This is the whole content of the .pem file.
 
     - Finally, add the token generated from above to the pull request generation workflow block:
     ..code-block:: shell
