@@ -88,7 +88,7 @@ repository.
         - **PRIVATE_KEY**: This will be a secret. This is the whole content of the .pem file.
 
     - Finally, add the token generated from above to the pull request generation workflow block:
-    ..code-block:: shell
+    .. code-block:: shell
 
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v4
