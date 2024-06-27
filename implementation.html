@@ -196,11 +196,11 @@ and delete <a class="reference external" href="https://github.com/INCATools/onto
 <dt>Follow instructions in <cite>actions/create-github-app-token&#64;v1&lt;https://github.com/actions/create-github-app-token&gt;_</cite> to create a GitHub App token.</dt><dd><ul class="simple">
 <li><p>Add the following code block to the workflow file:</p></li>
 </ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-<span class="w"> </span>name:<span class="w"> </span>Create<span class="w"> </span>GitHub<span class="w"> </span>App<span class="w"> </span>token
-<span class="w">  </span>uses:<span class="w"> </span>actions/create-github-app-token@v1
-<span class="w">  </span>with:
-<span class="w">    </span>app_id:<span class="w"> </span><span class="si">${</span><span class="p">{ secrets.APP_ID </span><span class="si">}</span><span class="o">}</span>
-<span class="w">    </span>private_key:<span class="w"> </span><span class="si">${</span><span class="p">{ secrets.PRIVATE_KEY </span><span class="si">}</span><span class="o">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create GitHub App token</span>
+<span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/create-github-app-token@v1</span>
+<span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.APP_ID }}</span>
+<span class="w">    </span><span class="nt">private_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PRIVATE_KEY }}</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -214,19 +214,19 @@ and delete <a class="reference external" href="https://github.com/INCATools/onto
 </li>
 <li><p>Finally, add the token generated from above to the pull request generation workflow block:</p></li>
 </ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-<span class="w"> </span>name:<span class="w"> </span>Create<span class="w"> </span>Pull<span class="w"> </span>Request
-<span class="w">  </span>uses:<span class="w"> </span>peter-evans/create-pull-request@v4
-<span class="w">  </span><span class="k">if</span>:<span class="w"> </span><span class="si">${</span><span class="p">{ env.PR_TITLE </span><span class="si">}</span><span class="o">}</span>
-<span class="w">  </span>with:
-<span class="w">    </span>branch-suffix:<span class="w"> </span>short-commit-hash
-<span class="w">    </span>labels:<span class="w"> </span>Automated
-<span class="w">    </span>author:<span class="w"> </span><span class="si">${</span><span class="p">{ env.ISSUE_CREATOR </span><span class="si">}</span><span class="o">}</span><span class="w"> </span>&lt;<span class="si">${</span><span class="p">{ env.ISSUE_CREATOR </span><span class="si">}</span><span class="o">}</span>@users.noreply.github.com&gt;
-<span class="w">    </span>committer:<span class="w"> </span><span class="si">${</span><span class="p">{ env.ISSUE_CREATOR </span><span class="si">}</span><span class="o">}</span><span class="w"> </span>&lt;<span class="si">${</span><span class="p">{ env.ISSUE_CREATOR </span><span class="si">}</span><span class="o">}</span>@users.noreply.github.com&gt;
-<span class="w">    </span>body:<span class="w"> </span><span class="si">${</span><span class="p">{ env.PR_BODY </span><span class="si">}</span><span class="o">}</span>
-<span class="w">    </span>title:<span class="w"> </span><span class="si">${</span><span class="p">{ env.PR_TITLE </span><span class="si">}</span><span class="o">}</span>
-<span class="w">    </span>base:<span class="w"> </span><span class="si">${</span><span class="p">{ github.head_ref </span><span class="si">}</span><span class="o">}</span>
-<span class="w">    </span>branch:<span class="w"> </span><span class="si">${</span><span class="p">{ env.branch-name </span><span class="si">}</span><span class="o">}</span>
-<span class="w">    </span>token:<span class="w"> </span><span class="si">${</span><span class="p">{ steps.app-token.outputs.token </span><span class="si">}</span><span class="o">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create Pull Request</span>
+<span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">peter-evans/create-pull-request@v4</span>
+<span class="w">  </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ env.PR_TITLE }}</span>
+<span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branch-suffix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">short-commit-hash</span>
+<span class="w">    </span><span class="nt">labels</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Automated</span>
+<span class="w">    </span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ env.ISSUE_CREATOR }} &lt;${{ env.ISSUE_CREATOR }}@users.noreply.github.com&gt;</span>
+<span class="w">    </span><span class="nt">committer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ env.ISSUE_CREATOR }} &lt;${{ env.ISSUE_CREATOR }}@users.noreply.github.com&gt;</span>
+<span class="w">    </span><span class="nt">body</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ env.PR_BODY }}</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ env.PR_TITLE }}</span>
+<span class="w">    </span><span class="nt">base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.head_ref }}</span>
+<span class="w">    </span><span class="nt">branch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ env.branch-name }}</span>
+<span class="w">    </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ steps.app-token.outputs.token }}</span>
 </pre></div>
 </div>
 </dd>

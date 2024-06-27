@@ -74,7 +74,7 @@ repository.
 2. Follow instructions in `actions/create-github-app-token@v1<https://github.com/actions/create-github-app-token>_` to create a GitHub App token.
     - Add the following code block to the workflow file:
 
-    .. code-block:: shell
+    .. code-block:: yaml
 
         - name: Create GitHub App token
           uses: actions/create-github-app-token@v1
@@ -88,7 +88,7 @@ repository.
         - **PRIVATE_KEY**: This will be a secret. This is the whole content of the .pem file.
 
     - Finally, add the token generated from above to the pull request generation workflow block:
-    .. code-block:: shell
+    .. code-block:: yaml
 
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v4
