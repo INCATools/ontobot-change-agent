@@ -71,7 +71,7 @@ repository.
             - Select the organization and repository.
             - Click on **Install**.
 
-2. Follow instructions in `actions/create-github-app-token@v1<https://github.com/actions/create-github-app-token>_` to create a GitHub App token.
+2. Follow instructions in `actions/create-github-app-token@v1 <https://github.com/actions/create-github-app-token>`_ to create a GitHub App token.
     - Add the following code block to the workflow file:
 
     .. code-block:: yaml
