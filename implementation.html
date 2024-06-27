@@ -127,16 +127,119 @@ and delete <a class="reference external" href="https://github.com/INCATools/onto
 </div>
 </div></blockquote>
 </li>
-</ol>
-<p>2. Create a <a class="reference external" href="https://docs.github.com/en/enterprise-server&#64;3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">personal access token</a>
-and enter it in the “Secrets” section of the ontology repository <a class="reference external" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets">as explained here</a>.</p>
+<li><dl>
+<dt>..warning::</dt><dd><p>This should be done once only. <cite>ontobot-change-agent</cite> already exists as an app on GitHub. This step is solely for the purpose of documentation.</p>
+<p>Create a GitHub App at the Organization level such that it has access to specific repositories of concern.
+- Go to <strong>Settings</strong> -&gt; <strong>Developer settings</strong> -&gt; <strong>GitHub Apps</strong> -&gt; <strong>New GitHub App</strong>.
+- Fill in the necessary details and create the GitHub App:</p>
 <blockquote>
-<div><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The variable name could be either <code class="code docutils literal notranslate"><span class="pre">GH_TOKEN</span></code> or anything else but it must match
-in the workflow (<code class="code docutils literal notranslate"><span class="pre">${{</span> <span class="pre">secrets.GH_TOKEN</span> <span class="pre">}}</span></code>) and the repository secret section (e.g. <code class="code docutils literal notranslate"><span class="pre">GH_TOKEN</span></code>).</p>
-</div>
+<div><ul class="simple">
+<li><p><strong>Github App Name</strong>:</p></li>
+<li><p><strong>Homepage URL</strong>:</p></li>
+<li><p><strong>Expire user authorization tokens</strong>: Unchecked</p></li>
+<li><dl class="simple">
+<dt><strong>Webhook</strong>:</dt><dd><ul>
+<li><p><strong>Active</strong>: Unchecked</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Permissions</strong>:</dt><dd><ul>
+<li><dl class="simple">
+<dt><strong>Repository level permissions</strong>:</dt><dd><ul>
+<li><p><strong>Contents</strong>: Read &amp; Write</p></li>
+<li><p><strong>Metadata (mandatory)</strong>: Read-only</p></li>
+<li><p><strong>Pull requests</strong>: Read &amp; write</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Organization level permissions</strong>:</dt><dd><ul>
+<li><p>Adminstration: Read-only</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Account permissions</strong>: None</p></li>
+<li><dl class="simple">
+<dt><strong>Where can this GitHub App be installed?</strong>:</dt><dd><ul>
+<li><p><strong>Only on this account</strong> (If you want to restrict the app to a single organization)</p></li>
+<li><p><strong>Any account</strong> (If you want to allow the app to be installed on any organization)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </div></blockquote>
+<ul class="simple">
+<li><p>Generate a private key and download it (.pem file).</p></li>
+<li><p>Note the App ID.</p></li>
+<li><dl class="simple">
+<dt>Follow instructions to install the GitHub App on the repository.</dt><dd><ul>
+<li><p>Go to <strong>Settings</strong> -&gt; <strong>GitHub Apps</strong> -&gt; <strong>Install App</strong>.</p></li>
+<li><p>Select the organization and repository.</p></li>
+<li><p>Click on <strong>Install</strong>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Follow instructions in <cite>actions/create-github-app-token&#64;v1&lt;https://github.com/actions/create-github-app-token&gt;_</cite> to create a GitHub App token.</dt><dd><ul class="simple">
+<li><p>Add the following code block to the workflow file:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-<span class="w"> </span>name:<span class="w"> </span>Create<span class="w"> </span>GitHub<span class="w"> </span>App<span class="w"> </span>token
+<span class="w">  </span>uses:<span class="w"> </span>actions/create-github-app-token@v1
+<span class="w">  </span>with:
+<span class="w">    </span>app_id:<span class="w"> </span><span class="si">${</span><span class="p">{ secrets.APP_ID </span><span class="si">}</span><span class="o">}</span>
+<span class="w">    </span>private_key:<span class="w"> </span><span class="si">${</span><span class="p">{ secrets.PRIVATE_KEY </span><span class="si">}</span><span class="o">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Add the following to the repository:</dt><dd><ul>
+<li><p><strong>APP_ID</strong>: The App ID generated in step 2. This will an environment variable.</p></li>
+<li><p><strong>PRIVATE_KEY</strong>: The private key generated in step 2. This will be a secret. This is the whole content of the .pem file.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Finally, add the token generated from above to the pull request generation workflow block:</p></li>
+</ul>
+<p>..code-block:: shell</p>
+<blockquote>
+<div><ul>
+<li><p>name: Create Pull Request
+uses: <a class="reference external" href="mailto:peter-evans/create-pull-request&#37;&#52;&#48;v4">peter-evans/create-pull-request<span>&#64;</span>v4</a>
+if: ${{ env.PR_TITLE }}
+with:</p>
+<blockquote>
+<div><p>branch-suffix: short-commit-hash
+labels: Automated
+author: ${{ env.ISSUE_CREATOR }} &lt;${{ env.ISSUE_CREATOR <a class="reference external" href="mailto:}}&#37;&#52;&#48;users&#46;noreply&#46;github&#46;com">}}<span>&#64;</span>users<span>&#46;</span>noreply<span>&#46;</span>github<span>&#46;</span>com</a>&gt;
+committer: ${{ env.ISSUE_CREATOR }} &lt;${{ env.ISSUE_CREATOR <a class="reference external" href="mailto:}}&#37;&#52;&#48;users&#46;noreply&#46;github&#46;com">}}<span>&#64;</span>users<span>&#46;</span>noreply<span>&#46;</span>github<span>&#46;</span>com</a>&gt;
+body: ${{ env.PR_BODY }}
+title: ${{ env.PR_TITLE }}
+base: ${{ github.head_ref }}
+branch: ${{ env.branch-name }}
+token: ${{ steps.app-token.outputs.token }}</p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ol>
 </section>
 <section id="step-2-take-it-for-a-spin">
 <h2>Step 2: Take it for a spin!<a class="headerlink" href="#step-2-take-it-for-a-spin" title="Permalink to this heading"></a></h2>
