@@ -214,27 +214,21 @@ and delete <a class="reference external" href="https://github.com/INCATools/onto
 </li>
 <li><p>Finally, add the token generated from above to the pull request generation workflow block:</p></li>
 </ul>
-<p>..code-block:: shell</p>
-<blockquote>
-<div><ul>
-<li><p>name: Create Pull Request
-uses: <a class="reference external" href="mailto:peter-evans/create-pull-request&#37;&#52;&#48;v4">peter-evans/create-pull-request<span>&#64;</span>v4</a>
-if: ${{ env.PR_TITLE }}
-with:</p>
-<blockquote>
-<div><p>branch-suffix: short-commit-hash
-labels: Automated
-author: ${{ env.ISSUE_CREATOR }} &lt;${{ env.ISSUE_CREATOR <a class="reference external" href="mailto:}}&#37;&#52;&#48;users&#46;noreply&#46;github&#46;com">}}<span>&#64;</span>users<span>&#46;</span>noreply<span>&#46;</span>github<span>&#46;</span>com</a>&gt;
-committer: ${{ env.ISSUE_CREATOR }} &lt;${{ env.ISSUE_CREATOR <a class="reference external" href="mailto:}}&#37;&#52;&#48;users&#46;noreply&#46;github&#46;com">}}<span>&#64;</span>users<span>&#46;</span>noreply<span>&#46;</span>github<span>&#46;</span>com</a>&gt;
-body: ${{ env.PR_BODY }}
-title: ${{ env.PR_TITLE }}
-base: ${{ github.head_ref }}
-branch: ${{ env.branch-name }}
-token: ${{ steps.app-token.outputs.token }}</p>
-</div></blockquote>
-</li>
-</ul>
-</div></blockquote>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-<span class="w"> </span>name:<span class="w"> </span>Create<span class="w"> </span>Pull<span class="w"> </span>Request
+<span class="w">  </span>uses:<span class="w"> </span>peter-evans/create-pull-request@v4
+<span class="w">  </span><span class="k">if</span>:<span class="w"> </span><span class="si">${</span><span class="p">{ env.PR_TITLE </span><span class="si">}</span><span class="o">}</span>
+<span class="w">  </span>with:
+<span class="w">    </span>branch-suffix:<span class="w"> </span>short-commit-hash
+<span class="w">    </span>labels:<span class="w"> </span>Automated
+<span class="w">    </span>author:<span class="w"> </span><span class="si">${</span><span class="p">{ env.ISSUE_CREATOR </span><span class="si">}</span><span class="o">}</span><span class="w"> </span>&lt;<span class="si">${</span><span class="p">{ env.ISSUE_CREATOR </span><span class="si">}</span><span class="o">}</span>@users.noreply.github.com&gt;
+<span class="w">    </span>committer:<span class="w"> </span><span class="si">${</span><span class="p">{ env.ISSUE_CREATOR </span><span class="si">}</span><span class="o">}</span><span class="w"> </span>&lt;<span class="si">${</span><span class="p">{ env.ISSUE_CREATOR </span><span class="si">}</span><span class="o">}</span>@users.noreply.github.com&gt;
+<span class="w">    </span>body:<span class="w"> </span><span class="si">${</span><span class="p">{ env.PR_BODY </span><span class="si">}</span><span class="o">}</span>
+<span class="w">    </span>title:<span class="w"> </span><span class="si">${</span><span class="p">{ env.PR_TITLE </span><span class="si">}</span><span class="o">}</span>
+<span class="w">    </span>base:<span class="w"> </span><span class="si">${</span><span class="p">{ github.head_ref </span><span class="si">}</span><span class="o">}</span>
+<span class="w">    </span>branch:<span class="w"> </span><span class="si">${</span><span class="p">{ env.branch-name </span><span class="si">}</span><span class="o">}</span>
+<span class="w">    </span>token:<span class="w"> </span><span class="si">${</span><span class="p">{ steps.app-token.outputs.token </span><span class="si">}</span><span class="o">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
