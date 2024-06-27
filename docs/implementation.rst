@@ -42,7 +42,7 @@ repository.
         and delete `this code block <https://github.com/INCATools/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L63-L68>`_
 
     .. warning::
-        This should be done once only. `ontobot-change-agent` already exists as an app on GitHub. This step is solely for the purpose of documentation.
+        **This should be done once only. `ontobot-change-agent` already exists as an app on GitHub. This step is solely for the purpose of documentation.**
 
         Create a GitHub App at the Organization level such that it has access to specific repositories of concern.
         - Go to **Settings** -> **Developer settings** -> **GitHub Apps** -> **New GitHub App**.
