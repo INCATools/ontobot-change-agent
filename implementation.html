@@ -125,10 +125,9 @@ There are 2 options for implementation here:</p>
 <p>We highly recommend using the standard option (#1). For this you should just uncomment <a class="reference external" href="https://github.com/INCATools/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L56-L62">this code block</a>
 and delete <a class="reference external" href="https://github.com/INCATools/ontobot-change-agent/blob/b60d32375941c19672deace22b74814e04a73284/.github/workflows/new-pr-java.yml#L63-L68">this code block</a></p>
 </div>
-</div></blockquote>
-</li>
-<li><dl>
-<dt>..warning::</dt><dd><p>This should be done once only. <cite>ontobot-change-agent</cite> already exists as an app on GitHub. This step is solely for the purpose of documentation.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This should be done once only. <cite>ontobot-change-agent</cite> already exists as an app on GitHub. This step is solely for the purpose of documentation.</p>
 <p>Create a GitHub App at the Organization level such that it has access to specific repositories of concern.
 - Go to <strong>Settings</strong> -&gt; <strong>Developer settings</strong> -&gt; <strong>GitHub Apps</strong> -&gt; <strong>New GitHub App</strong>.
 - Fill in the necessary details and create the GitHub App:</p>
@@ -190,8 +189,8 @@ and delete <a class="reference external" href="https://github.com/INCATools/onto
 </dl>
 </li>
 </ul>
-</dd>
-</dl>
+</div>
+</div></blockquote>
 </li>
 <li><dl>
 <dt>Follow instructions in <cite>actions/create-github-app-token&#64;v1&lt;https://github.com/actions/create-github-app-token&gt;_</cite> to create a GitHub App token.</dt><dd><ul class="simple">
@@ -207,8 +206,8 @@ and delete <a class="reference external" href="https://github.com/INCATools/onto
 <ul class="simple">
 <li><dl class="simple">
 <dt>Add the following to the repository:</dt><dd><ul>
-<li><p><strong>APP_ID</strong>: The App ID generated in step 2. This will an environment variable.</p></li>
-<li><p><strong>PRIVATE_KEY</strong>: The private key generated in step 2. This will be a secret. This is the whole content of the .pem file.</p></li>
+<li><p><strong>APP_ID</strong>: This will an environment variable.</p></li>
+<li><p><strong>PRIVATE_KEY</strong>: This will be a secret. This is the whole content of the .pem file.</p></li>
 </ul>
 </dd>
 </dl>
