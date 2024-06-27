@@ -42,15 +42,15 @@
 #               let result = bodyText.includes(phrase);
               
 #               // If not found in bodyText, check each comment
-#               if (!result) {
-#                 for (let comment of comments) {
-#                   if (comment.body.toLowerCase().includes(phrase)) {
-#                     result = true;
-#                     commentId = comment.id;
-#                     break;
-#                   }
+
+#             for (let comment of comments.reverse()) { // Reverse to give precedence to the latest comment
+#                 if (comment.body.toLowerCase().includes(phrase)) {
+#                 result = true;
+#                 commentId = comment.id;
+#                 break;
 #                 }
-#               }
+#             }
+
 
 #               return {
 #                 result: result,
