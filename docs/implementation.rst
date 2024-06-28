@@ -79,7 +79,7 @@ repository.
         - name: Create GitHub App token
           uses: actions/create-github-app-token@v1
           with:
-            app_id: ${{ secrets.APP_ID }}
+            app_id: ${{ vars.APP_ID }}
             private_key: ${{ secrets.PRIVATE_KEY }}
 
 
