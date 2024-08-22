@@ -110,7 +110,7 @@ jar_path_option = click.option(
     help="Path to jar file.",
 )
 use_llm_option = click.option(
-    "--use-llm", is_flag=True, default=False, help="Use llm-change-agent for processing."
+    "--use-llm/--no-use-llm", is_flag=True, default=False, help="Use llm-change-agent for processing."
 )
 
 
