@@ -7,8 +7,9 @@ import logging
 import os
 import re
 from typing import TextIO, Union
-from llm_change_agent.cli import execute
+
 import click
+from llm_change_agent.cli import execute
 
 from ontobot_change_agent import __version__
 from ontobot_change_agent.api import (
@@ -236,8 +237,10 @@ def process_issue(
                         ctx.params["provider"] = "cborg"
                         ctx.params["model"] = "google/gemini:latest"
                         response = execute.invoke(ctx)
-                        KGCL_COMMANDS = [command.replace('"',"'") for command in ast.literal_eval(response)]
-                    
+                        KGCL_COMMANDS = [
+                            command.replace('"', "'") for command in ast.literal_eval(response)
+                        ]
+
                     if len(KGCL_COMMANDS) > 0:
                         click.echo(f"llm-change-agent result: {response}")
                         formatted_body = "The following commands were executed: </br> "
