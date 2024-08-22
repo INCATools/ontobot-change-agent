@@ -229,17 +229,17 @@ def process_issue(
                     formatted_body = "The following commands were executed: </br> "
                     KGCL_COMMANDS = _get_kgcl_commands(issue[BODY])
                 else:
-                    # TODO: Implement llm-change-agent call here.
+                    # ! llm-change-agent activate!
                     click.echo(f"Summoning llm-change-agent for {issue[TITLE]}")
                     with click.Context(execute) as ctx:
                         ctx.params["prompt"] = issue[BODY]
                         ctx.params["provider"] = "cborg"
                         ctx.params["model"] = "google/gemini:latest"
                         response = execute.invoke(ctx)
-                    
-                    if response:
-                        click.echo(f"llm-change-agent result: {response}")
                         KGCL_COMMANDS = [command.replace('"',"'") for command in ast.literal_eval(response)]
+                    
+                    if len(KGCL_COMMANDS) > 0:
+                        click.echo(f"llm-change-agent result: {response}")
                         formatted_body = "The following commands were executed: </br> "
                     else:
                         click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
