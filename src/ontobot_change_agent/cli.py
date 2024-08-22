@@ -2,11 +2,12 @@
 
 """Command line interface for :mod:`ontobot_change_agent`."""
 
+import ast
 import logging
 import os
 import re
 from typing import TextIO, Union
-
+from llm_change_agent.cli import execute
 import click
 
 from ontobot_change_agent import __version__
@@ -228,7 +229,20 @@ def process_issue(
                     formatted_body = "The following commands were executed: </br> "
                     KGCL_COMMANDS = _get_kgcl_commands(issue[BODY])
                 else:
-                    click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
+                    # TODO: Implement llm-change-agent call here.
+                    click.echo(f"Summoning llm-change-agent for {issue[TITLE]}")
+                    with click.Context(execute) as ctx:
+                        ctx.params["prompt"] = issue[BODY]
+                        ctx.params["provider"] = "cborg"
+                        ctx.params["model"] = "google/gemini:latest"
+                        response = execute.invoke(ctx)
+                    
+                    if response:
+                        click.echo(f"llm-change-agent result: {response}")
+                        KGCL_COMMANDS = [command.replace('"',"'") for command in ast.literal_eval(response)]
+                        formatted_body = "The following commands were executed: </br> "
+                    else:
+                        click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
             else:
                 click.echo(
                     f"""Issue number:{number} is either closed, does not exist or has no body."""
