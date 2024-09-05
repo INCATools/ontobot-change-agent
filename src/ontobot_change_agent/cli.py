@@ -27,7 +27,6 @@ from ontobot_change_agent.api import (
     get_ontobot_implementers,
     process_issue_via_jar,
     process_issue_via_oak,
-    process_new_term_template,
 )
 from ontobot_change_agent.constants import OWL_EXTENSION
 
