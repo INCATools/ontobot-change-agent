@@ -3,6 +3,9 @@
   <img src="https://github.com/INCATools/ontobot-change-agent/raw/main/docs/source/logo.png" height="150">
 </p>
 -->
+## ontobot-change-agent
+
+[![DOI](https://zenodo.org/badge/513320955.svg)](https://zenodo.org/doi/10.5281/zenodo.13693637)
 
 Update ontologies using change language.
 

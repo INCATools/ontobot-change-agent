@@ -36,10 +36,23 @@
 
 #             // Function to check for the phrase in bodyText and comments
 #             function checkForPhrase(bodyText, comments) {
-#               const phrase = 'hey ontobot';
-              
+#               const regex = /hey\s*[^a-zA-Z0-9]*\s*ontobot/i;
+            
 #               // Check if bodyText includes the phrase
-#               let result = bodyText.includes(phrase);
+#               let result = regex.test(bodyText);
+            
+#               // If not found in bodyText, check in comments
+#               if (!result && comments) {
+#                 for (const comment of comments) {
+#                   if (regex.test(comment.body)) {
+#                     result = true;
+#                     break;
+#                   }
+#                 }
+#               }
+            
+#               return result;
+#             }
               
 #               // Check each comment
 

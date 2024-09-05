@@ -2,12 +2,22 @@
 
 """Command line interface for :mod:`ontobot_change_agent`."""
 
+import ast
 import logging
 import os
 import re
 from typing import TextIO, Union
 
 import click
+
+try:
+    from llm_change_agent.cli import execute
+
+    llm_change_agent_available = True
+except ImportError:
+    # Handle the case where the package is not installed
+    llm_change_agent_available = False
+
 
 from ontobot_change_agent import __version__
 from ontobot_change_agent.api import (
@@ -107,6 +117,12 @@ jar_path_option = click.option(
     type=click.Path(exists=True),
     help="Path to jar file.",
 )
+use_llm_option = click.option(
+    "--use-llm/--no-use-llm",
+    is_flag=True,
+    default=False,
+    help="Use llm-change-agent for processing.",
+)
 
 
 @main.command()
@@ -171,6 +187,7 @@ def get_labels(repo: str, token: str):
 @state_option
 @jar_path_option
 @output_option
+@use_llm_option
 def process_issue(
     input: str,
     repo: str,
@@ -182,6 +199,7 @@ def process_issue(
     state: str,
     jar_path: str,
     output: str,
+    use_llm: bool = False,
 ):
     """Run processes based on issue label.
 
@@ -203,37 +221,64 @@ def process_issue(
         )
 
     else:
-        for issue in get_issues(
+        issues = get_issues(
             repository_name=repo, token=token, label=label, number=number, state=state
-        ):
-            # Make sure ontobot_change_agent needs to be triggered or no.
-            if issue and issue[BODY]:
+        )
+        ontobot_pattern = re.compile(r"(.*)ontobot(.*)apply(.*):(.*)", re.DOTALL)
 
-                KGCL_COMMANDS = []
-                if NEW_TERM_LABEL in issue["labels"]:
-                    formatted_body = "The following input was provided: </br> "
-                    KGCL_COMMANDS, body_as_dict, reason = process_new_term_template(
-                        issue["body"], prefix
-                    )
-                    if reason is None:
-                        formatted_body += _convert_to_markdown(body_as_dict)
-                        formatted_body += "</br> The following commands were executed: </br> "
-                    else:
-                        click.echo(
-                            f"""{issue[TITLE]} does not need ontobot's attention since {reason}""",  # noqa
-                        )
-                        break
+        click.echo("Starting to process issues...")
 
-                elif re.match(r"(.*)ontobot(.*)apply(.*):(.*)", issue[BODY].lower(), re.DOTALL):
-                    formatted_body = "The following commands were executed: </br> "
-                    KGCL_COMMANDS = _get_kgcl_commands(issue[BODY])
-                else:
-                    click.echo(f"""{issue[TITLE]} does not need ontobot's attention.""")
-            else:
+        for issue in issues:
+            if not issue or not issue[BODY]:
                 click.echo(
-                    f"""Issue number:{number} is either closed, does not exist or has no body."""
+                    f"Issue number:{number} is either closed, does not exist or has no body."
                 )
                 break
+
+            click.echo(f"Processing issue: {issue[TITLE]}")
+
+            KGCL_COMMANDS = []
+            formatted_body = ""
+
+            if NEW_TERM_LABEL in issue["labels"]:
+                click.echo("New term label found. Processing new term template...")
+                formatted_body = "The following input was provided: </br> "
+                KGCL_COMMANDS, body_as_dict, reason = process_new_term_template(
+                    issue["body"], prefix
+                )
+                if reason is None:
+                    click.echo("No reason found to skip. Converting body to markdown...")
+                    formatted_body += _convert_to_markdown(body_as_dict)
+                    formatted_body += "</br> The following commands were executed: </br> "
+                else:
+                    click.echo(f"{issue[TITLE]} does not need ontobot's attention since {reason}")
+                    break
+            elif ontobot_pattern.match(issue[BODY].lower()):
+                click.echo("Ontobot apply command found. Extracting KGCL commands...")
+                formatted_body = "The following commands were executed: </br> "
+                KGCL_COMMANDS = _get_kgcl_commands(issue[BODY])
+
+            elif use_llm and llm_change_agent_available:
+                click.echo(f"Summoning llm-change-agent for {issue[TITLE]}")
+                with click.Context(execute) as ctx:
+                    ctx.params["prompt"] = issue[BODY]
+                    ctx.params["provider"] = "cborg"
+                    ctx.params["model"] = "google/gemini:latest"
+                    response = execute.invoke(ctx)
+                    KGCL_COMMANDS = [
+                        command.replace('"', "'") for command in ast.literal_eval(response)
+                    ]
+                if KGCL_COMMANDS:
+                    click.echo(f"llm-change-agent result: {response}")
+                    formatted_body = "The following commands were executed: </br> "
+                    click.echo(formatted_body + "\n".join(KGCL_COMMANDS))
+                else:
+                    click.echo(f"{issue[TITLE]} does not need ontobot's attention.")
+            else:
+                click.echo(
+                    f"""{issue[TITLE]} does not need ontobot's
+                      attention unless `--use-llm` flag is True."""
+                )
 
     new_output = output if output else input
 

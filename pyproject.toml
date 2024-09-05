@@ -12,7 +12,9 @@ readme = "README.md"
 python = ">=3.9,<4.0.0"
 oaklib = ">=0.5.0"
 PyGithub = "^2.3.0"
-setuptools = "^70.1.1"
+setuptools = ">=70.1.1"
+llm-change-agent = {version = "^0.0.4", extras = ["llm"], optional = true}
+
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.1.3"
@@ -36,6 +38,7 @@ docs = [
     "sphinx-autodoc-typehints",
     "sphinx-click",
     ]
+llm = ["llm-change-agent"]
 
 [tool.black]
 line-length = 100
