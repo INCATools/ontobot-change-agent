@@ -9,7 +9,15 @@ import re
 from typing import TextIO, Union
 
 import click
-from llm_change_agent.cli import execute
+
+try:
+    from llm_change_agent.cli import execute
+
+    llm_change_agent_available = True
+except ImportError:
+    # Handle the case where the package is not installed
+    llm_change_agent_available = False
+
 
 from ontobot_change_agent import __version__
 from ontobot_change_agent.api import (
@@ -250,7 +258,7 @@ def process_issue(
                 formatted_body = "The following commands were executed: </br> "
                 KGCL_COMMANDS = _get_kgcl_commands(issue[BODY])
 
-            elif use_llm:
+            elif use_llm and llm_change_agent_available:
                 click.echo(f"Summoning llm-change-agent for {issue[TITLE]}")
                 with click.Context(execute) as ctx:
                     ctx.params["prompt"] = issue[BODY]
