@@ -36,6 +36,8 @@ try:
 except ImportError:
     # Handle the case where the package is not installed
     llm_change_agent_available = False
+    ALL_AVAILABLE_PROVIDERS = []
+    ALL_AVAILABLE_MODELS = []
 
 
 from ontobot_change_agent import __version__
