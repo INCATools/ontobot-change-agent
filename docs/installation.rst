@@ -46,3 +46,10 @@ New Features
     .. code-block:: shell
 
         $ poetry install --extras llm
+
+.. note::
+
+    To leverage the features of `llm-change-agent` package one would need to have any one or all of the environment variables set:
+    - `OPENAI_API_KEY`
+    - `ANTHROPIC_API_KEY`
+    - `CBORG_API_KEY` (for LBNL users only)
