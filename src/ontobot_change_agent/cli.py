@@ -10,6 +10,8 @@ from typing import TextIO, Union
 
 import click
 
+from ontobot_change_agent.constants import OWL_EXTENSION
+
 try:
     from llm_change_agent.cli import execute
     from llm_change_agent.utils.llm_utils import (
@@ -25,7 +27,6 @@ try:
         CBORG_PROVIDER,
         OLLAMA_PROVIDER,
         OPENAI_PROVIDER,
-        OWL_EXTENSION,
     )
 
     llm_change_agent_available = True
