@@ -29,7 +29,7 @@ from ontobot_change_agent.api import (
     process_issue_via_oak,
     process_new_term_template,
 )
-from ontobot_change_agent.constants import NEW_TERM_LABEL, OWL_EXTENSION
+from ontobot_change_agent.constants import OWL_EXTENSION
 
 __all__ = [
     "main",
@@ -240,19 +240,6 @@ def process_issue(
             KGCL_COMMANDS = []
             formatted_body = ""
 
-            # if NEW_TERM_LABEL in issue["labels"]:
-            #     click.echo("New term label found. Processing new term template...")
-            #     formatted_body = "The following input was provided: </br> "
-            #     KGCL_COMMANDS, body_as_dict, reason = process_new_term_template(
-            #         issue["body"], prefix
-            #     )
-            #     if reason is None:
-            #         click.echo("No reason found to skip. Converting body to markdown...")
-            #         formatted_body += _convert_to_markdown(body_as_dict)
-            #         formatted_body += "</br> The following commands were executed: </br> "
-            #     else:
-            #         click.echo(f"{issue[TITLE]} does not need ontobot's attention since {reason}")
-            #         break
             if ontobot_pattern.match(issue[BODY].lower()):
                 click.echo("Ontobot apply command found. Extracting KGCL commands...")
                 formatted_body = "The following commands were executed: </br> "
