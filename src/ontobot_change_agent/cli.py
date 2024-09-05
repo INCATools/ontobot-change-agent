@@ -12,9 +12,27 @@ import click
 
 try:
     from llm_change_agent.cli import execute
-    from llm_change_agent.utils.llm_utils import extract_commands
+    from llm_change_agent.utils.llm_utils import (
+        extract_commands,
+        get_anthropic_models,
+        get_lbl_cborg_models,
+        get_ollama_models,
+        get_openai_models,
+    )
+
+    from ontobot_change_agent.constants import (
+        ANTHROPIC_PROVIDER,
+        CBORG_PROVIDER,
+        OLLAMA_PROVIDER,
+        OPENAI_PROVIDER,
+        OWL_EXTENSION,
+    )
 
     llm_change_agent_available = True
+    ALL_AVAILABLE_PROVIDERS = [OPENAI_PROVIDER, OLLAMA_PROVIDER, ANTHROPIC_PROVIDER, CBORG_PROVIDER]
+    ALL_AVAILABLE_MODELS = (
+        get_openai_models() + get_ollama_models() + get_anthropic_models() + get_lbl_cborg_models()
+    )
 except ImportError:
     # Handle the case where the package is not installed
     llm_change_agent_available = False
@@ -29,7 +47,6 @@ from ontobot_change_agent.api import (
     process_issue_via_jar,
     process_issue_via_oak,
 )
-from ontobot_change_agent.constants import OPEN_AI_MODEL, OPENAI_PROVIDER, OWL_EXTENSION
 
 __all__ = [
     "main",
@@ -123,6 +140,12 @@ use_llm_option = click.option(
     default=False,
     help="Use llm-change-agent for processing.",
 )
+llm_provider_option = click.option(
+    "--provider", type=click.Choice(ALL_AVAILABLE_PROVIDERS), help="Provider to use for generation."
+)
+llm_model_option = click.option(
+    "--model", type=click.Choice(ALL_AVAILABLE_MODELS), help="Model to use for generation."
+)
 
 
 @main.command()
@@ -188,6 +211,8 @@ def get_labels(repo: str, token: str):
 @jar_path_option
 @output_option
 @use_llm_option
+@llm_provider_option
+@llm_model_option
 def process_issue(
     input: str,
     repo: str,
@@ -200,6 +225,8 @@ def process_issue(
     jar_path: str,
     output: str,
     use_llm: bool = False,
+    provider: str = None,
+    model: str = None,
 ):
     """Run processes based on issue label.
 
@@ -249,8 +276,8 @@ def process_issue(
                 click.echo(f"Summoning llm-change-agent for {issue[TITLE]}")
                 with click.Context(execute) as ctx:
                     ctx.params["prompt"] = issue[BODY]
-                    ctx.params["provider"] = OPENAI_PROVIDER
-                    ctx.params["model"] = OPEN_AI_MODEL
+                    ctx.params["provider"] = provider
+                    ctx.params["model"] = model
                     response = extract_commands(execute.invoke(ctx))
                     KGCL_COMMANDS = [
                         command.replace('"', "'") for command in ast.literal_eval(response)
