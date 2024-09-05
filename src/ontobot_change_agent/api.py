@@ -13,6 +13,7 @@ from urllib.parse import quote
 import kgcl_schema.grammar.parser as kgcl_parser
 import requests
 import yaml
+from deprecated import deprecated
 from github import Github
 from github.Issue import Issue
 from oaklib.cli import query_terms_iterator
@@ -192,6 +193,7 @@ def process_issue_via_oak(input: str, commands: list, output: str = None):
     impl_obj.dump(output, output_format)
 
 
+@deprecated(version="0.5.0", reason="Use process_issue_via_oak instead.")
 def process_new_term_template(body, prefix):
     """Process an issue generated via new term request template.
 

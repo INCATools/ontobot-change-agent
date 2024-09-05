@@ -2146,13 +2146,13 @@ langchain-core = ">=0.2.38,<0.3.0"
 
 [[package]]
 name = "langsmith"
-version = "0.1.114"
+version = "0.1.115"
 description = "Client library to connect to the LangSmith LLM Tracing and Evaluation Platform."
 optional = true
 python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "langsmith-0.1.114-py3-none-any.whl", hash = "sha256:2b6b6b49ddb1cea75f465da107ddc21e60d3c7242813dcc0de90f914e4957249"},
-    {file = "langsmith-0.1.114.tar.gz", hash = "sha256:1683e1505d034d1bf7c960067c1357fd0d294172dd20540f913093e4b86857a2"},
+    {file = "langsmith-0.1.115-py3-none-any.whl", hash = "sha256:04e35cfd4c2d4ff1ea10bb577ff43957b05ebb3d9eb4e06e200701f4a2b4ac9f"},
+    {file = "langsmith-0.1.115.tar.gz", hash = "sha256:3b775377d858d32354f3ee0dd1ed637068cfe9a1f13e7b3bfa82db1615cdffc9"},
 ]
 
 [package.dependencies]
@@ -2226,13 +2226,13 @@ requests = "*"
 
 [[package]]
 name = "llm-change-agent"
-version = "0.0.4"
+version = "0.0.7"
 description = "llm-change-agent"
 optional = true
 python-versions = "<4.0,>=3.9"
 files = [
-    {file = "llm_change_agent-0.0.4-py3-none-any.whl", hash = "sha256:0dc915ad5d350c64053dfc88fbf1f96944c928fd5b2916d8dfd83ae84491c0d0"},
-    {file = "llm_change_agent-0.0.4.tar.gz", hash = "sha256:1dae218ca533dda54d9396801c5f4c431e93765c09960c4ff431663b227f2961"},
+    {file = "llm_change_agent-0.0.7-py3-none-any.whl", hash = "sha256:e917ad7140c9bdc6e1aca693a2f86102989cbede5867a10506a66b1761ba21ba"},
+    {file = "llm_change_agent-0.0.7.tar.gz", hash = "sha256:c4c032e3f5bffda0bd99a35961efbdc0274368fe7f79e32e91d641f5614e9ff3"},
 ]
 
 [package.dependencies]
@@ -3018,13 +3018,13 @@ tests = ["coverage", "pytest", "unittest-templates"]
 
 [[package]]
 name = "openai"
-version = "1.43.0"
+version = "1.43.1"
 description = "The official Python library for the openai API"
 optional = true
 python-versions = ">=3.7.1"
 files = [
-    {file = "openai-1.43.0-py3-none-any.whl", hash = "sha256:1a748c2728edd3a738a72a0212ba866f4fdbe39c9ae03813508b267d45104abe"},
-    {file = "openai-1.43.0.tar.gz", hash = "sha256:e607aff9fc3e28eade107e5edd8ca95a910a4b12589336d3cbb6bfe2ac306b3c"},
+    {file = "openai-1.43.1-py3-none-any.whl", hash = "sha256:23ed3aa71e89cf644c911f7ab80087d08c0bf46ce6b75d9a811fc7942cff85c2"},
+    {file = "openai-1.43.1.tar.gz", hash = "sha256:b64843711b7c92ded36795062ea1f8cad84ec6c2848646f2a786ac4617a6b9f5"},
 ]
 
 [package.dependencies]
@@ -5735,4 +5735,4 @@ llm = ["llm-change-agent"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<4.0.0"
-content-hash = "18ec4f7e69308915f9a436ad9bb3f771e3680a06106365cd6ccf34ffeb10eefa"
+content-hash = "4c3f4d8532dc5477b008f2e1143a0c0ae89087ea86d6d54d6cd2d5cab632a16e"
