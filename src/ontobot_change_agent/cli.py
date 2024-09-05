@@ -12,6 +12,7 @@ import click
 
 try:
     from llm_change_agent.cli import execute
+    from llm_change_agent.utils.llm_utils import extract_commands
 
     llm_change_agent_available = True
 except ImportError:
@@ -250,7 +251,7 @@ def process_issue(
                     ctx.params["prompt"] = issue[BODY]
                     ctx.params["provider"] = OPENAI_PROVIDER
                     ctx.params["model"] = OPEN_AI_MODEL
-                    response = execute.invoke(ctx)
+                    response = extract_commands(execute.invoke(ctx))
                     KGCL_COMMANDS = [
                         command.replace('"', "'") for command in ast.literal_eval(response)
                     ]
