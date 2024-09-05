@@ -28,7 +28,7 @@ from ontobot_change_agent.api import (
     process_issue_via_jar,
     process_issue_via_oak,
 )
-from ontobot_change_agent.constants import OWL_EXTENSION
+from ontobot_change_agent.constants import OPEN_AI_MODEL, OPENAI_PROVIDER, OWL_EXTENSION
 
 __all__ = [
     "main",
@@ -248,8 +248,8 @@ def process_issue(
                 click.echo(f"Summoning llm-change-agent for {issue[TITLE]}")
                 with click.Context(execute) as ctx:
                     ctx.params["prompt"] = issue[BODY]
-                    ctx.params["provider"] = "cborg"
-                    ctx.params["model"] = "google/gemini:latest"
+                    ctx.params["provider"] = OPENAI_PROVIDER
+                    ctx.params["model"] = OPEN_AI_MODEL
                     response = execute.invoke(ctx)
                     KGCL_COMMANDS = [
                         command.replace('"', "'") for command in ast.literal_eval(response)
