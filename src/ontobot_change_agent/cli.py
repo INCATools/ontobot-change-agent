@@ -149,6 +149,12 @@ llm_provider_option = click.option(
 llm_model_option = click.option(
     "--model", type=click.Choice(ALL_AVAILABLE_MODELS), help="Model to use for generation."
 )
+rag_docs_option = click.option(
+    "--rag-docs",
+    multiple=True,
+    default=[],
+    help="Paths to the docs directories, URLs, or lowercased ontology names.",
+)
 
 
 @main.command()
@@ -216,6 +222,7 @@ def get_labels(repo: str, token: str):
 @use_llm_option
 @llm_provider_option
 @llm_model_option
+@rag_docs_option
 def process_issue(
     input: str,
     repo: str,
@@ -230,6 +237,7 @@ def process_issue(
     use_llm: bool = False,
     provider: str = None,
     model: str = None,
+    rag_docs: tuple[str] = None,
 ):
     """Run processes based on issue label.
 
@@ -281,6 +289,7 @@ def process_issue(
                     ctx.params["prompt"] = issue[BODY]
                     ctx.params["provider"] = provider
                     ctx.params["model"] = model
+                    ctx.params["docs"] = rag_docs
                     response = extract_commands(execute.invoke(ctx))
                     KGCL_COMMANDS = [
                         command.replace('"', "'") for command in ast.literal_eval(response)
@@ -293,8 +302,8 @@ def process_issue(
                     click.echo(f"{issue[TITLE]} does not need ontobot's attention.")
             else:
                 click.echo(
-                    f"""{issue[TITLE]} does not need ontobot's
-                      attention unless `--use-llm` flag is True."""
+                    f"{issue[TITLE]} does not need ontobot's"
+                    "  attention unless `--use-llm` flag is True."
                 )
 
     new_output = output if output else input
