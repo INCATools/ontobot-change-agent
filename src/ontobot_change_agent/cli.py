@@ -300,8 +300,7 @@ def process_issue(
                     click.echo(f"{issue[TITLE]} does not need ontobot's attention.")
             else:
                 click.echo(
-                    f"""{issue[TITLE]} does not need ontobot's
-                      attention unless `--use-llm` flag is True."""
+                    f"""{issue[TITLE]} does not need ontobot's attention unless `--use-llm` flag is True."""
                 )
 
     new_output = output if output else input
