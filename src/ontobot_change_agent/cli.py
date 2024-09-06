@@ -291,8 +291,12 @@ def process_issue(
                     ctx.params["model"] = model
                     ctx.params["docs"] = rag_docs
                     response = extract_commands(execute.invoke(ctx))
+                    if "[" in response:
+                        processed_commands = ast.literal_eval(response)
+                    else:
+                        processed_commands = response.split("\n")
                     KGCL_COMMANDS = [
-                        command.replace('"', "'") for command in ast.literal_eval(response)
+                        command.replace('"', "'").strip() for command in processed_commands
                     ]
                 if KGCL_COMMANDS:
                     click.echo(f"llm-change-agent result: {response}")
