@@ -153,8 +153,10 @@ rag_docs_option = click.option(
     "--rag-docs",
     multiple=True,
     default=[],
-    help=f"Paths to the docs directories, URLs, or lowercased ontology names.",
+    help="Paths to the docs directories, URLs, or lowercased ontology names.",
 )
+
+
 @main.command()
 @repo_option
 @state_option
@@ -300,7 +302,8 @@ def process_issue(
                     click.echo(f"{issue[TITLE]} does not need ontobot's attention.")
             else:
                 click.echo(
-                    f"""{issue[TITLE]} does not need ontobot's attention unless `--use-llm` flag is True."""
+                    f"{issue[TITLE]} does not need ontobot's"
+                    "  attention unless `--use-llm` flag is True."
                 )
 
     new_output = output if output else input
