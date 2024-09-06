@@ -2226,13 +2226,13 @@ requests = "*"
 
 [[package]]
 name = "llm-change-agent"
-version = "0.0.7"
+version = "0.0.8"
 description = "llm-change-agent"
 optional = true
 python-versions = "<4.0,>=3.9"
 files = [
-    {file = "llm_change_agent-0.0.7-py3-none-any.whl", hash = "sha256:e917ad7140c9bdc6e1aca693a2f86102989cbede5867a10506a66b1761ba21ba"},
-    {file = "llm_change_agent-0.0.7.tar.gz", hash = "sha256:c4c032e3f5bffda0bd99a35961efbdc0274368fe7f79e32e91d641f5614e9ff3"},
+    {file = "llm_change_agent-0.0.8-py3-none-any.whl", hash = "sha256:377843cbe9445997be2e6809a25dc0b1f18ee28613c5b43d7a035c685a0f0e32"},
+    {file = "llm_change_agent-0.0.8.tar.gz", hash = "sha256:0f495c96118414b6aab4d02f958f377c52fd71fde17669a4292fa42616011cd4"},
 ]
 
 [package.dependencies]
@@ -5735,4 +5735,4 @@ llm = ["llm-change-agent"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<4.0.0"
-content-hash = "4c3f4d8532dc5477b008f2e1143a0c0ae89087ea86d6d54d6cd2d5cab632a16e"
+content-hash = "4fc1793a8d62029b5b9a3a316fd30fa82ccac184c66b162f5f5838612f846dc6"
