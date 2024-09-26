@@ -11,12 +11,12 @@
 #   check:
 #     runs-on: ubuntu-latest
 #     outputs:
-#       phraseExists: ${{ steps.check-body.outputs.result }}
+#       phraseExists: ${{ steps.check-body.outputs.phraseExists }}
 #       commentId: ${{ steps.check-body.outputs.commentId }}
 #     steps:
 #       - name: Check if issue body or any comment contains 'Hey ontobot'
 #         id: check-body
-#         uses: actions/github-script@v6
+#         uses: actions/github-script@v7
 #         with:
 #           script: |
 #             const issue = await github.rest.issues.get({
@@ -53,32 +53,24 @@
             
 #               return result;
 #             }
-              
-#               // Check each comment
 
-#             for (let comment of comments.reverse()) { // Reverse to give precedence to the latest comment
-#                 if (comment.body.toLowerCase().includes(phrase)) {
+#             // Check each comment
+#             let result = false;
+#             for (let comment of comments.data.reverse()) { // Reverse to give precedence to the latest comment
+#               if (comment.body.toLowerCase().includes('hey ontobot')) {
 #                 result = true;
 #                 commentId = comment.id;
 #                 break;
-#                 }
-#             }
-
-
-#               return {
-#                 result: result,
-#                 commentId: result ? commentId : null
-#               };
+#               }
 #             }
 
 #             const checkResult = checkForPhrase(bodyText, comments.data);
 
-#             console.log(`Result: ${checkResult.result}`);
-#             console.log(`Comment ID: ${checkResult.commentId}`);
-#             console.log(`Check Result: ${JSON.stringify(checkResult)}`);
+#             console.log(`Result: ${checkResult}`);
+#             console.log(`Comment ID: ${commentId}`);
 
-#             core.setOutput('phraseExists', checkResult.result);
-#             core.setOutput('commentId', checkResult.commentId);
+#             core.setOutput('phraseExists', checkResult);
+#             core.setOutput('commentId', commentId);
 
 #       - name: Log phraseExists output
 #         run: |
@@ -90,9 +82,10 @@
 #         if: ${{ steps.check-body.outputs.phraseExists == 'true' }}
 #         run: echo "The phrase 'Hey ontobot' was found."
 
+
 #   build:
 #     needs: check
-#     if: needs.check.outputs.phraseExists == 'true'
+#     if: ${{ needs.check.outputs.phraseExists == 'true' }}
 #     runs-on: ${{ matrix.os }}
 #     container: obolibrary/odkfull:v1.4.3
 #     strategy:
@@ -106,7 +99,7 @@
 
 #       - name: Return issue number
 #         id: gh-script-issue
-#         uses: actions/github-script@v6
+#         uses: actions/github-script@v7
 #         with:
 #           script: |
 #             const issue_number = context.issue.number;
@@ -114,7 +107,7 @@
 
 #       - name: Return repository name
 #         id: gh-script-repo
-#         uses: actions/github-script@v6
+#         uses: actions/github-script@v7
 #         with:
 #           script: |
 #             const repo = context.repo.owner + "/" + context.repo.repo;
@@ -130,28 +123,31 @@
 #       - name: Get jar & enable plugin.
 #         run: |
 #           mkdir -p robot-plugins
-#           wget https://github.com/gouttegd/kgcl-java/releases/download/kgcl-java-0.3.2/kgcl-robot-plugin-0.3.2.jar -O robot-plugins/kgcl.jar
+#           wget https://github.com/gouttegd/kgcl-java/releases/download/kgcl-java-0.4.0/kgcl-robot-plugin-0.4.0.jar -O robot-plugins/kgcl.jar
 #           echo "ROBOT_PLUGINS_DIRECTORY=$(pwd)/robot-plugins/" >> "$GITHUB_ENV"
 
 #       - name: Install dependencies
 #         run: |
 #           pip install ontobot-change-agent
 
-#       - name: Run ochange
-#         id: ochange
+#       - name: Run ochange with comment-id
+#         if: ${{ env.comment-id != '' }}
+#         id: ochange_with_comment
 #         run: |
 #           ochange process-issue ${{ env.resource }} \
 #           -r ${{ steps.gh-script-repo.outputs.result }} \
 #           -n ${{ steps.gh-script-issue.outputs.result }} \
 #           -g ${{ secrets.GH_TOKEN }} \
 #           -c ${{ env.comment-id }}
-# # ! OR using standalone JAR file.
-# # !          ochange process-issue ${{ env.resource }} \
-# # !          -r ${{ steps.gh-script-repo.outputs.result }} \
-# # !          -n ${{ steps.gh-script-issue.outputs.result }} \
-# # !          -g ${{ secrets.GH_TOKEN }} \
-# # !          -p ${{ env.comment-id }} \
-# # !          -j kgcl-robot.jar
+      
+#       - name: Run ochange without comment-id
+#         if: ${{ env.comment-id == '' }}
+#         id: ochange_without_comment
+#         run: |
+#           ochange process-issue ${{ env.resource }} \
+#           -r ${{ steps.gh-script-repo.outputs.result }} \
+#           -n ${{ steps.gh-script-issue.outputs.result }} \
+#           -g ${{ secrets.GH_TOKEN }} 
 
 #       - name: Clean-up
 #         run: rm -rf robot-plugins
@@ -160,7 +156,7 @@
 #         uses: peter-evans/create-pull-request@v5
 #         if: ${{ env.PR_TITLE }}
 #         with:
-#           token: ${{ secrets.GH_TOKEN }}
+#           # token: ${{ secrets.GH_TOKEN }}
 #           branch-suffix: short-commit-hash
 #           labels: Automated
 #           author: ${{ env.ISSUE_CREATOR }} <${{ env.ISSUE_CREATOR }}@users.noreply.github.com>
